@@ -1,7 +1,7 @@
 {
     "name": "activecollab/bootstrap",
     "description": "All packages and code that is needed to glue them together for a typical PHP project",
-    "prefer-stable": true,
+    "minimum-stability" : "stable",
     "require": {
         "php": ">=7.0.0",
         "slim/http-cache": "~0.3.0",
@@ -15,8 +15,9 @@
         "activecollab/jobsqueue": "dev-next",
         "activecollab/promises": "^1.0.0",
         "activecollab/user": "~1.0",
+        "jasonpriem/human-name-parser" : "dev-master",
         "graylog2/gelf-php": "~1.4.0",
-        "ircmaxell/random-lib": "~1.1",,
+        "ircmaxell/random-lib": "~1.1",
         "monolog/monolog": "~1.17.0",
         "slim/php-view": "^2.0",
         "slim/slim": "3.1.0",
