@@ -5,6 +5,7 @@
     "require": {
         "php": ">=7.0.0",
         "activecollab/authentication": "^1.0.0",
+        "activecollab/container": "^1.0.0",
         "activecollab/databasemigrations": "^1.0.0",
         "activecollab/databasestructure": "^0.10.0",
         "graylog2/gelf-php": "~1.4.0",

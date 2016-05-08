@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6a3d72908a26a4394f2bb9fdcfe88f38",
-    "content-hash": "b4713de2a124692bc074b84752d99a83",
+    "hash": "640c5b28772867e6506c2f3e285b1434",
+    "content-hash": "49e282d0e394ef9873bc6bb17184f6d3",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -56,6 +56,39 @@
                 "activecollab"
             ],
             "time": "2016-05-07 20:42:54"
+        },
+        {
+            "name": "activecollab/container",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/activecollab/container.git",
+                "reference": "3e2a0c8d6863c489c03505031e3e25d3e039113c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/activecollab/container/zipball/3e2a0c8d6863c489c03505031e3e25d3e039113c",
+                "reference": "3e2a0c8d6863c489c03505031e3e25d3e039113c",
+                "shasum": ""
+            },
+            "require": {
+                "container-interop/container-interop": "^1.1",
+                "php": ">=5.6.0",
+                "pimple/pimple": "^3.0.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ActiveCollab\\Container\\": "app/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Pimple 3 wrapper that implements Container Interop",
+            "time": "2016-05-08 20:54:25"
         },
         {
             "name": "activecollab/containeraccess",
