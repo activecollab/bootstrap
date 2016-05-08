@@ -33,7 +33,7 @@ abstract class Command extends BaseCommand implements ContainerAccessInterface
 
         $bits = explode('\\', get_class($this));
 
-        $this->setName($this->getCommandNamePrefix() . Inflector::tableize(array_pop($bits)))
+        $this->setName($this->getCommandNamePrefix() . rtrim(Inflector::tableize(array_pop($bits)), '_command'))
              ->addOption('debug', '', InputOption::VALUE_NONE, 'Output debug details')
              ->addOption('json', '', InputOption::VALUE_NONE, 'Output JSON');
     }
