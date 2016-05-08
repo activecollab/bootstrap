@@ -1,7 +1,7 @@
 {
     "name": "activecollab/bootstrap",
     "description": "All packages and code that is needed to glue them together for a typical PHP project",
-    "minimum-stability" : "stable",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=7.0.0",
         "activecollab/authentication": "^1.0.0",
@@ -15,8 +15,8 @@
         "symfony/console": "^3.0.0",
         "vlucas/phpdotenv": "^2.2.0"
     },
-    "suggest" : {
-        "activecollab/jobsqueue" : "Queue for background, delayed, parallel or remove jobs"
+    "suggest": {
+        "activecollab/jobsqueue": "Queue for background, delayed, parallel or remove jobs"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "^1.0",
