@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4ead91e809787f6e325abe0c1d5b88e",
-    "content-hash": "5d6ed16e6af58aa01fd72a4b65617162",
+    "hash": "4aebd20df9788417925412c89eb0a1e1",
+    "content-hash": "1921dcdb3bce57989516635b8f201e4d",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -136,6 +136,33 @@
                 "service-container"
             ],
             "time": "2016-04-26 15:18:08"
+        },
+        {
+            "name": "activecollab/controller",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "/Users/ilija/Projects/Components/Controller",
+                "reference": "d0a07c655b458e8d17fa3762acb02941306ea679"
+            },
+            "require": {
+                "activecollab/containeraccess": "^1.0.0",
+                "activecollab/etag": "^1.0.0",
+                "php": ">=5.6.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ActiveCollab\\Controller\\": "src"
+                }
+            },
+            "description": "Convenient Slit3 controller and conventions",
+            "time": "2016-05-08 22:38:35"
         },
         {
             "name": "activecollab/cookies",
@@ -3083,7 +3110,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "activecollab/controller": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
