@@ -4,33 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "761efd2bbf9632efe1a79e86d745ac2a",
-    "content-hash": "4458b1df961ac27cd9ef9d216b6d880e",
+    "hash": "6a3d72908a26a4394f2bb9fdcfe88f38",
+    "content-hash": "b4713de2a124692bc074b84752d99a83",
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "11a71edaaa87b102b8ed8f6376e19ef3549a51a2"
+                "reference": "5aae8ea14e2a6458c1baf14eca28b7d12332db47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/11a71edaaa87b102b8ed8f6376e19ef3549a51a2",
-                "reference": "11a71edaaa87b102b8ed8f6376e19ef3549a51a2",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/5aae8ea14e2a6458c1baf14eca28b7d12332db47",
+                "reference": "5aae8ea14e2a6458c1baf14eca28b7d12332db47",
                 "shasum": ""
             },
             "require": {
                 "activecollab/cookies": "~0.1",
-                "activecollab/user": "~1.0",
+                "activecollab/user": "^1.1.0",
                 "google/apiclient": "^1.1",
                 "guzzlehttp/psr7": "~1.2",
                 "php": ">=5.6.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.0",
-                "phpunit/phpunit": "~5",
+                "phpunit/phpunit": "^5.0",
                 "slim/slim": "~3.2"
             },
             "type": "library",
@@ -55,7 +55,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2016-04-25 15:40:45"
+            "time": "2016-05-07 20:42:54"
         },
         {
             "name": "activecollab/containeraccess",
@@ -153,16 +153,16 @@
         },
         {
             "name": "activecollab/databaseconnection",
-            "version": "dev-next",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databaseconnection.git",
-                "reference": "24d575fa79e0403849f1e36f28d5820103ba9417"
+                "reference": "53c0e5e27204320ea05d3c1037ddc30c0a71cb71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databaseconnection/zipball/24d575fa79e0403849f1e36f28d5820103ba9417",
-                "reference": "24d575fa79e0403849f1e36f28d5820103ba9417",
+                "url": "https://api.github.com/repos/activecollab/databaseconnection/zipball/53c0e5e27204320ea05d3c1037ddc30c0a71cb71",
+                "reference": "53c0e5e27204320ea05d3c1037ddc30c0a71cb71",
                 "shasum": ""
             },
             "require": {
@@ -200,25 +200,25 @@
                 "activecollab",
                 "mysql"
             ],
-            "time": "2016-04-26 15:24:26"
+            "time": "2016-05-07 18:32:41"
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "461e2a7d182acc7f0e208ee8ed3de0a58b2d3801"
+                "reference": "8a2a6aaa34927cbed1422448cbac1b88504eafff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/461e2a7d182acc7f0e208ee8ed3de0a58b2d3801",
-                "reference": "461e2a7d182acc7f0e208ee8ed3de0a58b2d3801",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/8a2a6aaa34927cbed1422448cbac1b88504eafff",
+                "reference": "8a2a6aaa34927cbed1422448cbac1b88504eafff",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databasestructure": "dev-master",
-                "activecollab/filesystem": "~0.1",
+                "activecollab/databasestructure": "^0.10.0",
+                "activecollab/filesystem": "^0.10.0",
                 "doctrine/inflector": "~1.0",
                 "php": ">=5.6.0",
                 "psr/log": "~1.0.0"
@@ -256,28 +256,28 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2016-05-05 21:42:13"
+            "time": "2016-05-07 21:59:35"
         },
         {
             "name": "activecollab/databaseobject",
-            "version": "dev-master",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databaseobject.git",
-                "reference": "fee1adf9a0bb74a87331f0d0894a3c03879c2056"
+                "reference": "a3272eeb388169bdaa84cdcf8496d4dd4e5441a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databaseobject/zipball/fee1adf9a0bb74a87331f0d0894a3c03879c2056",
-                "reference": "fee1adf9a0bb74a87331f0d0894a3c03879c2056",
+                "url": "https://api.github.com/repos/activecollab/databaseobject/zipball/a3272eeb388169bdaa84cdcf8496d4dd4e5441a7",
+                "reference": "a3272eeb388169bdaa84cdcf8496d4dd4e5441a7",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databaseconnection": "dev-next",
-                "activecollab/etag": "~1.0",
-                "doctrine/inflector": "~1.0",
+                "activecollab/databaseconnection": "^2.0.0",
+                "activecollab/etag": "^1.0",
+                "doctrine/inflector": "^1.0",
                 "php": ">=5.6.0",
-                "psr/log": "~1.0.0"
+                "psr/log": "^1.0.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "~1.0",
@@ -308,33 +308,33 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2016-04-26 15:27:44"
+            "time": "2016-05-07 18:40:24"
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "dev-master",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "2b20cc4eac96734933bb35dc922d147cc4762d71"
+                "reference": "7de9f9599d6ff9c28793c9c38b3499a0fe7e93fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/2b20cc4eac96734933bb35dc922d147cc4762d71",
-                "reference": "2b20cc4eac96734933bb35dc922d147cc4762d71",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/7de9f9599d6ff9c28793c9c38b3499a0fe7e93fa",
+                "reference": "7de9f9599d6ff9c28793c9c38b3499a0fe7e93fa",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databaseconnection": "dev-next",
-                "activecollab/databaseobject": "dev-master",
-                "activecollab/filesystem": "~0.1.0",
-                "activecollab/user": "~1.0",
-                "doctrine/inflector": "~1.0",
+                "activecollab/databaseconnection": "^2.0.0",
+                "activecollab/databaseobject": "^1.0.7",
+                "activecollab/filesystem": "^0.10.0",
+                "activecollab/user": "^1.1.0",
+                "doctrine/inflector": "^1.0",
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "~1.0",
-                "phpunit/phpunit": "~5.0"
+                "fabpot/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -361,20 +361,20 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2016-04-17 17:17:36"
+            "time": "2016-05-07 21:49:32"
         },
         {
             "name": "activecollab/datevalue",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/datevalue.git",
-                "reference": "c7b0af1ca57e82a529368a0038c79fbe015d07a3"
+                "reference": "d9f47a2bec33e8072578d5330899bba0ec9a42a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/datevalue/zipball/c7b0af1ca57e82a529368a0038c79fbe015d07a3",
-                "reference": "c7b0af1ca57e82a529368a0038c79fbe015d07a3",
+                "url": "https://api.github.com/repos/activecollab/datevalue/zipball/d9f47a2bec33e8072578d5330899bba0ec9a42a9",
+                "reference": "d9f47a2bec33e8072578d5330899bba0ec9a42a9",
                 "shasum": ""
             },
             "require": {
@@ -382,7 +382,8 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8"
+                "fabpot/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -408,7 +409,7 @@
                 "date",
                 "datetime"
             ],
-            "time": "2016-04-26 07:51:26"
+            "time": "2016-05-08 15:52:22"
         },
         {
             "name": "activecollab/etag",
@@ -457,16 +458,16 @@
         },
         {
             "name": "activecollab/filesystem",
-            "version": "0.1.11",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/filesystem.git",
-                "reference": "646d6352b7ca62da259450565a4070542ec6a001"
+                "reference": "6efdcaaffb3c9e5549d369b5210ec8b356cf7cc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/filesystem/zipball/646d6352b7ca62da259450565a4070542ec6a001",
-                "reference": "646d6352b7ca62da259450565a4070542ec6a001",
+                "url": "https://api.github.com/repos/activecollab/filesystem/zipball/6efdcaaffb3c9e5549d369b5210ec8b356cf7cc6",
+                "reference": "6efdcaaffb3c9e5549d369b5210ec8b356cf7cc6",
                 "shasum": ""
             },
             "require": {
@@ -499,135 +500,78 @@
                 "activecollab",
                 "filesystem"
             ],
-            "time": "2016-03-06 16:33:49"
+            "time": "2016-03-06 16:37:32"
         },
         {
-            "name": "activecollab/jobsqueue",
-            "version": "dev-next",
+            "name": "activecollab/humannameparser",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/activecollab/jobsqueue.git",
-                "reference": "16a3c06afa327dc630d6c804c5b4a44bd6638778"
+                "url": "https://github.com/activecollab/humannameparser.git",
+                "reference": "5278cbf85eb26b47ebfe49c930f8cb18752c61cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/jobsqueue/zipball/16a3c06afa327dc630d6c804c5b4a44bd6638778",
-                "reference": "16a3c06afa327dc630d6c804c5b4a44bd6638778",
+                "url": "https://api.github.com/repos/activecollab/humannameparser/zipball/5278cbf85eb26b47ebfe49c930f8cb18752c61cb",
+                "reference": "5278cbf85eb26b47ebfe49c930f8cb18752c61cb",
                 "shasum": ""
             },
             "require": {
-                "activecollab/containeraccess": "^1.0",
-                "activecollab/databaseconnection": "dev-next",
-                "doctrine/inflector": "^1.1.0",
-                "php": ">=5.6.0",
-                "psr/log": "^1.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "~1.0",
-                "monolog/monolog": "~1.0",
-                "phpunit/phpunit": "~5.0",
-                "pimple/pimple": "~3.0",
-                "symfony/console": "~2.0"
-            },
-            "suggest": {
-                "symfony/console": "Use Symfony console to easily create CLI jobs consumer"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ActiveCollab\\JobsQueue\\": "src",
-                    "ActiveCollab\\JobsQueue\\Test\\": "test/src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ilija Studen",
-                    "email": "ilija.studen@activecollab.com"
-                }
-            ],
-            "description": "Simple jobs queue",
-            "homepage": "https://labs.activecollab.com",
-            "keywords": [
-                "activecollab",
-                "jobs",
-                "queue"
-            ],
-            "time": "2016-04-26 15:30:51"
-        },
-        {
-            "name": "activecollab/promises",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/activecollab/promises.git",
-                "reference": "2f9704e0712746257fefaa73ea98a9f2bdb03134"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/promises/zipball/2f9704e0712746257fefaa73ea98a9f2bdb03134",
-                "reference": "2f9704e0712746257fefaa73ea98a9f2bdb03134",
-                "shasum": ""
-            },
-            "require": {
-                "activecollab/databaseconnection": "dev-next",
-                "activecollab/datevalue": "^1.0",
-                "php": ">=5.6.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "~1.0",
-                "monolog/monolog": "~1.0",
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ActiveCollab\\Promises\\": "src",
-                    "ActiveCollab\\Promises\\Test\\": "test/src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ilija Studen",
-                    "email": "ilija.studen@activecollab.com"
-                }
-            ],
-            "description": "Server side promises",
-            "homepage": "https://labs.activecollab.com",
-            "keywords": [
-                "activecollab",
-                "promise"
-            ],
-            "time": "2016-01-30 22:04:33"
-        },
-        {
-            "name": "activecollab/user",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/activecollab/user.git",
-                "reference": "23e8ceb3771d7a88fb22039050a87627b7e2396c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/user/zipball/23e8ceb3771d7a88fb22039050a87627b7e2396c",
-                "reference": "23e8ceb3771d7a88fb22039050a87627b7e2396c",
-                "shasum": ""
-            },
-            "require": {
-                "jasonpriem/human-name-parser": "dev-master",
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8"
+                "fabpot/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ActiveCollab\\HumanNameParser\\": "src",
+                    "ActiveCollab\\HumanNameParser\\Test\\": "test/src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jason Priem",
+                    "email": "jason@jasonpriem.com"
+                },
+                {
+                    "name": "Ilija Studen",
+                    "email": "ilija.studen@activecollab.com"
+                }
+            ],
+            "description": "Takes human names of arbitrary complexity and various formats leading initial, first name, last name, middle name, nicknames etc",
+            "homepage": "https://labs.activecollab.com",
+            "keywords": [
+                "name",
+                "parse"
+            ],
+            "time": "2016-05-07 19:39:35"
+        },
+        {
+            "name": "activecollab/user",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/activecollab/user.git",
+                "reference": "51805a0b48e50992e66e484f84aa0e46bc3ee141"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/activecollab/user/zipball/51805a0b48e50992e66e484f84aa0e46bc3ee141",
+                "reference": "51805a0b48e50992e66e484f84aa0e46bc3ee141",
+                "shasum": ""
+            },
+            "require": {
+                "activecollab/humannameparser": "^1.0.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -651,7 +595,7 @@
             "keywords": [
                 "activecollab"
             ],
-            "time": "2015-10-15 15:25:14"
+            "time": "2016-05-07 20:02:54"
         },
         {
             "name": "container-interop/container-interop",
@@ -952,126 +896,6 @@
                 "uri"
             ],
             "time": "2016-04-13 19:56:01"
-        },
-        {
-            "name": "ircmaxell/random-lib",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ircmaxell/RandomLib.git",
-                "reference": "13efa4368bb2ac88bb3b1459b487d907de4dbf7c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ircmaxell/RandomLib/zipball/13efa4368bb2ac88bb3b1459b487d907de4dbf7c",
-                "reference": "13efa4368bb2ac88bb3b1459b487d907de4dbf7c",
-                "shasum": ""
-            },
-            "require": {
-                "ircmaxell/security-lib": "1.0.*@dev",
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "1.1.*",
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "RandomLib": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
-                    "homepage": "http://blog.ircmaxell.com"
-                }
-            ],
-            "description": "A Library For Generating Secure Random Numbers",
-            "homepage": "https://github.com/ircmaxell/RandomLib",
-            "keywords": [
-                "cryptography",
-                "random",
-                "random-numbers",
-                "random-strings"
-            ],
-            "time": "2015-01-15 16:31:45"
-        },
-        {
-            "name": "ircmaxell/security-lib",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ircmaxell/SecurityLib.git",
-                "reference": "80934de3c482dcafb46b5756e59ebece082b6dc7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ircmaxell/SecurityLib/zipball/80934de3c482dcafb46b5756e59ebece082b6dc7",
-                "reference": "80934de3c482dcafb46b5756e59ebece082b6dc7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "1.1.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SecurityLib": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
-                    "homepage": "http://blog.ircmaxell.com"
-                }
-            ],
-            "description": "A Base Security Library",
-            "homepage": "https://github.com/ircmaxell/PHP-SecurityLib",
-            "time": "2013-04-30 18:00:34"
-        },
-        {
-            "name": "jasonpriem/human-name-parser",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jasonpriem/HumanNameParser.php.git",
-                "reference": "da339cc2bc17ac19202a6cdd78c9f9f17aae2724"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jasonpriem/HumanNameParser.php/zipball/da339cc2bc17ac19202a6cdd78c9f9f17aae2724",
-                "reference": "da339cc2bc17ac19202a6cdd78c9f9f17aae2724",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "Name.php",
-                    "Parser.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Takes human names of arbitrary complexity and various wacky formats and parses them out.",
-            "time": "2015-05-07 03:41:34"
         },
         {
             "name": "monolog/monolog",
@@ -1473,16 +1297,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.1.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "03b44a4b41896ba42c78bbd5fa172cd79e650496"
+                "reference": "939f2e85d57508de9cff241d10091cd972f221c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/03b44a4b41896ba42c78bbd5fa172cd79e650496",
-                "reference": "03b44a4b41896ba42c78bbd5fa172cd79e650496",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/939f2e85d57508de9cff241d10091cd972f221c3",
+                "reference": "939f2e85d57508de9cff241d10091cd972f221c3",
                 "shasum": ""
             },
             "require": {
@@ -1536,30 +1360,30 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-01-08 15:37:50"
+            "time": "2016-03-10 21:37:40"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.5",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609"
+                "reference": "34a214710e0714b6efcf40ba3cd1e31373a97820"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/48221d3de4dc22d2cd57c97e8b9361821da86609",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609",
+                "url": "https://api.github.com/repos/symfony/console/zipball/34a214710e0714b6efcf40ba3cd1e31373a97820",
+                "reference": "34a214710e0714b6efcf40ba3cd1e31373a97820",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
+                "php": ">=5.5.9",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/event-dispatcher": "~2.1|~3.0.0",
-                "symfony/process": "~2.1|~3.0.0"
+                "symfony/event-dispatcher": "~2.8|~3.0",
+                "symfony/process": "~2.8|~3.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -1569,7 +1393,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1596,7 +1420,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-26 12:00:47"
+            "time": "2016-04-28 09:48:42"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3226,15 +3050,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "activecollab/authentication": 20,
-        "activecollab/databaseconnection": 20,
-        "activecollab/databasemigrations": 20,
-        "activecollab/databaseobject": 20,
-        "activecollab/databasestructure": 20,
-        "activecollab/jobsqueue": 20,
-        "jasonpriem/human-name-parser": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
