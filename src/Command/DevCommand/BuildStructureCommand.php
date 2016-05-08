@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @package ActiveCollab\Id\Command
  */
-class BuildStructure extends DevCommand
+class BuildStructureCommand extends DevCommand
 {
     /**
      * {@inheritdoc}
