@@ -6,9 +6,8 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
-namespace ActiveCollab\Bootstrap\Command;
+namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
-use ActiveCollab\Bootstrap\Command\DevCommand\DevCommand;
 use ActiveCollab\DatabaseConnection\ConnectionInterface;
 use ActiveCollab\DatabaseStructure\StructureInterface;
 use Symfony\Component\Console\Input\InputInterface;
