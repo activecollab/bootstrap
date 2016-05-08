@@ -47,4 +47,4 @@ return (new Symfony\CS\Config\Config('psr2'))->fixers([
     '-print_to_echo',
     '-concat_without_spaces',
     '-empty_return',
-])->finder((new Symfony\CS\Finder\DefaultFinder())->in([__DIR__ . '/app', __DIR__ . '/test']));
+])->finder((new Symfony\CS\Finder\DefaultFinder())->in([__DIR__ . '/src', __DIR__ . '/test']));
