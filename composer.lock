@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4aebd20df9788417925412c89eb0a1e1",
-    "content-hash": "1921dcdb3bce57989516635b8f201e4d",
+    "hash": "1b7128aedc610e08bdfe407219ccb45c",
+    "content-hash": "55270883d23b54f5ae23688ebfac9074",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -139,7 +139,7 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "dev-master",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Projects/Components/Controller",
@@ -3110,9 +3110,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "activecollab/controller": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
