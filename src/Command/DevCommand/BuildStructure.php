@@ -6,7 +6,7 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
-namespace ActiveCollab\Id\Command;
+namespace ActiveCollab\Bootstrap\Command;
 
 use ActiveCollab\Bootstrap\Command\DevCommand\DevCommand;
 use ActiveCollab\DatabaseConnection\ConnectionInterface;
