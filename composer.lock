@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "640c5b28772867e6506c2f3e285b1434",
-    "content-hash": "49e282d0e394ef9873bc6bb17184f6d3",
+    "hash": "f4ead91e809787f6e325abe0c1d5b88e",
+    "content-hash": "5d6ed16e6af58aa01fd72a4b65617162",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -59,16 +59,16 @@
         },
         {
             "name": "activecollab/container",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/container.git",
-                "reference": "3e2a0c8d6863c489c03505031e3e25d3e039113c"
+                "reference": "9e5bb9f990a46f4bd94ca59a53499fa9553800f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/container/zipball/3e2a0c8d6863c489c03505031e3e25d3e039113c",
-                "reference": "3e2a0c8d6863c489c03505031e3e25d3e039113c",
+                "url": "https://api.github.com/repos/activecollab/container/zipball/9e5bb9f990a46f4bd94ca59a53499fa9553800f6",
+                "reference": "9e5bb9f990a46f4bd94ca59a53499fa9553800f6",
                 "shasum": ""
             },
             "require": {
@@ -83,12 +83,12 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ActiveCollab\\Container\\": "app/src"
+                    "ActiveCollab\\Container\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Pimple 3 wrapper that implements Container Interop",
-            "time": "2016-05-08 20:54:25"
+            "time": "2016-05-08 21:04:44"
         },
         {
             "name": "activecollab/containeraccess",
