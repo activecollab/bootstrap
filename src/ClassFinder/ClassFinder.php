@@ -20,19 +20,19 @@ class ClassFinder implements ClassFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function scanDirs(array $dirs, callable $with_found_instance, array $constructor_arguments = [])
+    public function scanDirsForInstances(array $dirs, callable $with_found_instance, array $constructor_arguments = [])
     {
         foreach ($dirs as $dir_path => $instance_namespace) {
-            $this->scanDir($dir_path, $instance_namespace, $with_found_instance, $constructor_arguments);
+            $this->scanDirForInstances($dir_path, $instance_namespace, $with_found_instance, $constructor_arguments);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = [])
+    public function scanDirForInstances($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = [])
     {
-        foreach ($this->scanDirForClasses($dir_path, $instance_namespace) as $class_path => $class_name) {
+        foreach ($this->scanDirForClasses($dir_path, $instance_namespace, true) as $class_path => $class_name) {
             if (!class_exists($class_name, false)) {
                 require_once $class_path;
             }
@@ -49,7 +49,7 @@ class ClassFinder implements ClassFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function scanDirForClasses($dir_path, $instance_namespace)
+    public function scanDirForClasses($dir_path, $instance_namespace, $skip_abstract = false)
     {
         $result = [];
 
@@ -61,7 +61,13 @@ class ClassFinder implements ClassFinderInterface
 
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir_path), RecursiveIteratorIterator::SELF_FIRST) as $file) {
                 if ($file->isFile() && $file->getExtension() == 'php') {
-                    $result[$file->getPathname()] = $instance_namespace . '\\' . implode('\\', explode('/', substr($file->getPath() . '/' . $file->getBasename('.php'), $dir_path_len + 1)));
+                    $class_name = $instance_namespace . '\\' . implode('\\', explode('/', substr($file->getPath() . '/' . $file->getBasename('.php'), $dir_path_len + 1)));
+
+                    if ($skip_abstract && (new ReflectionClass($class_name))->isAbstract()) {
+                        continue;
+                    }
+
+                    $result[$file->getPathname()] = $class_name;
                 }
             }
         }
