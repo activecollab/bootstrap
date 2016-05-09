@@ -33,6 +33,7 @@ class ClassFinder implements ClassFinderInterface
     public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = null)
     {
         $dir_path_len = strlen($dir_path);
+        $instance_namespace = rtrim($instance_namespace, '\\');
 
         if (is_dir($dir_path)) {
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir_path), RecursiveIteratorIterator::SELF_FIRST) as $file) {
