@@ -20,7 +20,7 @@ class ClassFinder implements ClassFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function scanDirs(array $dirs, callable $with_found_instance, array $constructor_arguments = null)
+    public function scanDirs(array $dirs, callable $with_found_instance, array $constructor_arguments = [])
     {
         foreach ($dirs as $dir_path => $instance_namespace) {
             $this->scanDir($dir_path, $instance_namespace, $with_found_instance, $constructor_arguments);
@@ -30,7 +30,7 @@ class ClassFinder implements ClassFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = null)
+    public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = [])
     {
         $dir_path_len = strlen($dir_path);
         $instance_namespace = rtrim($instance_namespace, '\\');

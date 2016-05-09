@@ -20,7 +20,7 @@ interface ClassFinderInterface
      * @param callable   $with_found_instance
      * @param array|null $constructor_arguments
      */
-    public function scanDirs(array $dirs, callable $with_found_instance, array $constructor_arguments = null);
+    public function scanDirs(array $dirs, callable $with_found_instance, array $constructor_arguments = []);
 
     /**
      * Scan a dir for classes.
@@ -30,5 +30,5 @@ interface ClassFinderInterface
      * @param callable   $with_found_instance
      * @param array|null $constructor_arguments
      */
-    public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = null);
+    public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = []);
 }
