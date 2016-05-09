@@ -31,4 +31,13 @@ interface ClassFinderInterface
      * @param array|null $constructor_arguments
      */
     public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = []);
+
+    /**
+     * Scan directory for classes.
+     *
+     * @param  string $dir_path
+     * @param  string $instance_namespace
+     * @return array
+     */
+    public function scanDirForClasses($dir_path, $instance_namespace);
 }

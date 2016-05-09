@@ -32,27 +32,40 @@ class ClassFinder implements ClassFinderInterface
      */
     public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = [])
     {
+        foreach ($this->scanDirForClasses($dir_path, $instance_namespace) as $class_path => $class_name) {
+            if (!class_exists($class_name, false)) {
+                require_once $class_path;
+            }
+
+            $reflection_class = new ReflectionClass($class_name);
+
+            if (!$reflection_class->isAbstract()) {
+                $found_instance = $reflection_class->newInstanceArgs($constructor_arguments);
+                call_user_func($with_found_instance, $found_instance);
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function scanDirForClasses($dir_path, $instance_namespace)
+    {
+        $result = [];
+
         $dir_path = rtrim($dir_path, '/');
-        $dir_path_len = strlen($dir_path);
-        $instance_namespace = rtrim($instance_namespace, '\\');
 
         if (is_dir($dir_path)) {
+            $dir_path_len = strlen($dir_path);
+            $instance_namespace = rtrim($instance_namespace, '\\');
+
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir_path), RecursiveIteratorIterator::SELF_FIRST) as $file) {
                 if ($file->isFile() && $file->getExtension() == 'php') {
-                    $class_name = ($instance_namespace . '\\' . implode('\\', explode('/', substr($file->getPath() . '/' . $file->getBasename('.php'), $dir_path_len + 1))));
-
-                    if (!class_exists($class_name, false)) {
-                        require_once $file->getPathname();
-                    }
-
-                    $reflection_class = new ReflectionClass($class_name);
-
-                    if (!$reflection_class->isAbstract()) {
-                        $found_instance = $reflection_class->newInstanceArgs($constructor_arguments);
-                        call_user_func($with_found_instance, $found_instance);
-                    }
+                    $result[$file->getPathname()] = $instance_namespace . '\\' . implode('\\', explode('/', substr($file->getPath() . '/' . $file->getBasename('.php'), $dir_path_len + 1)));
                 }
             }
         }
+
+        return $result;
     }
 }
