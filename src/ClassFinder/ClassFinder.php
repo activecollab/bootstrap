@@ -32,6 +32,7 @@ class ClassFinder implements ClassFinderInterface
      */
     public function scanDir($dir_path, $instance_namespace, callable $with_found_instance, array $constructor_arguments = [])
     {
+        $dir_path = rtrim($dir_path, '/');
         $dir_path_len = strlen($dir_path);
         $instance_namespace = rtrim($instance_namespace, '\\');
 
