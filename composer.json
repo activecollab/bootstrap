@@ -1,6 +1,11 @@
 {
     "name": "activecollab/bootstrap",
     "description": "All packages and code that is needed to glue them together for a typical PHP project",
+    "keywords": [
+        "project", "bootstrap"
+    ],
+    "license": "MIT",
+    "type": "library",
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0.0",
