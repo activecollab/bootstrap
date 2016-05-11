@@ -13,7 +13,6 @@
         "activecollab/controller": "^0.10.0",
         "activecollab/databasemigrations": "^1.0.0",
         "activecollab/databasestructure": "^0.10.0",
-        "graylog2/gelf-php": "~1.4.0",
         "monolog/monolog": "~1.17.0",
         "slim/http-cache": "~0.3.0",
         "slim/php-view": "^2.0",
@@ -22,7 +21,8 @@
         "vlucas/phpdotenv": "^2.2.0"
     },
     "suggest": {
-        "activecollab/jobsqueue": "Queue for background, delayed, parallel or remove jobs"
+        "activecollab/jobsqueue": "Queue for background, delayed, parallel or remove jobs",
+        "graylog2/gelf-php": "Log to Graylog2 using GELF"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "^1.0",
