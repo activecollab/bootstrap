@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e8e9e2182b1e66a3a0068edda3497ba6",
-    "content-hash": "4575f469aa1e45d857f1312e25307102",
+    "hash": "592e10d2e642fecbd10dbdc2e3872d6d",
+    "content-hash": "b61ad333086be6d22f7933eb37d29660",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -106,11 +106,17 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "0.10.0",
+            "version": "0.10.1",
             "source": {
                 "type": "git",
-                "url": "/Users/ilija/Projects/Components/Controller",
-                "reference": "d0a07c655b458e8d17fa3762acb02941306ea679"
+                "url": "https://github.com/activecollab/controller.git",
+                "reference": "93da1151fe7b3be2f8591547455e5fdf6dfd93b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/93da1151fe7b3be2f8591547455e5fdf6dfd93b6",
+                "reference": "93da1151fe7b3be2f8591547455e5fdf6dfd93b6",
+                "shasum": ""
             },
             "require": {
                 "activecollab/containeraccess": "^1.0.0",
@@ -128,8 +134,15 @@
                     "ActiveCollab\\Controller\\": "src"
                 }
             },
-            "description": "Convenient Slit3 controller and conventions",
-            "time": "2016-05-08 22:38:35"
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Invokeable controller that accepts containers, works with ETag and more",
+            "keywords": [
+                "controller"
+            ],
+            "time": "2016-05-11 07:31:21"
         },
         {
             "name": "activecollab/cookies",
