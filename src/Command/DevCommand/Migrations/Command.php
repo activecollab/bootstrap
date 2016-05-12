@@ -10,6 +10,7 @@ namespace ActiveCollab\Bootstrap\Command\DevCommand\Migrations;
 
 use ActiveCollab\Bootstrap\Command\DevCommand\DevCommand;
 use ActiveCollab\DatabaseMigrations\MigrationsInterface;
+use RuntimeException;
 
 /**
  * @package ActiveCollab\Bootstrap\Command\DevCommand\Migrations
@@ -29,8 +30,14 @@ abstract class Command extends DevCommand
      *
      * @return MigrationsInterface
      */
-    public function getMigrations()
+    public function &getMigrations()
     {
-        return $this->getContainer()->get('migrations');
+        $migrations = $this->getContainer()->get('migrations');
+
+        if ($migrations instanceof MigrationsInterface) {
+            return $migrations;
+        } else {
+            throw new RuntimeException('Failed to get migrations utility from DI container');
+        }
     }
 }
