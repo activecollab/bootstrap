@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da60b87073b6ec881a261043f810247a",
-    "content-hash": "24177affb51b99a204461a2db2997cc5",
+    "hash": "352993c7a2e01f8107c65ced80c81e74",
+    "content-hash": "a1f1c5b619415d9943e0d05c04ca97f2",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -106,16 +106,16 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "93da1151fe7b3be2f8591547455e5fdf6dfd93b6"
+                "reference": "8f74a2ffc08f0bd61c5beae9b7684e2616535aec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/93da1151fe7b3be2f8591547455e5fdf6dfd93b6",
-                "reference": "93da1151fe7b3be2f8591547455e5fdf6dfd93b6",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/8f74a2ffc08f0bd61c5beae9b7684e2616535aec",
+                "reference": "8f74a2ffc08f0bd61c5beae9b7684e2616535aec",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +142,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-05-11 07:31:21"
+            "time": "2016-05-11 23:32:01"
         },
         {
             "name": "activecollab/cookies",
@@ -825,59 +825,6 @@
                 "google"
             ],
             "time": "2016-02-02 18:50:42"
-        },
-        {
-            "name": "graylog2/gelf-php",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bzikarsky/gelf-php.git",
-                "reference": "4230f22e2944f377b057edbc31c35a360edfbce9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bzikarsky/gelf-php/zipball/4230f22e2944f377b057edbc31c35a360edfbce9",
-                "reference": "4230f22e2944f377b057edbc31c35a360edfbce9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "psr/log": "~1.0"
-            },
-            "provide": {
-                "psr/log-implementation": "~1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.3",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Gelf\\": "src/Gelf"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Benjamin Zikarsky",
-                    "email": "benjamin@zikarsky.de"
-                },
-                {
-                    "name": "gelf-php contributors",
-                    "homepage": "https://github.com/bzikarsky/gelf-php/contributors"
-                }
-            ],
-            "description": "A php implementation to send log-messages to a GELF compatible backend like Graylog2.",
-            "time": "2015-10-22 15:07:05"
         },
         {
             "name": "guzzlehttp/psr7",
