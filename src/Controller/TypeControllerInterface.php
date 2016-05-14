@@ -16,6 +16,13 @@ use ActiveCollab\User\UserInterface;
 interface TypeControllerInterface
 {
     /**
+     * Return true if this contraoller is read only (allows only GET requests to be handled).
+     *
+     * @return bool
+     */
+    public function isReadOnly(): bool;
+
+    /**
      * Return full, namespaced model collection class.
      *
      * @return string
