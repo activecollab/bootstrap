@@ -462,7 +462,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     public function getTypeName(): string
     {
         if (empty($this->type_name)) {
-            $this->type_name = Inflector::singularize($this->getControllerName());
+            $this->type_name = Inflector::singularize(rtrim($this->getControllerName(), 'Controller'));
         }
 
         return $this->type_name;
@@ -490,7 +490,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      */
     public function getCollectionClassName(): string
     {
-        return rtrim($this->getCollectionsNamespace(), '\\') . '\\' . $this->getControllerName();
+        return rtrim($this->getCollectionsNamespace(), '\\') . '\\' . Inflector::pluralize($this->getTypeName());
     }
 
     /**
