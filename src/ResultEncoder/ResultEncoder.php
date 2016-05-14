@@ -17,7 +17,7 @@ use ActiveCollab\Etag\EtagInterface;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use \Slim\HttpCache\CacheProvider;
+use Slim\HttpCache\CacheProvider;
 
 /**
  * @package ActiveCollab\Bootstrap\ResultEncoder
@@ -41,8 +41,8 @@ class ResultEncoder extends BaseResultEncoder
 
     /**
      * @param CacheProvider $cache
-     * @param string $app_identifier
-     * @param string $user_identifier
+     * @param string        $app_identifier
+     * @param string        $user_identifier
      */
     public function __construct(CacheProvider $cache, $app_identifier, $user_identifier)
     {
