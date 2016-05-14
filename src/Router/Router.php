@@ -91,7 +91,7 @@ class Router implements RouterInterface
             $model_name = $settings['model_name'];
         }
 
-        $controller = empty($settings['controller']) ? $this->controller_namespace . '\\' . Inflector::classify($model_name) : $settings['controller'];
+        $controller = empty($settings['controller']) ? $this->controller_namespace . '\\' . Inflector::classify($model_name) . 'Controller' : $settings['controller'];
         $id = empty($settings['id']) ? Inflector::singularize($model_name) . '_id' : $settings['id'];
         $id_format = empty($settings['id_format']) ? '[0-9]+' : $settings['id_format'];
 
