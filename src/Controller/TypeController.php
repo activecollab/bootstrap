@@ -430,7 +430,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      */
     public function getTypeClassName(): string
     {
-        return 'ActiveCollab\\Id\\Model\\' . $this->getTypeName();
+        return rtrim($this->getModelsNamespace(), '\\') . '\\' . $this->getTypeName();
     }
 
     /**
@@ -472,7 +472,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      */
     public function getCollectionClassName(): string
     {
-        return 'ActiveCollab\\Id\\Model\\Collection\\' . $this->getControllerName();
+        return rtrim($this->getCollectionsNamespace(), '\\') . '\\' . $this->getControllerName();
     }
 
     /**
@@ -482,4 +482,18 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     {
         return true;
     }
+
+    /**
+     * Return models namespace.
+     *
+     * @return string
+     */
+    abstract protected function getModelsNamespace(): string;
+
+    /**
+     * Return collections namespace.
+     *
+     * @return string
+     */
+    abstract protected function getCollectionsNamespace(): string;
 }
