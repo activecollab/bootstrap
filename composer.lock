@@ -9,21 +9,21 @@
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "5aae8ea14e2a6458c1baf14eca28b7d12332db47"
+                "reference": "4fce6b239a8dd629d906947f1591aefdf32e2b4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/5aae8ea14e2a6458c1baf14eca28b7d12332db47",
-                "reference": "5aae8ea14e2a6458c1baf14eca28b7d12332db47",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/4fce6b239a8dd629d906947f1591aefdf32e2b4c",
+                "reference": "4fce6b239a8dd629d906947f1591aefdf32e2b4c",
                 "shasum": ""
             },
             "require": {
                 "activecollab/cookies": "~0.1",
-                "activecollab/user": "^1.1.0",
+                "activecollab/user": "^2.0.0",
                 "google/apiclient": "^1.1",
                 "guzzlehttp/psr7": "~1.2",
                 "php": ">=5.6.0"
@@ -55,7 +55,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2016-05-07 20:42:54"
+            "time": "2016-05-14 18:39:45"
         },
         {
             "name": "activecollab/containeraccess",
@@ -352,23 +352,23 @@
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "59bc2370add3575f5c68dca61ada55269db5562c"
+                "reference": "1316f25e7436f5d09cacc91bf4ec711cfb9c318a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/59bc2370add3575f5c68dca61ada55269db5562c",
-                "reference": "59bc2370add3575f5c68dca61ada55269db5562c",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/1316f25e7436f5d09cacc91bf4ec711cfb9c318a",
+                "reference": "1316f25e7436f5d09cacc91bf4ec711cfb9c318a",
                 "shasum": ""
             },
             "require": {
                 "activecollab/databaseconnection": "^2.0.0",
                 "activecollab/databaseobject": "^1.0.7",
                 "activecollab/filesystem": "^0.10.0",
-                "activecollab/user": "^1.1.0",
+                "activecollab/user": "^2.0.0",
                 "doctrine/inflector": "^1.0",
                 "php": ">=5.6.0"
             },
@@ -401,7 +401,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2016-05-13 00:39:01"
+            "time": "2016-05-14 19:42:56"
         },
         {
             "name": "activecollab/datevalue",
@@ -594,16 +594,16 @@
         },
         {
             "name": "activecollab/user",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/user.git",
-                "reference": "51805a0b48e50992e66e484f84aa0e46bc3ee141"
+                "reference": "a4308dce37cf9b2a0d78c5ca26be63aa0e974bfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/user/zipball/51805a0b48e50992e66e484f84aa0e46bc3ee141",
-                "reference": "51805a0b48e50992e66e484f84aa0e46bc3ee141",
+                "url": "https://api.github.com/repos/activecollab/user/zipball/a4308dce37cf9b2a0d78c5ca26be63aa0e974bfb",
+                "reference": "a4308dce37cf9b2a0d78c5ca26be63aa0e974bfb",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
             "keywords": [
                 "activecollab"
             ],
-            "time": "2016-05-07 20:02:54"
+            "time": "2016-05-14 18:33:45"
         },
         {
             "name": "container-interop/container-interop",
