@@ -23,8 +23,8 @@ use ActiveCollab\DatabaseStructure\Behaviour\ProtectedFieldsInterface;
 use ActiveCollab\User\UserInterface;
 use Doctrine\Common\Inflector\Inflector;
 use InvalidArgumentException;
+use Psr\Http\Message\ServerRequestInterface;
 use ReflectionClass;
-use Slim\Http\Request;
 
 /**
  * @property PoolInterface $pool
@@ -41,11 +41,11 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Run before every action.
      *
-     * @param  Request             $request
-     * @param  array               $arguments
+     * @param  ServerRequestInterface $request
+     * @param  array                  $arguments
      * @return void|StatusResponse
      */
-    protected function __before(Request $request, array $arguments)
+    protected function __before(ServerRequestInterface $request, array $arguments)
     {
         $type_id_variable = $this->getTypeIdVariable();
 
@@ -63,10 +63,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Return a collection of type instances.
      *
-     * @param  Request             $request
+     * @param  ServerRequestInterface $request
      * @return CollectionInterface
      */
-    public function index(Request $request)
+    public function index(ServerRequestInterface $request)
     {
         if ($this->shouldCheckPermissions()) {
             /** @var UserInterface\null $authenticated_user */
@@ -94,10 +94,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  Request                        $request
+     * @param  ServerRequestInterface         $request
      * @return ObjectInterface|StatusResponse
      */
-    public function view(Request $request)
+    public function view(ServerRequestInterface $request)
     {
         if ($this->shouldCheckPermissions()) {
             /** @var UserInterface\null $authenticated_user */
@@ -112,10 +112,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  Request                        $request
+     * @param  ServerRequestInterface         $request
      * @return ObjectInterface|StatusResponse
      */
-    public function add(Request $request)
+    public function add(ServerRequestInterface $request)
     {
         /** @var UserInterface\null $authenticated_user */
         $authenticated_user = $request->getAttribute('authenticated_user');
@@ -161,10 +161,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Update an existing type instance.
      *
-     * @param  Request         $request
+     * @param  ServerRequestInterface $request
      * @return ObjectInterface
      */
-    public function edit(Request $request)
+    public function edit(ServerRequestInterface $request)
     {
         if ($this->active_object && $this->active_object->isLoaded()) {
             /** @var UserInterface\null $authenticated_user */
@@ -199,10 +199,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Drop an existing type instance.
      *
-     * @param  Request                        $request
+     * @param  ServerRequestInterface         $request
      * @return ObjectInterface|StatusResponse
      */
-    public function delete(Request $request)
+    public function delete(ServerRequestInterface $request)
     {
         if ($this->active_object && $this->active_object->isLoaded()) {
             /** @var UserInterface\null $authenticated_user */
