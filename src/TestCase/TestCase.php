@@ -14,15 +14,20 @@ use ActiveCollab\DateValue\DateTimeValue;
 use ActiveCollab\DateValue\DateTimeValueInterface;
 use Doctrine\Common\Inflector\Inflector;
 use Interop\Container\ContainerInterface;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Slim\Container;
 
 /**
+ * @property string $app_env
  * @property string $app_root
  * @property string $app_name
  * @property string $app_version
  * @property string $app_identifier
+ * @property TestHandler|HandlerInterface $logger_handler
+ * @property LoggerInterface $logger
  *
  * @package ActiveCollab\Bootstrap\TestCase
  */
@@ -49,6 +54,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
 
         $this->container = new Container();
         $this->setNow(new DateTimeValue());
+
+        $this->addToContainer('app_env', function () {
+            return 'testing';
+        });
 
         $this->addToContainer('app_root', function () {
             return dirname(dirname(dirname(__DIR__)));
