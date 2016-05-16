@@ -6,6 +6,8 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare (strict_types = 1);
+
 namespace ActiveCollab\Bootstrap\TestCase;
 
 use ActiveCollab\ContainerAccess\ContainerAccessInterface;
@@ -126,7 +128,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
      *
      * @return string
      */
-    protected function getEnvVariablePrefix()
+    protected function getEnvVariablePrefix(): string
     {
         return strtoupper(Inflector::tableize($this->app_name)) . '_';
     }
