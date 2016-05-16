@@ -6,6 +6,8 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare (strict_types = 1);
+
 namespace ActiveCollab\Bootstrap\TestCase;
 
 use ActiveCollab\Bootstrap\Command\Command;
@@ -36,7 +38,7 @@ abstract class ModelCommandTestCase extends ModelTestCase
      * @param  string        $command_class
      * @return CommandTester
      */
-    protected function getCommandTesterFor($command_class)
+    protected function getCommandTesterFor($command_class): CommandTester
     {
         /** @var Command $command */
         $command = new $command_class();
@@ -53,7 +55,7 @@ abstract class ModelCommandTestCase extends ModelTestCase
      * @param  array         $command_arguments
      * @return CommandTester
      */
-    protected function executeCommand($command_class, $command, array $command_arguments = [])
+    protected function executeCommand($command_class, $command, array $command_arguments = []): CommandTester
     {
         $command_tester = $this->getCommandTesterFor($command_class);
         $command_tester->execute(array_merge(['command' => $command], $command_arguments));
