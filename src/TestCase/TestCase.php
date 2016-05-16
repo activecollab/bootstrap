@@ -60,7 +60,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
         });
 
         $this->addToContainer('app_root', function () {
-            return dirname(dirname(dirname(__DIR__)));
+            return dirname(__DIR__, 5);
         });
 
         $this->addToContainer('app_name', function ($c) {
