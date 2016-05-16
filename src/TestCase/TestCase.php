@@ -8,15 +8,35 @@
 
 namespace ActiveCollab\Bootstrap\TestCase;
 
+use ActiveCollab\ContainerAccess\ContainerAccessInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessInterfaceImplementation;
 use ActiveCollab\DateValue\DateTimeValue;
+use ActiveCollab\DateValue\DateTimeValueInterface;
+use Doctrine\Common\Inflector\Inflector;
+use Interop\Container\ContainerInterface;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Slim\Container;
 
 /**
+ * @property string $app_root
+ * @property string $app_name
+ * @property string $app_version
+ * @property string $app_identifier
+ *
  * @package ActiveCollab\Bootstrap\TestCase
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase implements ContainerAccessInterface
 {
+    use ContainerAccessInterfaceImplementation;
+
     /**
-     * @var DateTimeValue
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * @var DateTimeValue|null
      */
     protected $now;
 
@@ -27,9 +47,32 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->now = new DateTimeValue();
+        $this->container = new Container();
+        $this->setNow(new DateTimeValue());
 
-        DateTimeValue::setTestNow($this->now);
+        $this->addToContainer('app_root', function () {
+            return dirname(dirname(dirname(__DIR__)));
+        });
+
+        $this->addToContainer('app_name', function ($c) {
+            return basename($c['app_root']);
+        });
+
+        $this->addToContainer('app_version', function () {
+            return '1.0.0';
+        });
+
+        $this->addToContainer('app_identifier', function ($c) {
+            return "{$c['app_name']} v{$c['app_version']}";
+        });
+
+        $this->addToContainer('logger_handler', function () {
+            return new TestHandler();
+        });
+
+        $this->addToContainer('logger', function ($c) {
+            return new Logger("{$c['app_name']} Test", [$c['logger_handler']]);
+        });
     }
 
     /**
@@ -37,41 +80,36 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        DateTimeValue::setTestNow(null);
+        $this->container = null;
+        $this->setNow(null);
 
         parent::tearDown();
     }
 
     /**
-     * @return string
+     * @param string   $key
+     * @param callable $callback
      */
-    protected function getAppRoot()
+    protected function addToContainer($key, callable $callback)
     {
-        return dirname(dirname(dirname(__DIR__)));
+        $this->getContainer()[$key] = $callback;
     }
 
     /**
-     * @return string
+     * @return DateTimeValue|null
      */
-    protected function getAppName()
+    public function getNow()
     {
-        return basename($this->getAppRoot());
+        return $this->now;
     }
 
     /**
-     * @return string
+     * @param DateTimeValueInterface|null $now
      */
-    protected function getAppVersion()
+    public function setNow(DateTimeValueInterface $now = null)
     {
-        return '1.0.0';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getAppIdentifier()
-    {
-        return "{$this->getAppName()} v{$this->getAppVersion()}";
+        $this->now = $now;
+        DateTimeValue::setTestNow($this->now);
     }
 
     /**
@@ -81,6 +119,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function getEnvVariablePrefix()
     {
-        return strtoupper($this->getAppName()) . '_';
+        return strtoupper(Inflector::tableize($this->app_name)) . '_';
     }
 }

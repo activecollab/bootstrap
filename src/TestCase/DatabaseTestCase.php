@@ -15,136 +15,68 @@ use mysqli;
 use RuntimeException;
 
 /**
+ * @property mysqli $link
+ * @property ConnectionInterface $connection
+ *
  * @package ActiveCollab\Id\Test
  */
 abstract class DatabaseTestCase extends TestCase
 {
     /**
-     * @var mysqli
+     * {@inheritdoc}
      */
-    private $link;
+    public function setUp()
+    {
+        parent::setUp();
 
-    /**
-     * @var ConnectionInterface
-     */
-    protected $connection;
+        $this->addToContainer('link', function ($c) {
+            $db_host = $this->getTestMySqlConnectionParam('host', 'localhost');
+            $db_port = $this->getTestMySqlConnectionParam('port', 3306);
+            $db_user = $this->getTestMySqlConnectionParam('user', 'root');
+            $db_pass = $this->getTestMySqlConnectionParam('pass', '');
+            $db_name = $this->getTestMySqlConnectionParam('database', Inflector::tableize($c['app_name']) . '_test');
+
+            $link = new \MySQLi("$db_host:$db_port", $db_user, $db_pass);
+
+            if ($link->connect_error) {
+                throw new RuntimeException('Failed to connect to database. MySQL said: ' . $link->connect_error);
+            }
+
+            if (!$link->select_db($db_name)) {
+                throw new RuntimeException('Failed to select database');
+            }
+
+            return $link;
+        });
+
+        $this->addToContainer('connection', function ($c) {
+            $connection = new MysqliConnection($c['link']);
+
+            $connection->execute('SET foreign_key_checks = 0;');
+            foreach ($connection->getTableNames() as $table_name) {
+                $connection->dropTable($table_name);
+            }
+            $connection->execute('SET foreign_key_checks = 1;');
+
+            return $connection;
+        });
+    }
 
     /**
      * Tear down test environment.
      */
     public function tearDown()
     {
-        if ($this->connection) {
-            $this->connection->execute('SET foreign_key_checks = 0;');
-            foreach ($this->connection->getTableNames() as $table_name) {
-                $this->connection->dropTable($table_name);
-            }
-            $this->connection->execute('SET foreign_key_checks = 1;');
-
-            $this->connection = null;
+        $this->connection->execute('SET foreign_key_checks = 0;');
+        foreach ($this->connection->getTableNames() as $table_name) {
+            $this->connection->dropTable($table_name);
         }
+        $this->connection->execute('SET foreign_key_checks = 1;');
 
-        if ($this->link) {
-            $this->link->close();
-        }
+        $this->link->close();
 
         parent::tearDown();
     }
-
-    /**
-     * Return database connection link.
-     *
-     * @return mysqli
-     */
-    protected function &getDatabaseLink()
-    {
-        if (empty($this->link)) {
-            $db_host = $this->getTestMySqlHost();
-            $db_port = $this->getTestMySqlPort();
-            $db_user = $this->getTestMySqlUser();
-            $db_pass = $this->getTestMySqlPassword();
-            $db_name = $this->getTestMySqlDatabase();
-
-            $this->link = new \MySQLi("$db_host:$db_port", $db_user, $db_pass);
-
-            if ($this->link->connect_error) {
-                throw new RuntimeException('Failed to connect to database. MySQL said: ' . $this->link->connect_error);
-            }
-
-            if (!$this->link->select_db($db_name)) {
-                throw new RuntimeException('Failed to select database');
-            }
-        }
-
-        return $this->link;
-    }
-
-    /**
-     * Return database connection instance.
-     *
-     * @return ConnectionInterface
-     */
-    protected function &getDatabaseConnection()
-    {
-        if (empty($this->connection)) {
-            $this->connection = new MysqliConnection($this->getDatabaseLink());
-
-            $this->connection->execute('SET foreign_key_checks = 0;');
-            foreach ($this->connection->getTableNames() as $table_name) {
-                $this->connection->dropTable($table_name);
-            }
-            $this->connection->execute('SET foreign_key_checks = 1;');
-        }
-
-        return $this->connection;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTestMySqlHost()
-    {
-        return $this->getTestMySqlConnectionParam('host', 'localhost');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTestMySqlPort()
-    {
-        return $this->getTestMySqlConnectionParam('port', 3306);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTestMySqlUser()
-    {
-        return $this->getTestMySqlConnectionParam('user', 'root');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTestMySqlPassword()
-    {
-        return $this->getTestMySqlConnectionParam('pass', '');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTestMySqlDatabase()
-    {
-        return $this->getTestMySqlConnectionParam('database', Inflector::tableize($this->getAppName()) . '_test');
-    }
-
-    /**
-     * Cached MySQL connection parameters.
-     *
-     * @var string[]|int[]
-     */
-    private $test_mysql_connection_params = [];
 
     /**
      * Return MySQL connection parameter.
@@ -155,12 +87,8 @@ abstract class DatabaseTestCase extends TestCase
      */
     private function getTestMySqlConnectionParam($param_name, $default)
     {
-        if (!array_key_exists($param_name, $this->test_mysql_connection_params)) {
-            $env_variable_name = $this->getEnvVariablePrefix() . 'MYSQL_TEST_' . strtoupper($param_name);
+        $env_variable_name = $this->getEnvVariablePrefix() . 'MYSQL_TEST_' . strtoupper($param_name);
 
-            $this->test_mysql_connection_params[$param_name] = getenv($env_variable_name) ? getenv($env_variable_name) : $default;
-        }
-
-        return $this->test_mysql_connection_params[$param_name];
+        return getenv($env_variable_name) ? getenv($env_variable_name) : $default;
     }
 }
