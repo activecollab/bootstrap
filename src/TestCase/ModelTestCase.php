@@ -11,6 +11,7 @@ namespace ActiveCollab\Bootstrap\TestCase;
 use ActiveCollab\DatabaseObject\Pool;
 use ActiveCollab\DatabaseObject\PoolInterface;
 use ActiveCollab\DatabaseStructure\StructureInterface;
+use RuntimeException;
 
 /**
  * @property PoolInterface $pool
@@ -30,29 +31,32 @@ abstract class ModelTestCase extends DatabaseTestCase
         $this->addToContainer('pool', function ($c) {
             $pool = new Pool($c['connection']);
             $pool->setContainer($this->getContainer());
-            $pool->registerType(...require "{$c['app_root']}/app/src/Model/types.php");
 
-            foreach (new \DirectoryIterator("{$c['app_root']}/app/src/Model/Producer") as $file) {
-                if ($file->isFile() && $file->getExtension() == 'php') {
-                    $producer_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
-                    $model_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
+            $types_file = "{$c['app_root']}/app/src/Model/types.php";
 
-                    if ((new \ReflectionClass($producer_class_name))->isAbstract()) {
-                        continue;
+            if (is_file($types_file)) {
+                $pool->registerType(...require $types_file);
+            }
+
+            $produces_dir = "{$c['app_root']}/app/src/Model/Producer";
+
+            if (is_dir($produces_dir)) {
+                foreach (new \DirectoryIterator("{$c['app_root']}/app/src/Model/Producer") as $file) {
+                    if ($file->isFile() && $file->getExtension() == 'php') {
+                        $producer_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
+                        $model_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
+
+                        if ((new \ReflectionClass($producer_class_name))->isAbstract()) {
+                            continue;
+                        }
+
+                        $pool->registerProducerByClass($model_class_name, $producer_class_name);
                     }
-
-                    $pool->registerProducerByClass($model_class_name, $producer_class_name);
                 }
             }
 
-            return $pool;
-        });
-
-        $this->addToContainer('structure', function ($c) {
             /** @var \mysqli $link */
             $link = $c['link'];
-
-            $structure = $this->getModelStructure();
 
             $structure_sql_file_path = "{$c['app_root']}/app/src/Model/structure.sql";
 
@@ -64,7 +68,17 @@ abstract class ModelTestCase extends DatabaseTestCase
                 } while ($link->more_results());
             }
 
-            return $structure;
+            return $pool;
+        });
+
+        $this->addToContainer('structure', function ($c) {
+            $structure_class_name = $this->getModelNamespace() . '\\Structure';
+
+            if (class_exists($structure_class_name)) {
+                return new $structure_class_name;
+            } else {
+                throw new RuntimeException("Class '$structure_class_name' is not defined");
+            }
         });
     }
 
@@ -72,9 +86,4 @@ abstract class ModelTestCase extends DatabaseTestCase
      * @return string
      */
     abstract protected function getModelNamespace();
-
-    /**
-     * @return StructureInterface
-     */
-    abstract protected function getModelStructure();
 }
