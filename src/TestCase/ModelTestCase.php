@@ -10,6 +10,7 @@ declare (strict_types = 1);
 
 namespace ActiveCollab\Bootstrap\TestCase;
 
+use ActiveCollab\Bootstrap\ClassFinder\ClassFinder;
 use ActiveCollab\DatabaseObject\Pool;
 use ActiveCollab\DatabaseObject\PoolInterface;
 use ActiveCollab\DatabaseStructure\StructureInterface;
@@ -38,6 +39,16 @@ abstract class ModelTestCase extends DatabaseTestCase
 
             if (is_file($types_file)) {
                 $pool->registerType(...require $types_file);
+            }
+
+            $collections_dir = "{$c['app_root']}/app/src/Model/Collection";
+
+            if (is_dir($collections_dir)) {
+                foreach ((new ClassFinder())->scanDirForClasses($collections_dir, $this->getModelNamespace() . '\\Collection') as $class_name) {
+                    $c[ltrim($class_name, '\\')] = function($c) use ($class_name) {
+                        return new $class_name($c['connection'], $c['pool'], $c['logger']);
+                    };
+                }
             }
 
             $produces_dir = "{$c['app_root']}/app/src/Model/Producer";
