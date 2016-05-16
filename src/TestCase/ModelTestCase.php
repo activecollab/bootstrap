@@ -45,7 +45,7 @@ abstract class ModelTestCase extends DatabaseTestCase
 
             if (is_dir($collections_dir)) {
                 foreach ((new ClassFinder())->scanDirForClasses($collections_dir, $this->getModelNamespace() . '\\Collection') as $class_name) {
-                    $c[ltrim($class_name, '\\')] = function($c) use ($class_name) {
+                    $c[ltrim($class_name, '\\')] = function ($c) use ($class_name) {
                         return new $class_name($c['connection'], $c['pool'], $c['logger']);
                     };
                 }
@@ -88,7 +88,7 @@ abstract class ModelTestCase extends DatabaseTestCase
             $structure_class_name = $this->getModelNamespace() . '\\Structure';
 
             if (class_exists($structure_class_name)) {
-                return new $structure_class_name;
+                return new $structure_class_name();
             } else {
                 throw new RuntimeException("Class '$structure_class_name' is not defined");
             }
