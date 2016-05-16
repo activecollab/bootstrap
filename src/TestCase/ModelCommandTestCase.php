@@ -15,7 +15,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @package ActiveCollab\Id\Test\Base
  */
-abstract class CommandTestCase extends ModelTestCase
+abstract class ModelCommandTestCase extends ModelTestCase
 {
     /**
      * @var Application
