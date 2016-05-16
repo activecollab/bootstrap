@@ -73,4 +73,14 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         return "{$this->getAppName()} v{$this->getAppVersion()}";
     }
+
+    /**
+     * Return environment variable prefix.
+     *
+     * @return string
+     */
+    protected function getEnvVariablePrefix()
+    {
+        return strtoupper($this->getAppName()) . '_';
+    }
 }
