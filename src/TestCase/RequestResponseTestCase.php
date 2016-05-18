@@ -22,7 +22,7 @@ use Slim\Http\Uri;
 /**
  * @package ActiveCollab\Bootstrap\TestCase
  */
-abstract class RequestResponseTest extends ModelTestCase
+abstract class RequestResponseTestCase extends ModelTestCase
 {
     /**
      * @var Request
