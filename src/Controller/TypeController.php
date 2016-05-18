@@ -9,7 +9,6 @@
 namespace ActiveCollab\Bootstrap\Controller;
 
 use ActiveCollab\Bootstrap\Exception\CollectionNotFoundException;
-use ActiveCollab\Controller\Controller;
 use ActiveCollab\Controller\Response\StatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\BadRequestStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\ForbiddenStatusResponse;
