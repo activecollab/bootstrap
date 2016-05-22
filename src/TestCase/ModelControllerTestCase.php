@@ -15,7 +15,7 @@ use Slim\Route;
 /**
  * @package ActiveCollab\Id\Test\Base
  */
-abstract class ModelControllerTestCaseCase extends RequestResponseTestCase
+abstract class ModelControllerTestCase extends RequestResponseTestCase
 {
     /**
      * Dispatch collection action.
