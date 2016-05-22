@@ -36,7 +36,7 @@ abstract class DatabaseTestCase extends TestCase
             $db_port = $this->getTestMySqlConnectionParam('port', 3306);
             $db_user = $this->getTestMySqlConnectionParam('user', 'root');
             $db_pass = $this->getTestMySqlConnectionParam('pass', '');
-            $db_name = $this->getTestMySqlConnectionParam('database', Inflector::tableize($c['app_name']) . '_test');
+            $db_name = $this->getTestMySqlConnectionParam('database', $this->getTestMySqlDatabaseName($c['app_name']));
 
             $link = new \MySQLi("$db_host:$db_port", $db_user, $db_pass);
 
@@ -92,5 +92,16 @@ abstract class DatabaseTestCase extends TestCase
         $env_variable_name = $this->getEnvVariablePrefix() . 'MYSQL_TEST_' . strtoupper($param_name);
 
         return getenv($env_variable_name) ? getenv($env_variable_name) : $default;
+    }
+
+    /**
+     * Return test database name.
+     *
+     * @param  string $app_name
+     * @return string
+     */
+    protected function getTestMySqlDatabaseName($app_name)
+    {
+        return Inflector::tableize($app_name) . '_test';
     }
 }
