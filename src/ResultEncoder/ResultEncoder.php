@@ -8,7 +8,6 @@
 
 namespace ActiveCollab\Bootstrap\ResultEncoder;
 
-use ActiveCollab\Controller\Response\ViewResponse\PhpView;
 use ActiveCollab\Controller\ResultEncoder\ResultEncoder as BaseResultEncoder;
 use ActiveCollab\DatabaseConnection\Result\ResultInterface;
 use ActiveCollab\DatabaseObject\CollectionInterface;
@@ -56,10 +55,6 @@ class ResultEncoder extends BaseResultEncoder
      */
     protected function onNoEncoderApplied($action_result, ServerRequestInterface $request, ResponseInterface $response)
     {
-        if ($action_result instanceof PhpView) {
-            return $action_result->render($response);
-        }
-
         if ($action_result instanceof CollectionInterface) {
             return $this->encodeCollection($action_result, $response);
         } elseif ($action_result instanceof ObjectInterface) {
