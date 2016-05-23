@@ -102,12 +102,25 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
     }
 
     /**
+     * Add callback value resolver to container.
+     *
      * @param string   $key
      * @param callable $callback
      */
     protected function addToContainer($key, callable $callback)
     {
         $this->getContainer()[$key] = $callback;
+    }
+
+    /**
+     * Set a value in container.
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+    protected function setInContainer($key, $value)
+    {
+        $this->getContainer()[$key] = $value;
     }
 
     /**
