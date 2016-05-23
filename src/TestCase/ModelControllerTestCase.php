@@ -11,7 +11,7 @@ namespace ActiveCollab\Bootstrap\TestCase;
 use ActiveCollab\Bootstrap\ResultEncoder\ResultEncoder;
 use LogicException;
 use Slim\Http\Response;
-use Slim\HttpCache\Cache;
+use Slim\HttpCache\CacheProvider;
 use Slim\Route;
 
 /**
@@ -30,7 +30,7 @@ abstract class ModelControllerTestCase extends RequestResponseTestCase
         parent::setUp();
 
         $this->addToContainer('cache', function () {
-            return new Cache();
+            return new CacheProvider();
         });
         $this->addToContainer('result_encoder', function ($c) {
             return new ResultEncoder($c['cache'], $c['app_identifier'], $c['user_identifier']);
