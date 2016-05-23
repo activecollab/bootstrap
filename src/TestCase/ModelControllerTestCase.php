@@ -29,7 +29,9 @@ abstract class ModelControllerTestCase extends RequestResponseTestCase
     {
         parent::setUp();
 
-        $this->addToContainer('cache', new Cache());
+        $this->addToContainer('cache', function () {
+            return new Cache();
+        });
         $this->addToContainer('result_encoder', function ($c) {
             return new ResultEncoder($c['cache'], $c['app_identifier'], $c['user_identifier']);
         });
