@@ -56,7 +56,7 @@ abstract class ModelTestCase extends DatabaseTestCase
             if (is_dir($produces_dir)) {
                 foreach (new \DirectoryIterator("{$c['app_root']}/app/src/Model/Producer") as $file) {
                     if ($file->isFile() && $file->getExtension() == 'php') {
-                        $producer_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
+                        $producer_class_name = $this->getModelNamespace() . '\\Producer\\' . $file->getBasename('.php');
                         $model_class_name = $this->getModelNamespace() . '\\' . $file->getBasename('.php');
 
                         if ((new \ReflectionClass($producer_class_name))->isAbstract()) {

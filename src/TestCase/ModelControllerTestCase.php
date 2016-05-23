@@ -8,15 +8,33 @@
 
 namespace ActiveCollab\Bootstrap\TestCase;
 
+use ActiveCollab\Bootstrap\ResultEncoder\ResultEncoder;
 use LogicException;
 use Slim\Http\Response;
+use Slim\HttpCache\Cache;
 use Slim\Route;
 
 /**
+ * @property \Slim\HttpCache\Cache $cache
+ * @property \ActiveCollab\Bootstrap\ResultEncoder\ResultEncoder $result_encoders
+ *
  * @package ActiveCollab\Id\Test\Base
  */
 abstract class ModelControllerTestCase extends RequestResponseTestCase
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->addToContainer('cache', new Cache());
+        $this->addToContainer('result_encoder', function ($c) {
+            return new ResultEncoder($c['cache'], $c['app_identifier'], $c['user_identifier']);
+        });
+    }
+
     /**
      * Dispatch collection action.
      *

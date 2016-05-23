@@ -14,12 +14,11 @@ use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessInterfaceImplementation;
 use ActiveCollab\DateValue\DateTimeValue;
 use ActiveCollab\DateValue\DateTimeValueInterface;
+use ActiveCollab\User\UnidentifiedVisitor;
 use Doctrine\Common\Inflector\Inflector;
 use Interop\Container\ContainerInterface;
-use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use Psr\Log\LoggerInterface;
 use Slim\Container;
 
 /**
@@ -28,8 +27,9 @@ use Slim\Container;
  * @property string $app_name
  * @property string $app_version
  * @property string $app_identifier
- * @property TestHandler|HandlerInterface $logger_handler
- * @property LoggerInterface $logger
+ * @property string $user_identifier
+ * @property \Monolog\Handler\TestHandler|\Monolog\Handler\HandlerInterface $logger_handler
+ * @property \Psr\Log\LoggerInterface $logger
  *
  * @package ActiveCollab\Bootstrap\TestCase
  */
@@ -75,6 +75,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
 
         $this->addToContainer('app_identifier', function ($c) {
             return "{$c['app_name']} v{$c['app_version']}";
+        });
+
+        $this->addToContainer('user_identifier', function () {
+            return (new UnidentifiedVisitor())->getEmail();
         });
 
         $this->addToContainer('logger_handler', function () {
