@@ -8,7 +8,11 @@
 
 namespace ActiveCollab\Bootstrap\ResultEncoder;
 
+use ActiveCollab\Authentication\Session\SessionInterface;
+use ActiveCollab\Bootstrap\UserSessionResponse\UserSessionResponseInterface;
+use ActiveCollab\Bootstrap\UserSessionResponse\UserSessionTerminateResponseInterface;
 use ActiveCollab\Controller\ResultEncoder\ResultEncoder as BaseResultEncoder;
+use ActiveCollab\Cookies\CookiesInterface;
 use ActiveCollab\DatabaseConnection\Result\ResultInterface;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\ObjectInterface;
@@ -39,15 +43,29 @@ class ResultEncoder extends BaseResultEncoder
     private $user_identifier;
 
     /**
-     * @param CacheProvider $cache
-     * @param string        $app_identifier
-     * @param string        $user_identifier
+     * @var CookiesInterface|null
      */
-    public function __construct(CacheProvider $cache, $app_identifier, $user_identifier)
+    private $cookies_provider;
+
+    /**
+     * @var string
+     */
+    private $user_session_id_cookie_name;
+
+    /**
+     * @param CacheProvider    $cache_provider
+     * @param string           $app_identifier
+     * @param string           $user_identifier
+     * @param CookiesInterface $cookies_provider
+     * @param string           $user_session_id_cookie_name
+     */
+    public function __construct(CacheProvider $cache_provider, $app_identifier, $user_identifier, CookiesInterface $cookies_provider = null, $user_session_id_cookie_name = null)
     {
-        $this->cache_provider = $cache;
+        $this->cache_provider = $cache_provider;
         $this->app_identifier = $app_identifier;
         $this->user_identifier = $user_identifier;
+        $this->cookies_provider = $cookies_provider;
+        $this->user_session_id_cookie_name = $user_session_id_cookie_name;
     }
 
     /**
@@ -55,18 +73,24 @@ class ResultEncoder extends BaseResultEncoder
      */
     protected function onNoEncoderApplied($action_result, ServerRequestInterface $request, ResponseInterface $response)
     {
-        if ($action_result instanceof CollectionInterface) {
+        if ($action_result instanceof UserSessionResponseInterface) {
+            return $this->encodeUserSessionResponse($action_result, $request, $response);
+        } elseif ($action_result instanceof UserSessionTerminateResponseInterface) {
+            return $this->encodeUserSessionTerminatedResponse($action_result, $request, $response);
+        } elseif ($action_result instanceof CollectionInterface) {
             return $this->encodeCollection($action_result, $response);
         } elseif ($action_result instanceof ObjectInterface) {
             return $this->encodeSingle($action_result, $response);
         } elseif ($action_result instanceof ResultInterface) {
-            return $response->write(json_encode($action_result->toArray()))->withStatus(200);
+            return $this->encodeArray($action_result->toArray(), $response);
         } else {
             return parent::onNoEncoderApplied($action_result, $request, $response);
         }
     }
 
     /**
+     * Encode DataObject collection.
+     *
      * @param  CollectionInterface $action_result
      * @param  ResponseInterface   $response
      * @return ResponseInterface
@@ -98,6 +122,8 @@ class ResultEncoder extends BaseResultEncoder
     }
 
     /**
+     * Encode individual DataObject object.
+     *
      * @param  ObjectInterface   $action_result
      * @param  ResponseInterface $response
      * @return ResponseInterface
@@ -121,5 +147,80 @@ class ResultEncoder extends BaseResultEncoder
         }
 
         return $response;
+    }
+
+    /**
+     * Encode user session action results and return properly populated response.
+     *
+     * @param  UserSessionResponseInterface $action_result
+     * @param  ServerRequestInterface       $request
+     * @param  ResponseInterface            $response
+     * @return ResponseInterface
+     */
+    private function encodeUserSessionResponse(UserSessionResponseInterface $action_result, ServerRequestInterface $request, ResponseInterface $response)
+    {
+        if ($action_result->getAuthenticatedWith() instanceof  SessionInterface) {
+            $response = $this->getCookiesProvider()->set($request, $response, $this->getUserSessionIdCookieName(), $action_result->getAuthenticatedWith()->getSessionId(), [
+                'ttl' => 1209600,
+                'http_only' => true,
+            ])[1];
+        }
+
+        return $this->encodeArray($action_result->toArray(), $response);
+    }
+
+    /**
+     * Encode user session terminated action results and return properly populated response.
+     *
+     * @param  UserSessionTerminateResponseInterface $action_result
+     * @param  ServerRequestInterface                $request
+     * @param  ResponseInterface                     $response
+     * @return ResponseInterface
+     */
+    private function encodeUserSessionTerminatedResponse(UserSessionTerminateResponseInterface $action_result, ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $response = $this->getCookiesProvider()->remove($request, $response, $this->getUserSessionIdCookieName())[1];
+
+        return $this->encodeArray($action_result->toArray(), $response);
+    }
+
+    /**
+     * @return CacheProvider
+     */
+    protected function getCacheProvider()
+    {
+        return $this->cache_provider;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAppIdentifier()
+    {
+        return $this->app_identifier;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUserIdentifier()
+    {
+        return $this->user_identifier;
+    }
+
+    /**
+     * @return CookiesInterface|null
+     */
+    protected function getCookiesProvider()
+    {
+        return $this->cookies_provider;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getUserSessionIdCookieName()
+    {
+        return $this->user_session_id_cookie_name;
     }
 }
