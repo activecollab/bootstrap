@@ -17,6 +17,7 @@ use ActiveCollab\DatabaseConnection\Result\ResultInterface;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\ObjectInterface;
 use ActiveCollab\Etag\EtagInterface;
+use JsonSerializable;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -83,6 +84,8 @@ class ResultEncoder extends BaseResultEncoder
             return $this->encodeSingle($action_result, $response);
         } elseif ($action_result instanceof ResultInterface) {
             return $this->encodeArray($action_result->toArray(), $response);
+        } elseif ($action_result instanceof \JsonSerializable) {
+            return $this->encodeJsonSerializable($action_result, $response);
         } else {
             return parent::onNoEncoderApplied($action_result, $request, $response);
         }
@@ -147,6 +150,19 @@ class ResultEncoder extends BaseResultEncoder
         }
 
         return $response;
+    }
+
+    /**
+     * Encode JsonSerializable instance response, with status 200.
+     *
+     * @param  JsonSerializable  $action_result
+     * @param  ResponseInterface $response
+     * @param  int               $status
+     * @return ResponseInterface
+     */
+    protected function encodeJsonSerializable(JsonSerializable $action_result, ResponseInterface $response, $status = 200)
+    {
+        return $response->write(json_encode($action_result))->withStatus($status);
     }
 
     /**
