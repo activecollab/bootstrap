@@ -15,7 +15,7 @@ use ActiveCollab\Controller\Response\StatusResponse\ForbiddenStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\NotFoundStatusResponse;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\Exception\ValidationException;
-use ActiveCollab\DatabaseObject\ObjectInterface;
+use ActiveCollab\Object\ObjectInterface;
 use ActiveCollab\DatabaseObject\PoolInterface;
 use ActiveCollab\DatabaseStructure\Behaviour\CreatedByInterface;
 use ActiveCollab\DatabaseStructure\Behaviour\PermissionsInterface;
