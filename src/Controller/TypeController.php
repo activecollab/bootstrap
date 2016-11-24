@@ -14,8 +14,8 @@ use ActiveCollab\Controller\Response\StatusResponse\BadRequestStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\ForbiddenStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\NotFoundStatusResponse;
 use ActiveCollab\DatabaseObject\CollectionInterface;
+use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use ActiveCollab\DatabaseObject\Exception\ValidationException;
-use ActiveCollab\Object\ObjectInterface;
 use ActiveCollab\DatabaseObject\PoolInterface;
 use ActiveCollab\DatabaseStructure\Behaviour\CreatedByInterface;
 use ActiveCollab\DatabaseStructure\Behaviour\PermissionsInterface;
@@ -36,7 +36,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     use ControllerTrait;
 
     /**
-     * @var ObjectInterface
+     * @var EntityInterface
      */
     protected $active_object;
 
@@ -96,7 +96,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
 
     /**
      * @param  ServerRequestInterface         $request
-     * @return ObjectInterface|StatusResponse
+     * @return EntityInterface|StatusResponse
      */
     public function view(ServerRequestInterface $request)
     {
@@ -113,7 +113,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
 
     /**
      * @param  ServerRequestInterface         $request
-     * @return ObjectInterface|StatusResponse
+     * @return EntityInterface|StatusResponse
      */
     public function add(ServerRequestInterface $request)
     {
@@ -165,7 +165,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      * Update an existing type instance.
      *
      * @param  ServerRequestInterface $request
-     * @return ObjectInterface
+     * @return EntityInterface
      */
     public function edit(ServerRequestInterface $request)
     {
@@ -206,7 +206,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      * Drop an existing type instance.
      *
      * @param  ServerRequestInterface         $request
-     * @return ObjectInterface|StatusResponse
+     * @return EntityInterface|StatusResponse
      */
     public function delete(ServerRequestInterface $request)
     {
@@ -285,13 +285,13 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Return true if $request_body contains a protected field.
      *
-     * @param  ObjectInterface|string $object_or_object_class
+     * @param  EntityInterface|string $object_or_object_class
      * @param  array                  $request_body
      * @return bool
      */
     private function requestBodyContainsProtectedFields($object_or_object_class, array $request_body)
     {
-        if ($object_or_object_class instanceof ObjectInterface) {
+        if ($object_or_object_class instanceof EntityInterface) {
             $protected_fields = $object_or_object_class instanceof ProtectedFieldsInterface ? $object_or_object_class->getProtectedFields() : [];
         } elseif (is_string($object_or_object_class)) {
             $object = $this->pool->produce($object_or_object_class, [], false);
@@ -377,11 +377,11 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  ObjectInterface|null $object
+     * @param  EntityInterface|null $object
      * @param  UserInterface        $user
      * @return bool
      */
-    protected function canView(ObjectInterface $object, UserInterface $user = null)
+    protected function canView(EntityInterface $object, UserInterface $user = null)
     {
         if ($user && $user->getId()) {
             if ($object instanceof PermissionsInterface) {
@@ -395,11 +395,11 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  ObjectInterface|null $object
-     * @param  UserInterface        $user
+     * @param  EntityInterface $object
+     * @param  UserInterface   $user
      * @return bool
      */
-    protected function canEdit(ObjectInterface $object, UserInterface $user = null)
+    protected function canEdit(EntityInterface $object, UserInterface $user = null)
     {
         if ($user && $user->getId()) {
             if ($object instanceof PermissionsInterface) {
@@ -413,11 +413,11 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  ObjectInterface|null $object
-     * @param  UserInterface        $user
+     * @param  EntityInterface $object
+     * @param  UserInterface   $user
      * @return bool
      */
-    protected function canDelete(ObjectInterface $object, UserInterface $user = null)
+    protected function canDelete(EntityInterface $object, UserInterface $user = null)
     {
         if ($user && $user->getId()) {
             if ($object instanceof PermissionsInterface) {
