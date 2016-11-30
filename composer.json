@@ -25,7 +25,7 @@
         "graylog2/gelf-php": "Log to Graylog2 using GELF"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer": "^1.0",
+        "friendsofphp/php-cs-fixer": "^1.0",
         "phpunit/phpunit": "^5.0"
     },
     "autoload": {
