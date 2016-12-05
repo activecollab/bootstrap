@@ -13,6 +13,7 @@ use ActiveCollab\Controller\Response\StatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\BadRequestStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\ForbiddenStatusResponse;
 use ActiveCollab\Controller\Response\StatusResponse\NotFoundStatusResponse;
+use ActiveCollab\Controller\Response\StatusResponseInterface;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use ActiveCollab\DatabaseObject\Exception\ValidationException;
@@ -43,9 +44,9 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Run before every action.
      *
-     * @param  ServerRequestInterface $request
-     * @param  array                  $arguments
-     * @return void|StatusResponse
+     * @param  ServerRequestInterface       $request
+     * @param  array                        $arguments
+     * @return StatusResponseInterface|null
      */
     protected function __before(ServerRequestInterface $request, array $arguments)
     {
@@ -65,8 +66,8 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Return a collection of type instances.
      *
-     * @param  ServerRequestInterface $request
-     * @return CollectionInterface
+     * @param  ServerRequestInterface                      $request
+     * @return CollectionInterface|StatusResponseInterface
      */
     public function index(ServerRequestInterface $request)
     {
@@ -95,8 +96,8 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  ServerRequestInterface         $request
-     * @return EntityInterface|StatusResponse
+     * @param  ServerRequestInterface                  $request
+     * @return EntityInterface|StatusResponseInterface
      */
     public function view(ServerRequestInterface $request)
     {
@@ -112,8 +113,8 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     }
 
     /**
-     * @param  ServerRequestInterface         $request
-     * @return EntityInterface|StatusResponse
+     * @param  ServerRequestInterface                  $request
+     * @return EntityInterface|StatusResponseInterface
      */
     public function add(ServerRequestInterface $request)
     {
@@ -164,8 +165,8 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Update an existing type instance.
      *
-     * @param  ServerRequestInterface $request
-     * @return EntityInterface
+     * @param  ServerRequestInterface                                      $request
+     * @return ValidationException|EntityInterface|StatusResponseInterface
      */
     public function edit(ServerRequestInterface $request)
     {
@@ -205,8 +206,8 @@ abstract class TypeController extends Controller implements TypeControllerInterf
     /**
      * Drop an existing type instance.
      *
-     * @param  ServerRequestInterface         $request
-     * @return EntityInterface|StatusResponse
+     * @param  ServerRequestInterface                        $request
+     * @return EntityInterface|array|StatusResponseInterface
      */
     public function delete(ServerRequestInterface $request)
     {
