@@ -8,7 +8,7 @@
     "type": "library",
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1",
         "activecollab/authentication": "^2.0",
         "activecollab/controller": "^0.10.0",
         "activecollab/databasemigrations": "^1.0",
@@ -22,7 +22,7 @@
         "vlucas/phpdotenv": "^2.2.0"
     },
     "suggest": {
-        "activecollab/jobsqueue": "Queue for background, delayed, parallel or remove jobs",
+        "activecollab/jobsqueue": "Queue for background, delayed, parallel or remote jobs",
         "graylog2/gelf-php": "Log to Graylog2 using GELF"
     },
     "require-dev": {
