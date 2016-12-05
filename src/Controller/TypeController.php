@@ -250,7 +250,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
         $page = 1;
 
         if (isset($query_params['page'])) {
-            $page = (integer) $query_params['page'];
+            $page = (int) $query_params['page'];
         }
 
         return $page < 1 ? 1 : $page;
