@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b6cd31f81e27a2594b0161b1b5e9db4c",
-    "content-hash": "8d096b2cf6417572a9594da08a6ffb73",
+    "hash": "1d4d876168e211a6f914674a75ad02c6",
+    "content-hash": "688e65bb2dafb5ce0071afdbfdcef732",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -3579,7 +3579,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }

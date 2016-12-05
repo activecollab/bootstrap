@@ -8,7 +8,7 @@
     "type": "library",
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.0",
         "activecollab/authentication": "^2.0",
         "activecollab/controller": "^0.10.0",
         "activecollab/databasemigrations": "^1.0",
