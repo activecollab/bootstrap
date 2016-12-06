@@ -177,7 +177,7 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @return RequestExecutorInterface
      */
-    private function getRequestExecutor(): RequestExecutorInterface
+    protected function getRequestExecutor(): RequestExecutorInterface
     {
         $app_bootstrapper = $this->getAppBootstrapper();
 
