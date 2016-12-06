@@ -17,6 +17,7 @@ use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
 use ActiveCollab\Cookies\CookiesInterface;
+use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -164,24 +165,16 @@ abstract class FullStackTestCase extends ModelTestCase
             $app_bootstrapper->bootstrap();
         }
 
+        $container = $app_bootstrapper->getApp()->getContainer();
+
         return new RequestExecutor(
             $app_bootstrapper,
-            $this->getSessionRepository(),
-            $this->getTokenRepository(),
-            $this->getCookies(),
-            $this->getSessionIdCookieName()
+            $this->getSessionRepository($container),
+            $this->getTokenRepository($container),
+            $this->getCookies($container),
+            $this->getSessionIdCookieName($container)
         );
     }
-
-    /**
-     * @return CookiesInterface
-     */
-    abstract protected function getCookies(): CookiesInterface;
-
-    /**
-     * @return string
-     */
-    abstract protected function getSessionIdCookieName(): string;
 
     /**
      * @return AppBootstrapperInterface
@@ -189,12 +182,26 @@ abstract class FullStackTestCase extends ModelTestCase
     abstract protected function getAppBoostrapper(): AppBootstrapperInterface;
 
     /**
-     * @return SessionRepositoryInterface
+     * @param  ContainerInterface $container
+     * @return CookiesInterface
      */
-    abstract protected function getSessionRepository(): SessionRepositoryInterface;
+    abstract protected function getCookies(ContainerInterface $container): CookiesInterface;
 
     /**
+     * @param  ContainerInterface $container
+     * @return string
+     */
+    abstract protected function getSessionIdCookieName(ContainerInterface $container): string;
+
+    /**
+     * @param  ContainerInterface         $container
+     * @return SessionRepositoryInterface
+     */
+    abstract protected function getSessionRepository(ContainerInterface $container): SessionRepositoryInterface;
+
+    /**
+     * @param  ContainerInterface       $container
      * @return TokenRepositoryInterface
      */
-    abstract protected function getTokenRepository(): TokenRepositoryInterface;
+    abstract protected function getTokenRepository(ContainerInterface $container): TokenRepositoryInterface;
 }
