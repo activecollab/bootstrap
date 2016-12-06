@@ -88,11 +88,11 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      * Execute POST request.
      *
      * @param  string            $path
-     * @param  array|null        $payload
+     * @param  array             $payload
      * @param  callable|null     $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executePostRequest(string $path, array $payload = null, callable $modify_request_and_response = null)
+    public function executePostRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->post($path, $payload, $modify_request_and_response);
@@ -103,11 +103,11 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      *
      * @param  AuthenticatedUserInterface $user
      * @param  string                     $path
-     * @param  array|null                 $payload
+     * @param  array                      $payload
      * @param  callable|null              $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executePostRequestAs(AuthenticatedUserInterface $user, string $path, $payload = null, callable $modify_request_and_response = null)
+    public function executePostRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->as($user)
@@ -118,11 +118,11 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      * Execute POST request.
      *
      * @param  string            $path
-     * @param  array|null        $payload
+     * @param  array             $payload
      * @param  callable|null     $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executePutRequest(string $path, array $payload = null, callable $modify_request_and_response = null)
+    public function executePutRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->put($path, $payload, $modify_request_and_response);
@@ -137,7 +137,7 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      * @param  callable|null              $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executePutRequestAs(AuthenticatedUserInterface $user, $path, $payload = [], callable $modify_request_and_response = null)
+    public function executePutRequestAs(AuthenticatedUserInterface $user, $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->as($user)
@@ -148,11 +148,11 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      * Execute delete action.
      *
      * @param  string            $path
-     * @param  array|null        $payload
+     * @param  array             $payload
      * @param  callable|null     $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executeDeleteRequest(string $path, array $payload = null, callable $modify_request_and_response = null)
+    public function executeDeleteRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->delete($path, $payload, $modify_request_and_response);
@@ -163,11 +163,11 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
      *
      * @param  AuthenticatedUserInterface $user
      * @param  string                     $path
-     * @param  array|null                 $payload
+     * @param  array                      $payload
      * @param  callable|null              $modify_request_and_response
      * @return ResponseInterface
      */
-    public function executeDeleteRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = null, callable $modify_request_and_response = null)
+    public function executeDeleteRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null)
     {
         return $this->getRequestExecutor()
             ->as($user)
