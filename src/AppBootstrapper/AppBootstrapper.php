@@ -67,8 +67,8 @@ class AppBootstrapper implements AppBootstrapperInterface
      */
     public function getApp(): App
     {
-        if (!$this->isBootstrapped()) {
-            throw new LogicException('App is not boostrapped.');
+        if (empty($this->app)) {
+            throw new LogicException('App not set up.');
         }
 
         return $this->app;
@@ -87,8 +87,8 @@ class AppBootstrapper implements AppBootstrapperInterface
      */
     public function getResponse(): ResponseInterface
     {
-        if (!$this->isRan()) {
-            throw new LogicException('App is not ran.');
+        if (empty($this->response)) {to
+            throw new LogicException('Response not set up.');
         }
 
         return $this->response;
