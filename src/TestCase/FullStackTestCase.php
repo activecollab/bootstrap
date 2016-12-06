@@ -35,6 +35,15 @@ use Slim\Http\Response;
 abstract class FullStackTestCase extends ModelTestCase
 {
     /**
+     * @param ResponseInterface|mixed $response
+     */
+    protected function assertJsonRespose($response)
+    {
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertContains('application/json', $response->getHeaderLine('Content-Type'));
+    }
+
+    /**
      * Execute a GET request and return resulting request and response.
      *
      * @param  string            $path
@@ -257,7 +266,7 @@ abstract class FullStackTestCase extends ModelTestCase
      */
     protected function prepareRequestUri(string $path)
     {
-        return trim($path, '/');
+        return '/' . trim($path, '/');
     }
 
     /**
