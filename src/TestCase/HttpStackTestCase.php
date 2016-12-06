@@ -12,8 +12,10 @@ namespace ActiveCollab\Bootstrap\TestCase;
 
 use ActiveCollab\Authentication\AuthenticatedUser\AuthenticatedUserInterface;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use ActiveCollab\Bootstrap\TestCase\Utils\NowTrait;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
+use ActiveCollab\DateValue\DateTimeValue;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -21,6 +23,28 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class HttpStackTestCase extends \PHPUnit_Framework_TestCase
 {
+    use NowTrait;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->setNow(new DateTimeValue());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function tearDown()
+    {
+        $this->setNow(null);
+
+        parent::tearDown();
+    }
+
     /**
      * @param ResponseInterface|mixed $response
      */
@@ -223,8 +247,6 @@ abstract class HttpStackTestCase extends \PHPUnit_Framework_TestCase
             return $app_boostrapper->getApp()->getContainer()->get($name);
         }
 
-        trigger_error(sprintf('Property %s not found in class %s', $name, get_class($this)));
-
-        return null;
+        throw new \RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
     }
 }

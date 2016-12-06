@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\TestCase;
 
+use ActiveCollab\Bootstrap\TestCase\Utils\NowTrait;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessInterfaceImplementation;
 use ActiveCollab\DateValue\DateTimeValue;
-use ActiveCollab\DateValue\DateTimeValueInterface;
 use ActiveCollab\User\UnidentifiedVisitor;
 use Doctrine\Common\Inflector\Inflector;
 use Interop\Container\ContainerInterface;
@@ -35,17 +35,12 @@ use Slim\Container;
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase implements ContainerAccessInterface
 {
-    use ContainerAccessInterfaceImplementation;
+    use NowTrait, ContainerAccessInterfaceImplementation;
 
     /**
      * @var ContainerInterface
      */
     private $container;
-
-    /**
-     * @var DateTimeValue|null
-     */
-    protected $now;
 
     /**
      * Set up test environment.
@@ -121,23 +116,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase implements Container
     protected function setInContainer($key, $value)
     {
         $this->getContainer()[$key] = $value;
-    }
-
-    /**
-     * @return DateTimeValue|null
-     */
-    public function getNow()
-    {
-        return $this->now;
-    }
-
-    /**
-     * @param DateTimeValueInterface|null $now
-     */
-    public function setNow(DateTimeValueInterface $now = null)
-    {
-        $this->now = $now;
-        DateTimeValue::setTestNow($this->now);
     }
 
     /**
