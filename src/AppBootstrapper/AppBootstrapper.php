@@ -23,7 +23,7 @@ class AppBootstrapper implements AppBootstrapperInterface
     /**
      * @var string
      */
-    private $app_path;
+    private $app_path = '';
 
     /**
      * @var array
@@ -65,6 +65,38 @@ class AppBootstrapper implements AppBootstrapperInterface
     /**
      * {@inheritdoc}
      */
+    public function getApp(): App
+    {
+        if (!$this->isBootstrapped()) {
+            throw new LogicException('App is not boostrapped.');
+        }
+
+        return $this->app;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppPath(): string
+    {
+        return $this->app_path;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResponse(): ResponseInterface
+    {
+        if (!$this->isRan()) {
+            throw new LogicException('App is not ran.');
+        }
+
+        return $this->response;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isBootstrapped(): bool
     {
         return $this->is_bootstrapped;
@@ -75,7 +107,7 @@ class AppBootstrapper implements AppBootstrapperInterface
      */
     public function &bootstrap(): AppBootstrapperInterface
     {
-        if ($this->is_bootstrapped) {
+        if ($this->isBootstrapped()) {
             throw new LogicException('App is already bootstrapped.');
         }
 

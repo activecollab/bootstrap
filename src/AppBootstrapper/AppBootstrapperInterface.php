@@ -12,12 +12,38 @@ namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\App;
 
 /**
  * @package ActiveCollab\Shepherd\Utils
  */
 interface AppBootstrapperInterface
 {
+    /**
+     * Return app instance.
+     *
+     * If app is not boostrapped, this function will throw an exception.
+     *
+     * @return App
+     */
+    public function getApp(): App;
+
+    /**
+     * Return app path.
+     *
+     * @return string
+     */
+    public function getAppPath(): string;
+
+    /**
+     * Return the response.
+     *
+     * If app was not ran, this function will throw an exception.
+     *
+     * @return ResponseInterface
+     */
+    public function getResponse(): ResponseInterface;
+
     /**
      * Return true if app is bootstrapped.
      *
