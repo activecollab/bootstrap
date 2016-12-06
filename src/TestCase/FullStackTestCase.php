@@ -11,11 +11,14 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\TestCase;
 
 use ActiveCollab\Authentication\AuthenticatedUser\AuthenticatedUserInterface;
+use ActiveCollab\Authentication\AuthenticationInterface;
 use ActiveCollab\Authentication\Session\RepositoryInterface as SessionRepositoryInterface;
 use ActiveCollab\Authentication\Session\SessionInterface;
 use ActiveCollab\Authentication\Token\RepositoryInterface as TokenRepositoryInterface;
 use ActiveCollab\Authentication\Token\TokenInterface;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use ActiveCollab\Cookies\CookiesInterface;
+use ActiveCollab\Encryptor\EncryptorInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,11 +28,6 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 /**
- * @property \ActiveCollab\Authentication\AuthenticationInterface $authentication
- * @property \ActiveCollab\Cookies\CookiesInterface $cookies
- * @property \ActiveCollab\Encryptor\EncryptorInterface $encryptor
- * @property string $session_id_cookie_name
- *
  * @package ActiveCollab\Bootstrap\TestCase
  */
 abstract class FullStackTestCase extends ModelTestCase
@@ -222,7 +220,7 @@ abstract class FullStackTestCase extends ModelTestCase
         }
 
         if ($authenticated_with instanceof SessionInterface) {
-            list($request, $response) = $this->cookies->set($request, $response, $this->session_id_cookie_name, $authenticated_with->getSessionId());
+            list($request, $response) = $this->getCookies()->set($request, $response, $this->getSessionIdCookieName(), $authenticated_with->getSessionId());
         } else {
             $request = $request->withHeader('Authorization', 'Bearer ' . $authenticated_with->getTokenId());
         }
@@ -299,6 +297,26 @@ abstract class FullStackTestCase extends ModelTestCase
     {
         return $this->getTokenRepository()->issueToken($user);
     }
+
+    /**
+     * @return AuthenticationInterface
+     */
+    abstract protected function getAuthentication(): AuthenticationInterface;
+
+    /**
+     * @return CookiesInterface
+     */
+    abstract protected function getCookies(): CookiesInterface;
+
+    /**
+     * @return string
+     */
+    abstract protected function getSessionIdCookieName(): string;
+
+    /**
+     * @return EncryptorInterface
+     */
+    abstract protected function getEncryptor(): EncryptorInterface;
 
     /**
      * @return AppBootstrapperInterface
