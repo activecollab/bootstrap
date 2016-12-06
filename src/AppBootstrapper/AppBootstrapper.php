@@ -87,7 +87,7 @@ class AppBootstrapper implements AppBootstrapperInterface
      */
     public function getResponse(): ResponseInterface
     {
-        if (empty($this->response)) {to
+        if (empty($this->response)) {
             throw new LogicException('Response not set up.');
         }
 
