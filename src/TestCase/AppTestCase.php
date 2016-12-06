@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @package ActiveCollab\Bootstrap\TestCase
  */
-abstract class HttpStackTestCase extends \PHPUnit_Framework_TestCase
+abstract class AppTestCase extends \PHPUnit_Framework_TestCase
 {
     use NowTrait;
 
