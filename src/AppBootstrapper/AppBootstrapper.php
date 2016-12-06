@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Shepherd project.
+ * This file is part of the Active Collab Bootstrap project.
  *
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
+use Interop\Container\ContainerInterface;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,9 +27,9 @@ class AppBootstrapper implements AppBootstrapperInterface
     private $app_path = '';
 
     /**
-     * @var array
+     * @var ContainerInterface|array
      */
-    private $app_settings;
+    private $container_or_settings;
 
     /**
      * @var bool
@@ -54,12 +55,16 @@ class AppBootstrapper implements AppBootstrapperInterface
      * AppBootstrapper constructor.
      *
      * @param string $app_path
-     * @param array  $app_settings
+     * @param array  $container_or_settings
      */
-    public function __construct(string $app_path, array $app_settings = [])
+    public function __construct(string $app_path, $container_or_settings = [])
     {
+        if (!is_array($container_or_settings) && !$container_or_settings instanceof ContainerInterface) {
+            throw new LogicException('Container or array expected, ' . gettype($container_or_settings) . ' given');
+        }
+
         $this->app_path = $app_path;
-        $this->app_settings = $app_settings;
+        $this->container_or_settings = $container_or_settings;
     }
 
     /**
@@ -112,7 +117,7 @@ class AppBootstrapper implements AppBootstrapperInterface
         }
 
         $this->beforeAppConstruction();
-        $this->app = new App($this->app_settings);
+        $this->app = new App($this->container_or_settings);
         $this->afterAppConstruction();
 
         $this->is_bootstrapped = true;

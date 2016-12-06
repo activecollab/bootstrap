@@ -24,7 +24,7 @@ interface RequestExecutorInterface
      * @param  string                     $authentication_method
      * @return RequestExecutorInterface
      */
-    public function as(AuthenticatedUserInterface $user, string $authentication_method = self::SESSION): RequestExecutorInterface;
+    public function &as(AuthenticatedUserInterface $user, string $authentication_method = self::SESSION): RequestExecutorInterface;
 
     public function get(string $path, array $query_params = [], callable $modify_request_and_response = null): ResponseInterface;
 
