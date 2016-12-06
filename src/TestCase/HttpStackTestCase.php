@@ -11,19 +11,15 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\TestCase;
 
 use ActiveCollab\Authentication\AuthenticatedUser\AuthenticatedUserInterface;
-use ActiveCollab\Authentication\Session\RepositoryInterface as SessionRepositoryInterface;
-use ActiveCollab\Authentication\Token\RepositoryInterface as TokenRepositoryInterface;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
-use ActiveCollab\Cookies\CookiesInterface;
-use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @package ActiveCollab\Bootstrap\TestCase
  */
-abstract class FullStackTestCase extends \PHPUnit_Framework_TestCase
+abstract class HttpStackTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @param ResponseInterface|mixed $response
@@ -165,14 +161,12 @@ abstract class FullStackTestCase extends \PHPUnit_Framework_TestCase
             $app_bootstrapper->bootstrap();
         }
 
-        $container = $app_bootstrapper->getApp()->getContainer();
-
         return new RequestExecutor(
             $app_bootstrapper,
-            $this->getSessionRepository($container),
-            $this->getTokenRepository($container),
-            $this->getCookies($container),
-            $this->getSessionIdCookieName($container)
+            $this->{$this->getSessionRepositoryPropertyName()},
+            $this->{$this->getTokenRepositoryPropertyName()},
+            $this->{$this->getCookiesPropertyName()},
+            $this->{$this->getSessionIdCookieNamePropertyName()}
         );
     }
 
@@ -182,26 +176,55 @@ abstract class FullStackTestCase extends \PHPUnit_Framework_TestCase
     abstract protected function getAppBootstrapper(): AppBootstrapperInterface;
 
     /**
-     * @param  ContainerInterface $container
-     * @return CookiesInterface
-     */
-    abstract protected function getCookies(ContainerInterface $container): CookiesInterface;
-
-    /**
-     * @param  ContainerInterface $container
      * @return string
      */
-    abstract protected function getSessionIdCookieName(ContainerInterface $container): string;
+    protected function getCookiesPropertyName(): string
+    {
+        return 'cookies';
+    }
 
     /**
-     * @param  ContainerInterface         $container
-     * @return SessionRepositoryInterface
+     * @return string
      */
-    abstract protected function getSessionRepository(ContainerInterface $container): SessionRepositoryInterface;
+    protected function getSessionIdCookieNamePropertyName(): string
+    {
+        return 'session_id_cookie_name';
+    }
 
     /**
-     * @param  ContainerInterface       $container
-     * @return TokenRepositoryInterface
+     * @return string
      */
-    abstract protected function getTokenRepository(ContainerInterface $container): TokenRepositoryInterface;
+    protected function getSessionRepositoryPropertyName(): string
+    {
+        return 'session_repository';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTokenRepositoryPropertyName(): string
+    {
+        return 'token_repository';
+    }
+
+    /**
+     * @param  string $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        $app_boostrapper = $this->getAppBootstrapper();
+
+        if (!$app_boostrapper->isBootstrapped()) {
+            $app_boostrapper->bootstrap();
+        }
+
+        if ($app_boostrapper->getApp()->getContainer()->has($name)) {
+            return $app_boostrapper->getApp()->getContainer()->get($name);
+        }
+
+        trigger_error(sprintf('Property %s not found in class %s', $name, get_class($this)));
+
+        return null;
+    }
 }
