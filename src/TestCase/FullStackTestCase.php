@@ -37,7 +37,7 @@ abstract class FullStackTestCase extends ModelTestCase
     /**
      * @param ResponseInterface|mixed $response
      */
-    protected function assertJsonRespose($response)
+    protected function assertJsonResponse($response)
     {
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertContains('application/json', $response->getHeaderLine('Content-Type'));
