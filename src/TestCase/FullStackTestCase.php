@@ -23,7 +23,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @package ActiveCollab\Bootstrap\TestCase
  */
-abstract class FullStackTestCase extends ModelTestCase
+abstract class FullStackTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      * @param ResponseInterface|mixed $response
@@ -159,7 +159,7 @@ abstract class FullStackTestCase extends ModelTestCase
      */
     private function getRequestExecutor(): RequestExecutorInterface
     {
-        $app_bootstrapper = $this->getAppBoostrapper();
+        $app_bootstrapper = $this->getAppBootstrapper();
 
         if (!$app_bootstrapper->isBootstrapped()) {
             $app_bootstrapper->bootstrap();
@@ -179,7 +179,7 @@ abstract class FullStackTestCase extends ModelTestCase
     /**
      * @return AppBootstrapperInterface
      */
-    abstract protected function getAppBoostrapper(): AppBootstrapperInterface;
+    abstract protected function getAppBootstrapper(): AppBootstrapperInterface;
 
     /**
      * @param  ContainerInterface $container
