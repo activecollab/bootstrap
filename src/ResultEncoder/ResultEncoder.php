@@ -8,6 +8,7 @@
 
 namespace ActiveCollab\Bootstrap\ResultEncoder;
 
+use ActiveCollab\Authentication\AuthenticationResult\Transport\TransportInterface;
 use ActiveCollab\Authentication\Session\SessionInterface;
 use ActiveCollab\Bootstrap\UserSessionResponse\UserSessionResponseInterface;
 use ActiveCollab\Bootstrap\UserSessionResponse\UserSessionTerminateResponseInterface;
@@ -76,6 +77,8 @@ class ResultEncoder extends BaseResultEncoder
     {
         if ($action_result instanceof UserSessionResponseInterface) {
             return $this->encodeUserSessionResponse($action_result, $request, $response);
+        } elseif ($action_result instanceof TransportInterface) {
+            return $this->encode($action_result->getPayload(), $request, $response);
         } elseif ($action_result instanceof UserSessionTerminateResponseInterface) {
             return $this->encodeUserSessionTerminatedResponse($action_result, $request, $response);
         } elseif ($action_result instanceof CollectionInterface) {
