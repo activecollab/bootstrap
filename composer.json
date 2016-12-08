@@ -10,7 +10,7 @@
     "require": {
         "php": ">=7.0",
         "activecollab/authentication": "^2.0",
-        "activecollab/controller": "^0.10.0",
+        "activecollab/controller": "v1.0.x-dev",
         "activecollab/databasemigrations": "^1.0",
         "activecollab/databasestructure": "^0.10",
         "activecollab/logger": "^1.0",

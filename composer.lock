@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d4d876168e211a6f914674a75ad02c6",
-    "content-hash": "688e65bb2dafb5ce0071afdbfdcef732",
+    "hash": "a0b69c5922d659f5cbcd27a8d6c61873",
+    "content-hash": "72cb5c1652255ef1605d91550eec0901",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -113,16 +113,16 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "0.10.15",
+            "version": "v1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "9c25d75b3349bded46fd2845bbcb2bd1fc8ce8d1"
+                "reference": "ba46a0e433ea7d44e06cc12b4573916bf7308f52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/9c25d75b3349bded46fd2845bbcb2bd1fc8ce8d1",
-                "reference": "9c25d75b3349bded46fd2845bbcb2bd1fc8ce8d1",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/ba46a0e433ea7d44e06cc12b4573916bf7308f52",
+                "reference": "ba46a0e433ea7d44e06cc12b4573916bf7308f52",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-11-25 12:28:53"
+            "time": "2016-12-08 19:20:16"
         },
         {
             "name": "activecollab/cookies",
@@ -3575,7 +3575,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "activecollab/controller": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
