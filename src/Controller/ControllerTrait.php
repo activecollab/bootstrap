@@ -23,7 +23,7 @@ trait ControllerTrait
      * @param  ServerRequestInterface          $request
      * @return AuthenticatedUserInterface|null
      */
-    protected function getAuthenticatedUser(ServerRequestInterface $request): ? AuthenticatedUserInterface
+    protected function getAuthenticatedUser(ServerRequestInterface $request)
     {
         return $request->getAttribute($this->getAuthenticatedUserAttributeName());
     }
@@ -44,7 +44,7 @@ trait ControllerTrait
      * @param  ServerRequestInterface             $request
      * @return AuthenticationResultInterface|null
      */
-    protected function getAuthenticatedWith(ServerRequestInterface $request): ? AuthenticationResultInterface
+    protected function getAuthenticatedWith(ServerRequestInterface $request)
     {
         return $request->getAttribute($this->getAuthenticatedWithAttributeName());
     }
