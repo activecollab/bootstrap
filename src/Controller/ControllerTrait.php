@@ -33,7 +33,7 @@ trait ControllerTrait
      *
      * @return string
      */
-    protected function getAuthenticatedUserAttributeName() : string
+    protected function getAuthenticatedUserAttributeName(): string
     {
         return 'authenticated_user';
     }
@@ -54,7 +54,7 @@ trait ControllerTrait
      *
      * @return string
      */
-    protected function getAuthenticatedWithAttributeName() : string
+    protected function getAuthenticatedWithAttributeName(): string
     {
         return 'authenticated_with';
     }
