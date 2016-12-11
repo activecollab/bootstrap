@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a0b69c5922d659f5cbcd27a8d6c61873",
-    "content-hash": "72cb5c1652255ef1605d91550eec0901",
+    "hash": "28dab69c34996da61b944c8d21602971",
+    "content-hash": "7bb613ef79f2902df5a6ca8a5b691eda",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -117,24 +117,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "ba46a0e433ea7d44e06cc12b4573916bf7308f52"
+                "reference": "672c2df5cb8e836637a4a7205c26120c85b02cb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/ba46a0e433ea7d44e06cc12b4573916bf7308f52",
-                "reference": "ba46a0e433ea7d44e06cc12b4573916bf7308f52",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/672c2df5cb8e836637a4a7205c26120c85b02cb2",
+                "reference": "672c2df5cb8e836637a4a7205c26120c85b02cb2",
                 "shasum": ""
             },
             "require": {
                 "activecollab/containeraccess": "^1.0",
                 "activecollab/etag": "^1.0",
                 "activecollab/templateengine": "^1.0",
-                "php": ">=5.6.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0",
                 "psr/log": "~1.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.0",
+                "monolog/monolog": "^1.0",
                 "phpunit/phpunit": "^5.0",
                 "slim/http": "^0.1.0"
             },
@@ -155,7 +156,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-12-08 19:20:16"
+            "time": "2016-12-10 23:54:53"
         },
         {
             "name": "activecollab/cookies",
@@ -2559,16 +2560,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.2",
+            "version": "5.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "336aff0ac52e306c98e7455bc3e8d7b0bf777a5e"
+                "reference": "de164acc2f2bb0b79beb892a36260264b2a03233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/336aff0ac52e306c98e7455bc3e8d7b0bf777a5e",
-                "reference": "336aff0ac52e306c98e7455bc3e8d7b0bf777a5e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/de164acc2f2bb0b79beb892a36260264b2a03233",
+                "reference": "de164acc2f2bb0b79beb892a36260264b2a03233",
                 "shasum": ""
             },
             "require": {
@@ -2579,7 +2580,7 @@
                 "ext-xml": "*",
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
-                "phpspec/prophecy": "^1.3.1",
+                "phpspec/prophecy": "^1.6.2",
                 "phpunit/php-code-coverage": "^4.0.3",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
@@ -2637,20 +2638,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-03 08:33:00"
+            "time": "2016-12-09 02:48:53"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.4.2",
+            "version": "3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf"
+                "reference": "3ab72b65b39b491e0c011e2e09bb2206c2aa8e24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/90a08f5deed5f7ac35463c161f2e8fa0e5652faf",
-                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3ab72b65b39b491e0c011e2e09bb2206c2aa8e24",
+                "reference": "3ab72b65b39b491e0c011e2e09bb2206c2aa8e24",
                 "shasum": ""
             },
             "require": {
@@ -2696,7 +2697,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-11-27 07:52:03"
+            "time": "2016-12-08 20:27:08"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -3581,7 +3582,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0"
+        "php": ">=7.1"
     },
     "platform-dev": []
 }
