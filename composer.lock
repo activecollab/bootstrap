@@ -117,12 +117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "1ada213b071e7e8784c8a0da292d603f075fec7b"
+                "reference": "7538d25b4c0b165e7e5b2b067d15591f7445fb7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/1ada213b071e7e8784c8a0da292d603f075fec7b",
-                "reference": "1ada213b071e7e8784c8a0da292d603f075fec7b",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/7538d25b4c0b165e7e5b2b067d15591f7445fb7c",
+                "reference": "7538d25b4c0b165e7e5b2b067d15591f7445fb7c",
                 "shasum": ""
             },
             "require": {
@@ -156,7 +156,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-12-11 00:05:12"
+            "time": "2016-12-11 14:41:17"
         },
         {
             "name": "activecollab/cookies",
