@@ -9,11 +9,6 @@
 namespace ActiveCollab\Bootstrap\Controller;
 
 use ActiveCollab\Bootstrap\Exception\CollectionNotFoundException;
-use ActiveCollab\Controller\Response\StatusResponse;
-use ActiveCollab\Controller\Response\StatusResponse\BadRequestStatusResponse;
-use ActiveCollab\Controller\Response\StatusResponse\ForbiddenStatusResponse;
-use ActiveCollab\Controller\Response\StatusResponse\NotFoundStatusResponse;
-use ActiveCollab\Controller\Response\StatusResponseInterface;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use ActiveCollab\DatabaseObject\Exception\ValidationException;
@@ -41,41 +36,28 @@ abstract class TypeController extends Controller implements TypeControllerInterf
      */
     protected $active_object;
 
-    /**
-     * Run before every action.
-     *
-     * @param  ServerRequestInterface       $request
-     * @param  array                        $arguments
-     * @return StatusResponseInterface|null
-     */
-    protected function __before(ServerRequestInterface $request, array $arguments)
+    public function __before(ServerRequestInterface $request)
     {
         $type_id_variable = $this->getTypeIdVariable();
 
-        if (array_key_exists($type_id_variable, $arguments)) {
+        if (array_key_exists($type_id_variable, '')) {
             $this->active_object = empty($arguments[$type_id_variable]) ? null : $this->pool->getById($this->getTypeClassName(), $arguments[$type_id_variable]);
 
             if (empty($this->active_object)) {
-                return new NotFoundStatusResponse();
+                return $this->notFound();
             }
         }
 
         return null;
     }
 
-    /**
-     * Return a collection of type instances.
-     *
-     * @param  ServerRequestInterface                      $request
-     * @return CollectionInterface|StatusResponseInterface
-     */
     public function index(ServerRequestInterface $request)
     {
         if ($this->shouldCheckPermissions()) {
             $authenticated_user = $this->getAuthenticatedUser($request);
 
             if (!$this->canList($authenticated_user)) {
-                return new ForbiddenStatusResponse();
+                return $this->forbidden();
             }
         }
 
@@ -95,37 +77,29 @@ abstract class TypeController extends Controller implements TypeControllerInterf
         }
     }
 
-    /**
-     * @param  ServerRequestInterface                  $request
-     * @return EntityInterface|StatusResponseInterface
-     */
     public function view(ServerRequestInterface $request)
     {
         if ($this->shouldCheckPermissions()) {
             $authenticated_user = $this->getAuthenticatedUser($request);
 
             if (!$this->canView($this->active_object, $authenticated_user)) {
-                return new ForbiddenStatusResponse();
+                return $this->forbidden();
             }
         }
 
-        return $this->active_object && $this->active_object->isLoaded() ? $this->active_object : new NotFoundStatusResponse();
+        return $this->active_object && $this->active_object->isLoaded() ? $this->active_object : $this->notFound();
     }
 
-    /**
-     * @param  ServerRequestInterface                  $request
-     * @return EntityInterface|StatusResponseInterface
-     */
     public function add(ServerRequestInterface $request)
     {
         if ($this->isReadOnly()) {
-            return new NotFoundStatusResponse();
+            return $this->notFound();
         }
 
         $authenticated_user = $this->getAuthenticatedUser($request);
 
         if ($this->shouldCheckPermissions() && !$this->canCreate($authenticated_user)) {
-            return new ForbiddenStatusResponse();
+            return $this->forbidden();
         }
 
         $type_class = $this->getTypeClassName();
@@ -139,12 +113,12 @@ abstract class TypeController extends Controller implements TypeControllerInterf
             try {
                 $type_class = $this->getTypeFromRequestBody($request_body);
             } catch (InvalidArgumentException $e) {
-                return new StatusResponse(400, $e->getMessage());
+                return $this->badRequest();
             }
         }
 
         if ($this->requestBodyContainsProtectedFields($type_class, $request_body)) {
-            return new BadRequestStatusResponse();
+            return $this->badRequest();
         }
 
         $this->cleanUpRequestBodyForAdd($request_body, $authenticated_user);
@@ -156,29 +130,23 @@ abstract class TypeController extends Controller implements TypeControllerInterf
                 $result->setCreatedBy($authenticated_user); // Force created_by_id when missing and when authenticated user can't override created_by data
             }
 
-            return $result->save();
+            return $this->created($result->save());
         } catch (ValidationException $e) {
             return $e;
         }
     }
 
-    /**
-     * Update an existing type instance.
-     *
-     * @param  ServerRequestInterface                                      $request
-     * @return ValidationException|EntityInterface|StatusResponseInterface
-     */
     public function edit(ServerRequestInterface $request)
     {
         if ($this->isReadOnly()) {
-            return new NotFoundStatusResponse();
+            return $this->notFound();
         }
 
         if ($this->active_object && $this->active_object->isLoaded()) {
             $authenticated_user = $this->getAuthenticatedUser($request);
 
             if ($this->shouldCheckPermissions() && !$this->canEdit($this->active_object, $authenticated_user)) {
-                return new ForbiddenStatusResponse();
+                return $this->forbidden();
             }
 
             $request_body = $request->getParsedBody();
@@ -188,7 +156,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
             }
 
             if ($this->requestBodyContainsProtectedFields($this->active_object, $request_body)) {
-                return new BadRequestStatusResponse();
+                return $this->badRequest();
             }
 
             $this->cleanUpRequestBodyForEdit($request_body, $authenticated_user);
@@ -199,27 +167,21 @@ abstract class TypeController extends Controller implements TypeControllerInterf
                 return $e;
             }
         } else {
-            return new NotFoundStatusResponse();
+            return $this->notFound();
         }
     }
 
-    /**
-     * Drop an existing type instance.
-     *
-     * @param  ServerRequestInterface                        $request
-     * @return EntityInterface|array|StatusResponseInterface
-     */
     public function delete(ServerRequestInterface $request)
     {
         if ($this->isReadOnly()) {
-            return new NotFoundStatusResponse();
+            return $this->notFound();
         }
 
         if ($this->active_object && $this->active_object->isLoaded()) {
             $authenticated_user = $this->getAuthenticatedUser($request);
 
             if ($this->shouldCheckPermissions() && !$this->canDelete($this->active_object, $authenticated_user)) {
-                return new ForbiddenStatusResponse();
+                return $this->forbidden();
             }
 
             $this->active_object = $this->pool->scrap($this->active_object);
@@ -232,7 +194,7 @@ abstract class TypeController extends Controller implements TypeControllerInterf
                 return $this->active_object;
             }
         } else {
-            return new NotFoundStatusResponse();
+            return $this->notFound();
         }
     }
 
