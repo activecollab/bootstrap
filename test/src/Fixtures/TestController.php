@@ -30,4 +30,9 @@ class TestController extends Controller
 
         parent::__construct($action_name_resolver, $action_result_attribute_name, $logger);
     }
+
+    public function index()
+    {
+        return [1, 2, 3];
+    }
 }
