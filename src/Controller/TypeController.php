@@ -39,10 +39,10 @@ abstract class TypeController extends Controller implements TypeControllerInterf
 
     public function __before(ServerRequestInterface $request)
     {
-        $type_id_variable = $this->getTypeIdVariable();
+        $object_id = $this->getRouteParam($request, $this->getTypeIdVariable());
 
-        if (array_key_exists($type_id_variable, '')) {
-            $this->active_object = empty($arguments[$type_id_variable]) ? null : $this->pool->getById($this->getTypeClassName(), $arguments[$type_id_variable]);
+        if ($object_id !== null) {
+            $this->active_object = $this->pool->getById($this->getTypeClassName(), $object_id);
 
             if (empty($this->active_object)) {
                 return $this->notFound();
