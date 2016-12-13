@@ -8,6 +8,7 @@
 
 namespace ActiveCollab\Bootstrap\Controller;
 
+use ActiveCollab\Bootstrap\Controller\AuthenticationAttributes\AuthenticationAttributesTrait;
 use ActiveCollab\Bootstrap\Exception\CollectionNotFoundException;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use ActiveCollab\DatabaseObject\Entity\EntityInterface;
@@ -29,7 +30,7 @@ use ReflectionClass;
  */
 abstract class TypeController extends Controller implements TypeControllerInterface
 {
-    use ControllerTrait;
+    use AuthenticationAttributesTrait;
 
     /**
      * @var EntityInterface

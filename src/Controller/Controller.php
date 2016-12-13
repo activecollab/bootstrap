@@ -8,13 +8,15 @@
 
 namespace ActiveCollab\Bootstrap\Controller;
 
+use ActiveCollab\Bootstrap\Controller\AuthenticationAttributes\AuthenticationAttributesInterface;
+use ActiveCollab\Bootstrap\Controller\AuthenticationAttributes\AuthenticationAttributesTrait;
 use ActiveCollab\Controller\Controller as BaseController;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\RouteInterface;
 
-abstract class Controller extends BaseController
+abstract class Controller extends BaseController implements AuthenticationAttributesInterface
 {
-    use ControllerTrait;
+    use AuthenticationAttributesTrait;
 
     protected function getRouteParam(ServerRequestInterface $request, string $param_name, $default = null)
     {
