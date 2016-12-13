@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "866a8e8cb77075cdd34718847d55499724f12dfa"
+                "reference": "0820938a0eb96ee6354b1a059a234bd8b2cfc5a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/866a8e8cb77075cdd34718847d55499724f12dfa",
-                "reference": "866a8e8cb77075cdd34718847d55499724f12dfa",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/0820938a0eb96ee6354b1a059a234bd8b2cfc5a9",
+                "reference": "0820938a0eb96ee6354b1a059a234bd8b2cfc5a9",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2016-11-28 09:21:10"
+            "time": "2016-12-11 23:10:12"
         },
         {
             "name": "activecollab/containeraccess",
@@ -117,12 +117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "7538d25b4c0b165e7e5b2b067d15591f7445fb7c"
+                "reference": "e77e5b47ba11aef6d6fa98b722b38969f5850baa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/7538d25b4c0b165e7e5b2b067d15591f7445fb7c",
-                "reference": "7538d25b4c0b165e7e5b2b067d15591f7445fb7c",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/e77e5b47ba11aef6d6fa98b722b38969f5850baa",
+                "reference": "e77e5b47ba11aef6d6fa98b722b38969f5850baa",
                 "shasum": ""
             },
             "require": {
@@ -156,7 +156,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-12-11 14:41:17"
+            "time": "2016-12-13 09:58:31"
         },
         {
             "name": "activecollab/cookies",
