@@ -14,7 +14,7 @@
         "activecollab/databasemigrations": "^1.0",
         "activecollab/databasestructure": "^0.10",
         "activecollab/logger": "^1.0",
-        "activecollab/utils": "^0.10",
+        "activecollab/utils": "^1.0",
         "slim/http-cache": "~0.3.0",
         "slim/php-view": "^2.0",
         "slim/slim": "^3.0",
