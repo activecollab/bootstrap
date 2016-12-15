@@ -12,12 +12,14 @@ namespace ActiveCollab\Bootstrap\Test\Fixtures;
 
 use ActiveCollab\Bootstrap\Controller\Controller;
 use ActiveCollab\Controller\ActionNameResolver\ActionNameResolverInterface;
+use ActiveCollab\Controller\ActionResult\Container\ActionResultContainerInterface;
+use Pimple\Container;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
 class TestController extends Controller
 {
-    public function __construct(ActionNameResolverInterface $action_name_resolver = null, string $action_result_attribute_name = 'action_result', LoggerInterface $logger = null)
+    public function __construct(ActionNameResolverInterface $action_name_resolver = null, ActionResultContainerInterface $action_result_container = null, LoggerInterface $logger = null)
     {
         if (empty($action_name_resolver)) {
             $action_name_resolver = new class() implements ActionNameResolverInterface {
@@ -28,7 +30,11 @@ class TestController extends Controller
             };
         }
 
-        parent::__construct($action_name_resolver, $action_result_attribute_name, $logger);
+        if (empty($action_result_container)) {
+            $action_result_container = new ActionResultInContainer(new Container());
+        }
+
+        parent::__construct($action_name_resolver, $action_result_container, $logger);
     }
 
     public function index()

@@ -15,9 +15,11 @@ use ActiveCollab\Authentication\Adapter\BrowserSessionAdapter;
 use ActiveCollab\Authentication\AuthenticationResult\Transport\Authentication\AuthenticationTransport;
 use ActiveCollab\Bootstrap\Controller\ActionResultEncoder\ValueEncoder\AuthenticationTransportEncoder;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use ActiveCollab\Bootstrap\Test\Fixtures\ActionResultInContainer;
 use ActiveCollab\Controller\ActionResult\StatusResult\StatusResult;
 use ActiveCollab\Controller\ActionResultEncoder\ActionResultEncoder;
 use ActiveCollab\Controller\ActionResultEncoder\ValueEncoder\ArrayEncoder;
+use Pimple\Container;
 use Psr\Http\Message\ResponseInterface;
 
 class AuthenticationTransportEncoderTest extends TestCase
@@ -46,7 +48,7 @@ class AuthenticationTransportEncoderTest extends TestCase
     {
         $authentication_transport = new AuthenticationTransport($this->adapter, null, null, [1, 2, 3]);
 
-        $encoder = new ActionResultEncoder();
+        $encoder = new ActionResultEncoder(new ActionResultInContainer(new Container()));
         $encoder->addValueEncoder(new ArrayEncoder());
 
         $response = $this->createResponse()->withHeader('X-Test', 'yes');
