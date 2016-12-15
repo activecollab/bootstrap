@@ -252,7 +252,7 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
         throw new RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
     }
 
-    public function __set($name, $value)
+    protected function &addToContainer($key, callable $resolver)
     {
         $app_boostrapper = $this->getAppBootstrapper();
 
@@ -262,10 +262,12 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
 
         $container = $app_boostrapper->getApp()->getContainer();
 
-        if ($container->has($name)) {
+        if ($container->has($key)) {
             throw new LogicException(sprintf('Service %s already found in container', $name));
         }
 
-        $container[$name] = $value;
+        $container[$key] = $resolver;
+
+        return $this;
     }
 }
