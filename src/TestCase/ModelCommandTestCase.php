@@ -17,7 +17,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @package ActiveCollab\Id\Test\Base
  */
-abstract class ModelCommandTestCase extends ModelTestCase
+abstract class ModelCommandTestCase extends AppTestCase
 {
     /**
      * @var Application
@@ -40,9 +40,15 @@ abstract class ModelCommandTestCase extends ModelTestCase
      */
     protected function getCommandTesterFor($command_class): CommandTester
     {
+        $app_boostrapper = $this->getAppBootstrapper();
+
+        if (!$app_boostrapper->isBootstrapped()) {
+            $app_boostrapper->bootstrap();
+        }
+
         /** @var Command $command */
         $command = new $command_class();
-        $command->setContainer($this->getContainer());
+        $command->setContainer($app_boostrapper->getApp()->getContainer());
 
         $this->application->add($command);
 
