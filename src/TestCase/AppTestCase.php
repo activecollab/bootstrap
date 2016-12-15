@@ -251,23 +251,4 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
 
         throw new RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
     }
-
-    protected function &addToContainer($key, callable $resolver)
-    {
-        $app_boostrapper = $this->getAppBootstrapper();
-
-        if (!$app_boostrapper->isBootstrapped()) {
-            $app_boostrapper->bootstrap();
-        }
-
-        $container = $app_boostrapper->getApp()->getContainer();
-
-        if ($container->has($key)) {
-            throw new LogicException(sprintf('Service %s already found in container', $name));
-        }
-
-        $container[$key] = $resolver;
-
-        return $this;
-    }
 }
