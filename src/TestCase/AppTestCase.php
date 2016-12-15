@@ -17,6 +17,8 @@ use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
 use ActiveCollab\DateValue\DateTimeValue;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
+use LogicException;
 
 /**
  * @package ActiveCollab\Bootstrap\TestCase
@@ -247,6 +249,23 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
             return $app_boostrapper->getApp()->getContainer()->get($name);
         }
 
-        throw new \RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
+        throw new RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
+    }
+
+    public function __set($name, $value)
+    {
+        $app_boostrapper = $this->getAppBootstrapper();
+
+        if (!$app_boostrapper->isBootstrapped()) {
+            $app_boostrapper->bootstrap();
+        }
+
+        $container = $app_boostrapper->getApp()->getContainer();
+
+        if ($container->has($name)) {
+            throw new LogicException(sprintf('Service %s already found in container', $name));
+        }
+
+        $container[$name] = $value;
     }
 }
