@@ -34,7 +34,14 @@ abstract class Command extends BaseCommand implements CommandInterface
 
         $bits = explode('\\', get_class($this));
 
-        $this->setName($this->getCommandNamePrefix() . rtrim(Inflector::tableize(array_pop($bits)), '_command'))
+        $last_bit = Inflector::tableize(array_pop($bits));
+        $last_bit_len = strlen($last_bit);
+
+        if (substr($last_bit, $last_bit_len - 8) == '_command') {
+            $last_bit = substr($last_bit, 0, $last_bit_len - 8);
+        }
+
+        $this->setName($this->getCommandNamePrefix() . $last_bit)
              ->addOption('debug', '', InputOption::VALUE_NONE, 'Output debug details')
              ->addOption('json', '', InputOption::VALUE_NONE, 'Output JSON');
     }
