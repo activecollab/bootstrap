@@ -15,4 +15,6 @@ interface AppMetadataInterface
     public function getName(): string;
 
     public function getVersion(): string;
+
+    public function getPath(): string;
 }

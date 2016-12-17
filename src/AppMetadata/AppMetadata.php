@@ -16,10 +16,13 @@ class AppMetadata implements AppMetadataInterface
 
     private $version = '';
 
-    public function __construct(string $name, string $version)
+    private $path = '';
+
+    public function __construct(string $name, string $version, string $path)
     {
         $this->name = $name;
         $this->version = $version;
+        $this->path = $path;
     }
 
     public function getName(): string
@@ -30,5 +33,10 @@ class AppMetadata implements AppMetadataInterface
     public function getVersion(): string
     {
         return $this->version;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 }
