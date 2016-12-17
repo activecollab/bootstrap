@@ -30,6 +30,8 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
 
     private $exit_code = 0;
 
+
+
     public function &bootstrap(): AppBootstrapperInterface
     {
         parent::bootstrap();
@@ -37,8 +39,7 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
         $this->beforeAppConstruction();
 
         $this->app = new Application($this->getAppMetadata()->getName(), $this->getAppMetadata()->getVersion());
-        $this->container = '';
-        $this->scanDirsForCommands($this->app, $this->container);
+        $this->scanDirsForCommands($this->app, $this->getContainer());
 
         $this->afterAppConstruction();
 

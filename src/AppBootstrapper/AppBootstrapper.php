@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
 use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
+use Interop\Container\ContainerInterface;
 use LogicException;
 use Psr\Log\LoggerInterface;
 
@@ -20,13 +21,16 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
 
     private $app_metadata;
 
+    private $container;
+
     private $is_bootstrapped = false;
 
     private $is_ran = false;
 
-    public function __construct(AppMetadataInterface $app_metadata, LoggerInterface $logger = null)
+    public function __construct(AppMetadataInterface $app_metadata, ContainerInterface $container, LoggerInterface $logger = null)
     {
         $this->setAppMetadata($app_metadata);
+        $this->setContainer($container);
         $this->setLogger($logger);
     }
 
@@ -38,6 +42,18 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
     protected function &setAppMetadata(AppMetadataInterface $app_metadata): AppBootstrapperInterface
     {
         $this->app_metadata = $app_metadata;
+
+        return $this;
+    }
+
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
+
+    public function &setContainer(ContainerInterface $container): AppBootstrapperInterface
+    {
+        $this->container = $container;
 
         return $this;
     }

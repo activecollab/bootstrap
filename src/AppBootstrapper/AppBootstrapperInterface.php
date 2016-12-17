@@ -11,10 +11,13 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
 use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
+use Interop\Container\ContainerInterface;
 
 interface AppBootstrapperInterface
 {
     public function getAppMetadata(): AppMetadataInterface;
+
+    public function getContainer(): ContainerInterface;
 
     public function isBootstrapped(): bool;
 
