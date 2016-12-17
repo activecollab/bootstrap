@@ -11,12 +11,15 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\Controller\ActionResultEncoder\ValueEncoder;
 
 use ActiveCollab\Controller\ActionResultEncoder\ActionResultEncoderInterface;
+use ActiveCollab\Controller\ActionResultEncoder\ValueEncoder\JsonContentTypeTrait;
 use ActiveCollab\Controller\ActionResultEncoder\ValueEncoder\ValueEncoder;
 use ActiveCollab\DatabaseObject\CollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class DatabaseCollectionEncoder extends ValueEncoder
 {
+    use JsonContentTypeTrait;
+
     public function shouldEncode($value): bool
     {
         return $value instanceof CollectionInterface;
@@ -30,6 +33,8 @@ class DatabaseCollectionEncoder extends ValueEncoder
      */
     public function encode(ResponseInterface $response, ActionResultEncoderInterface $encoder, $value): ResponseInterface
     {
+        $response = $this->setJsonContentType($response);
+
         /** @var ResponseInterface $response */
         $response = $response
             ->withBody($this->createBodyFromText(json_encode($value)))
