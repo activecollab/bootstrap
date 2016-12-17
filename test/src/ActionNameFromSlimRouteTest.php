@@ -34,7 +34,8 @@ class ActionNameFromSlimRouteTest extends TestCase
      */
     public function testActionForMethodNotFound()
     {
-        $route = new Route('GET', '/hello/{name}', function ($req, $resp, $next) {});
+        $route = new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
+        });
         $request = $this->createRequest()
             ->withAttribute('route', $route);
 
@@ -43,7 +44,8 @@ class ActionNameFromSlimRouteTest extends TestCase
 
     public function testActionForMethod()
     {
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {}))
+        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
+        }))
             ->setArgument('GET_action', 'get_value')
             ->setArgument('PUT_action', 'set_value');
 
@@ -65,7 +67,8 @@ class ActionNameFromSlimRouteTest extends TestCase
      */
     public function testRouteAttributeNameCanBeChanged()
     {
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {}))
+        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
+        }))
             ->setArgument('GET_action', 'get_value');
 
         $request = $this->createRequest()
@@ -76,7 +79,8 @@ class ActionNameFromSlimRouteTest extends TestCase
 
     public function testActionArgumentNameFormatChange()
     {
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {}))
+        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
+        }))
             ->setArgument('always_look_here', 'get_value');
 
         $request = $this->createRequest()

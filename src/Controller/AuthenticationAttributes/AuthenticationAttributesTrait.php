@@ -22,7 +22,7 @@ trait AuthenticationAttributesTrait
         return $request->getAttribute($this->getAuthenticateAdapterAttributeName());
     }
 
-    protected function getAuthenticateAdapterAttributeName(): string
+    protected function getAuthenticateAdapterAttributeName() : string
     {
         return 'authentication_adapter';
     }
@@ -32,7 +32,7 @@ trait AuthenticationAttributesTrait
         return $request->getAttribute($this->getAuthenticatedUserAttributeName());
     }
 
-    protected function getAuthenticatedUserAttributeName(): string
+    protected function getAuthenticatedUserAttributeName() : string
     {
         return 'authenticated_user';
     }
@@ -42,7 +42,7 @@ trait AuthenticationAttributesTrait
         return $request->getAttribute($this->getAuthenticatedWithAttributeName());
     }
 
-    protected function getAuthenticatedWithAttributeName(): string
+    protected function getAuthenticatedWithAttributeName() : string
     {
         return 'authenticated_with';
     }

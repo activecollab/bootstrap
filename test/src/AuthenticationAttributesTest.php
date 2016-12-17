@@ -16,9 +16,8 @@ use ActiveCollab\Authentication\AuthenticatedUser\AuthenticatedUserInterface;
 use ActiveCollab\Authentication\AuthenticatedUser\RepositoryInterface;
 use ActiveCollab\Authentication\Session\SessionInterface;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
-use ActiveCollab\Bootstrap\Test\Fixtures\TestController;
 use ActiveCollab\Bootstrap\Test\Fixtures\AuthenticatedUser;
-
+use ActiveCollab\Bootstrap\Test\Fixtures\TestController;
 
 class AuthenticationAttributesTest extends TestCase
 {
@@ -38,8 +37,7 @@ class AuthenticationAttributesTest extends TestCase
 
     public function testAuthenticatedWith()
     {
-        $request = $this->createRequest()->withAttribute('authenticated_with', new class() implements SessionInterface
-        {
+        $request = $this->createRequest()->withAttribute('authenticated_with', new class() implements SessionInterface {
             public function getSessionId()
             {
                 return '123';
