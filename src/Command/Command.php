@@ -6,9 +6,10 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare(strict_types=1);
+
 namespace ActiveCollab\Bootstrap\Command;
 
-use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessInterfaceImplementation;
 use Doctrine\Common\Inflector\Inflector;
 use Exception;
@@ -20,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @package ActiveCollab\Bootstrap\Command
  */
-abstract class Command extends BaseCommand implements ContainerAccessInterface
+abstract class Command extends BaseCommand implements CommandInterface
 {
     use ContainerAccessInterfaceImplementation;
 

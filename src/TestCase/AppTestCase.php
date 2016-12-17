@@ -18,7 +18,6 @@ use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
 use ActiveCollab\DateValue\DateTimeValue;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-use LogicException;
 
 /**
  * @package ActiveCollab\Bootstrap\TestCase

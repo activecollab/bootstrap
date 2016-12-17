@@ -10,93 +10,36 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
-use Interop\Container\ContainerInterface;
+use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
 use LogicException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Slim\App;
+use Psr\Log\LoggerInterface;
 
-/**
- * @package ActiveCollab\Shepherd\Utils
- */
-class AppBootstrapper implements AppBootstrapperInterface
+abstract class AppBootstrapper implements AppBootstrapperInterface
 {
-    /**
-     * @var string
-     */
-    private $app_path = '';
+    private $logger;
 
-    /**
-     * @var ContainerInterface|array
-     */
-    private $container_or_settings;
+    private $app_metadata;
 
-    /**
-     * @var bool
-     */
     private $is_bootstrapped = false;
 
-    /**
-     * @var App
-     */
-    private $app;
-
-    /**
-     * @var bool
-     */
     private $is_ran = false;
 
-    /**
-     * @var ResponseInterface
-     */
-    private $response;
-
-    /**
-     * AppBootstrapper constructor.
-     *
-     * @param string $app_path
-     * @param array  $container_or_settings
-     */
-    public function __construct(string $app_path, $container_or_settings = [])
+    public function __construct(AppMetadataInterface $app_metadata, LoggerInterface $logger = null)
     {
-        if (!is_array($container_or_settings) && !$container_or_settings instanceof ContainerInterface) {
-            throw new LogicException('Container or array expected, ' . gettype($container_or_settings) . ' given');
-        }
-
-        $this->app_path = $app_path;
-        $this->container_or_settings = $container_or_settings;
+        $this->setAppMetadata($app_metadata);
+        $this->setLogger($logger);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getApp(): App
+    public function getAppMetadata(): AppMetadataInterface
     {
-        if (empty($this->app)) {
-            throw new LogicException('App not set up.');
-        }
-
-        return $this->app;
+        return $this->app_metadata;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAppPath(): string
+    protected function &setAppMetadata(AppMetadataInterface $app_metadata): AppBootstrapperInterface
     {
-        return $this->app_path;
-    }
+        $this->app_metadata = $app_metadata;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getResponse(): ResponseInterface
-    {
-        if (empty($this->response)) {
-            throw new LogicException('Response not set up.');
-        }
-
-        return $this->response;
+        return $this;
     }
 
     /**
@@ -107,20 +50,30 @@ class AppBootstrapper implements AppBootstrapperInterface
         return $this->is_bootstrapped;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function &setIsBootstrapped(bool $is_bootstrapped = true): AppBootstrapperInterface
+    {
+        $this->is_bootstrapped = $is_bootstrapped;
+
+        return $this;
+    }
+
+    public function isRan(): bool
+    {
+        return $this->is_ran;
+    }
+
+    protected function &setIsRan(bool $is_ran = true): AppBootstrapperInterface
+    {
+        $this->is_ran = $is_ran;
+
+        return $this;
+    }
+
     public function &bootstrap(): AppBootstrapperInterface
     {
         if ($this->isBootstrapped()) {
             throw new LogicException('App is already bootstrapped.');
         }
-
-        $this->beforeAppConstruction();
-        $this->app = new App($this->container_or_settings);
-        $this->afterAppConstruction();
-
-        $this->is_bootstrapped = true;
 
         return $this;
     }
@@ -139,17 +92,6 @@ class AppBootstrapper implements AppBootstrapperInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isRan(): bool
-    {
-        return $this->is_ran;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function &run(bool $silent = false): AppBootstrapperInterface
     {
         if (!$this->isBootstrapped()) {
@@ -160,37 +102,18 @@ class AppBootstrapper implements AppBootstrapperInterface
             throw new LogicException('App is already ran.');
         }
 
-        $this->response = $this->app->run($silent);
-        $this->is_ran = true;
-
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function &logResponse(): AppBootstrapperInterface
+    protected function getLogger(): ? LoggerInterface
     {
-        if (!$this->isBootstrapped()) {
-            throw new LogicException('App needs to be bootstrapped before it can be ran.');
-        }
-
-        if (!$this->isRan()) {
-            throw new LogicException('App needs to be ran before response can be logged.');
-        }
-
-        return $this;
+        return $this->logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function process(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    protected function &setLogger(LoggerInterface $logger = null) : AppBootstrapperInterface
     {
-        if (!$this->isBootstrapped()) {
-            throw new LogicException('App needs to be bootstrapped before it can be ran.');
-        }
+        $this->logger = $logger;
 
-        return $this->app->process($request, $response);
+        return $this;
     }
 }
