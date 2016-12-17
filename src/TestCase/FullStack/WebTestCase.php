@@ -8,44 +8,15 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\TestCase;
+namespace ActiveCollab\Bootstrap\TestCase\FullStack;
 
 use ActiveCollab\Authentication\AuthenticatedUser\AuthenticatedUserInterface;
-use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
-use ActiveCollab\Bootstrap\TestCase\Utils\NowTrait;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
-use ActiveCollab\DateValue\DateTimeValue;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
-/**
- * @package ActiveCollab\Bootstrap\TestCase
- */
-abstract class AppTestCase extends \PHPUnit_Framework_TestCase
+abstract class WebTestCase extends FullStackTestCase
 {
-    use NowTrait;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->setNow(new DateTimeValue());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function tearDown()
-    {
-        $this->setNow(null);
-
-        parent::tearDown();
-    }
-
     /**
      * @param ResponseInterface|mixed $response
      */
@@ -196,11 +167,6 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return AppBootstrapperInterface
-     */
-    abstract protected function getAppBootstrapper(): AppBootstrapperInterface;
-
-    /**
      * @return string
      */
     protected function getCookiesPropertyName(): string
@@ -230,24 +196,5 @@ abstract class AppTestCase extends \PHPUnit_Framework_TestCase
     protected function getTokenRepositoryPropertyName(): string
     {
         return 'token_repository';
-    }
-
-    /**
-     * @param  string $name
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        $app_boostrapper = $this->getAppBootstrapper();
-
-        if (!$app_boostrapper->isBootstrapped()) {
-            $app_boostrapper->bootstrap();
-        }
-
-        if ($app_boostrapper->getApp()->getContainer()->has($name)) {
-            return $app_boostrapper->getApp()->getContainer()->get($name);
-        }
-
-        throw new RuntimeException(sprintf('Property %s not found in class %s', $name, get_class($this)));
     }
 }

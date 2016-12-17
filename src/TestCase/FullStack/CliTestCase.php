@@ -8,48 +8,30 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\TestCase;
+namespace ActiveCollab\Bootstrap\TestCase\FullStack;
 
-use ActiveCollab\Bootstrap\Command\Command;
-use ActiveCollab\Bootstrap\TestCase\FullStack\WebTestCase;
-use Symfony\Component\Console\Application;
+use ActiveCollab\Bootstrap\AppBootstrapper\Cli\CliAppBootstrapperInterface;
+use ActiveCollab\Bootstrap\Command\CommandInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-/**
- * @package ActiveCollab\Id\Test\Base
- */
-abstract class ModelCommandTestCase extends WebTestCase
+abstract class CliTestCase extends FullStackTestCase
 {
-    /**
-     * @var Application
-     */
-    private $application;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->application = new Application();
-    }
-
     /**
      * @param  string        $command_class
      * @return CommandTester
      */
     protected function getCommandTesterFor($command_class): CommandTester
     {
+        /** @var CliAppBootstrapperInterface $app_boostrapper */
         $app_boostrapper = $this->getAppBootstrapper();
 
         if (!$app_boostrapper->isBootstrapped()) {
             $app_boostrapper->bootstrap();
         }
 
-        /** @var Command $command */
+        /** @var CommandInterface $command */
         $command = new $command_class();
-        $command->setContainer($app_boostrapper->getApp()->getContainer());
+        $command->setContainer($app_boostrapper->getContainer());
 
         $this->application->add($command);
 

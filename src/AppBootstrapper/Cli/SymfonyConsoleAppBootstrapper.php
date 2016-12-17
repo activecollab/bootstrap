@@ -18,6 +18,7 @@ use ActiveCollab\Bootstrap\ClassFinder\ClassFinder;
 use ActiveCollab\Bootstrap\Command\CommandInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use Interop\Container\ContainerInterface;
+use LogicException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
@@ -29,8 +30,6 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
     private $app;
 
     private $exit_code = 0;
-
-
 
     public function &bootstrap(): AppBootstrapperInterface
     {
@@ -54,6 +53,21 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
 
         $this->exit_code = $this->app->run();
         $this->setIsRan();
+
+        return $this;
+    }
+
+    /**
+     * @param  Command|CommandInterface    $command
+     * @return CliAppBootstrapperInterface
+     */
+    public function &addCommand(CommandInterface $command): CliAppBootstrapperInterface
+    {
+        if (!$this->isBootstrapped()) {
+            throw new LogicException('App needs to be bootstrapped before we can add commands to it.');
+        }
+
+        $this->app->add($command);
 
         return $this;
     }
