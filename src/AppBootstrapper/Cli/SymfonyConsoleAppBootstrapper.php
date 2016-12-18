@@ -37,13 +37,12 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
         parent::bootstrap();
 
         $this->beforeAppConstruction();
-
         $this->app = new Application($this->getAppMetadata()->getName(), $this->getAppMetadata()->getVersion());
-        $this->scanDirsForCommands($this->app, $this->getContainer());
-
         $this->afterAppConstruction();
 
         $this->setIsBootstrapped();
+
+        $this->scanDirsForCommands($this->app, $this->getContainer());
 
         return $this;
     }
