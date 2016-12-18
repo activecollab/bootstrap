@@ -15,7 +15,7 @@ use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class WebTestCase extends FullStackTestCase
+abstract class WebTestCase extends TestCase
 {
     /**
      * @param ResponseInterface|mixed $response

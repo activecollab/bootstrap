@@ -15,5 +15,7 @@ use ActiveCollab\Bootstrap\Command\CommandInterface;
 
 interface CliAppBootstrapperInterface extends AppBootstrapperInterface
 {
+    public function getCommand(string $command): CommandInterface;
+
     public function &addCommand(CommandInterface $command): CliAppBootstrapperInterface;
 }

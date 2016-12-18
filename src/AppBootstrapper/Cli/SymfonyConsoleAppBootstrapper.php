@@ -18,6 +18,7 @@ use ActiveCollab\Bootstrap\ClassFinder\ClassFinder;
 use ActiveCollab\Bootstrap\Command\CommandInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use Interop\Container\ContainerInterface;
+use InvalidArgumentException;
 use LogicException;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
@@ -57,6 +58,17 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
         return $this;
     }
 
+    public function getCommand(string $command): CommandInterface
+    {
+        $command = $this->app->find($command);
+
+        if ($command instanceof CommandInterface) {
+            return $command;
+        }
+
+        throw new InvalidArgumentException("Command '$command' not found.");
+    }
+
     /**
      * @param  Command|CommandInterface    $command
      * @return CliAppBootstrapperInterface
@@ -79,7 +91,7 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
                 $command->setContainer($container);
             }
 
-            $app->add($command);
+            $this->addCommand($command);
         });
     }
 
