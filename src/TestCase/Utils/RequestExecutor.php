@@ -16,6 +16,7 @@ use ActiveCollab\Authentication\Session\SessionInterface;
 use ActiveCollab\Authentication\Token\RepositoryInterface as TokenRepositoryInterface;
 use ActiveCollab\Authentication\Token\TokenInterface;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use ActiveCollab\Bootstrap\AppBootstrapper\Web\WebAppBootstrapperInterface;
 use ActiveCollab\Cookies\CookiesInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,7 +31,7 @@ use Slim\Http\Response as SlimResponse;
 class RequestExecutor implements RequestExecutorInterface
 {
     /**
-     * @var AppBootstrapperInterface
+     * @var AppBootstrapperInterface|WebAppBootstrapperInterface
      */
     private $app_bootstrapper;
 
@@ -91,9 +92,6 @@ class RequestExecutor implements RequestExecutorInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function &as(AuthenticatedUserInterface $user, string $authentication_method = self::SESSION): RequestExecutorInterface
     {
         $this->impersonate_user = $user;
@@ -102,33 +100,39 @@ class RequestExecutor implements RequestExecutorInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    private $using_session;
+
+    public function &usingSession(SessionInterface $session): RequestExecutorInterface
+    {
+        $this->using_session = $session;
+
+        return $this;
+    }
+
+    private $using_token;
+
+    public function &usingToken(TokenInterface $token): RequestExecutorInterface
+    {
+        $this->using_token = $token;
+
+        return $this;
+    }
+
     public function get(string $path, array $query_params = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->executeRequest($this->createRequest('GET', $path, $query_params), null, $modify_request_and_response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function post(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->executeRequest($this->createRequest('POST', $path, [], $payload), null, $modify_request_and_response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function put(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->executeRequest($this->createRequest('PUT', $path, [], $payload), null, $modify_request_and_response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->executeRequest($this->createRequest('DELETE', $path, [], $payload), null, $modify_request_and_response);
@@ -179,9 +183,9 @@ class RequestExecutor implements RequestExecutorInterface
     private function prepareRequestAndResponseFor(AuthenticatedUserInterface $user, ServerRequestInterface $request, ResponseInterface $response = null, $use_session = true)
     {
         if ($use_session) {
-            $authenticated_with = $this->createUserSession($user);
+            $authenticated_with = $this->using_session ? $this->using_session : $this->createUserSession($user);
         } else {
-            $authenticated_with = $this->createToken($user);
+            $authenticated_with = $this->using_token ? $this->using_token : $this->createToken($user);
         }
 
         if ($response === null) {
