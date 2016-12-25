@@ -15,140 +15,67 @@ use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutor;
 use ActiveCollab\Bootstrap\TestCase\Utils\RequestExecutorInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class WebTestCase extends TestCase
+abstract class WebTestCase extends TestCase implements WebTestCaseInterface
 {
-    /**
-     * @param ResponseInterface|mixed $response
-     */
-    protected function assertJsonResponse($response)
+    protected function assertJsonResponse($response): void
     {
+        /** @var ResponseInterface $response */
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertContains('application/json', $response->getHeaderLine('Content-Type'));
     }
 
-    /**
-     * Execute a GET request and return resulting request and response.
-     *
-     * @param  string            $path
-     * @param  array             $query_params
-     * @param  callable|null     $modify_request_and_response
-     * @return ResponseInterface
-     */
-    protected function executeGetRequest(string $path, array $query_params = [], callable $modify_request_and_response = null)
+    public function executeGetRequest(string $path, array $query_params = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->get($path, $query_params, $modify_request_and_response);
     }
 
-    /**
-     * Execute GET request as a given user.
-     *
-     * @param  AuthenticatedUserInterface $user
-     * @param  string                     $path
-     * @param  array|null                 $query_params
-     * @param  callable|null              $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executeGetRequestAs(AuthenticatedUserInterface $user, string $path, array $query_params = [], callable $modify_request_and_response = null)
+    public function executeGetRequestAs(AuthenticatedUserInterface $user, string $path, array $query_params = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->as($user)
             ->get($path, $query_params, $modify_request_and_response);
     }
 
-    /**
-     * Execute POST request.
-     *
-     * @param  string            $path
-     * @param  array             $payload
-     * @param  callable|null     $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executePostRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executePostRequest(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->post($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * Execute POST request as $user.
-     *
-     * @param  AuthenticatedUserInterface $user
-     * @param  string                     $path
-     * @param  array                      $payload
-     * @param  callable|null              $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executePostRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executePostRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->as($user)
             ->post($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * Execute POST request.
-     *
-     * @param  string            $path
-     * @param  array             $payload
-     * @param  callable|null     $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executePutRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executePutRequest(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->put($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * Execute POST request as $user.
-     *
-     * @param  AuthenticatedUserInterface $user
-     * @param  string                     $path
-     * @param  array                      $payload
-     * @param  callable|null              $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executePutRequestAs(AuthenticatedUserInterface $user, $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executePutRequestAs(AuthenticatedUserInterface $user, $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->as($user)
             ->put($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * Execute delete action.
-     *
-     * @param  string            $path
-     * @param  array             $payload
-     * @param  callable|null     $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executeDeleteRequest(string $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executeDeleteRequest(string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->delete($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * Execute DELETE request as $user.
-     *
-     * @param  AuthenticatedUserInterface $user
-     * @param  string                     $path
-     * @param  array                      $payload
-     * @param  callable|null              $modify_request_and_response
-     * @return ResponseInterface
-     */
-    public function executeDeleteRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null)
+    public function executeDeleteRequestAs(AuthenticatedUserInterface $user, string $path, array $payload = [], callable $modify_request_and_response = null): ResponseInterface
     {
         return $this->getRequestExecutor()
             ->as($user)
             ->delete($path, $payload, $modify_request_and_response);
     }
 
-    /**
-     * @return RequestExecutorInterface
-     */
     protected function getRequestExecutor(): RequestExecutorInterface
     {
         $app_bootstrapper = $this->getAppBootstrapper();
@@ -166,33 +93,21 @@ abstract class WebTestCase extends TestCase
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getCookiesPropertyName(): string
     {
         return 'cookies';
     }
 
-    /**
-     * @return string
-     */
     protected function getSessionIdCookieNamePropertyName(): string
     {
         return 'session_id_cookie_name';
     }
 
-    /**
-     * @return string
-     */
     protected function getSessionRepositoryPropertyName(): string
     {
         return 'session_repository';
     }
 
-    /**
-     * @return string
-     */
     protected function getTokenRepositoryPropertyName(): string
     {
         return 'token_repository';

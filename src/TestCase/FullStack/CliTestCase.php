@@ -13,9 +13,9 @@ namespace ActiveCollab\Bootstrap\TestCase\FullStack;
 use ActiveCollab\Bootstrap\AppBootstrapper\Cli\CliAppBootstrapperInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
-abstract class CliTestCase extends TestCase
+abstract class CliTestCase extends TestCase implements CliTestCaseInterface
 {
-    protected function executeCommand(string $command, array $command_arguments = []): CommandTester
+    public function executeCommand(string $command, array $command_arguments = []): CommandTester
     {
         $command_tester = $this->getCommandTesterFor($command);
         $command_tester->execute(array_merge(['command' => $command], $command_arguments));
@@ -23,7 +23,7 @@ abstract class CliTestCase extends TestCase
         return $command_tester;
     }
 
-    protected function getCommandTesterFor(string $command): CommandTester
+    public function getCommandTesterFor(string $command): CommandTester
     {
         /** @var CliAppBootstrapperInterface $app_boostrapper */
         $app_boostrapper = $this->getAppBootstrapper();
