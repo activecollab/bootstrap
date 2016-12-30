@@ -51,7 +51,7 @@ class ActionResultInContainer implements ActionResultContainerInterface
         return $this;
     }
 
-    public function removeValue()
+    public function &removeValue()
     {
         throw new LogicException("Value can't be removed.");
     }
