@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "08914fba1c2ca01174c5513d5bd95038",
-    "content-hash": "1fb85047c75db54ef5387e73e0c959ec",
+    "hash": "b4b859f46746b89e6a43721859e9df48",
+    "content-hash": "84d9641072303331eda13a6c099b1adb",
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "2.1.1",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "0820938a0eb96ee6354b1a059a234bd8b2cfc5a9"
+                "reference": "46e1c44779f2bf7ed55ab7c3b2a58d6310c40fcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/0820938a0eb96ee6354b1a059a234bd8b2cfc5a9",
-                "reference": "0820938a0eb96ee6354b1a059a234bd8b2cfc5a9",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/46e1c44779f2bf7ed55ab7c3b2a58d6310c40fcc",
+                "reference": "46e1c44779f2bf7ed55ab7c3b2a58d6310c40fcc",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2016-12-11 23:10:12"
+            "time": "2016-12-22 19:04:44"
         },
         {
             "name": "activecollab/containeraccess",
@@ -117,12 +117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/controller.git",
-                "reference": "6f20d087ac444c236d114a60c6536ec6d384f2eb"
+                "reference": "8158957bd7dd2e0c39cf5f7e3cdb49e6bf1bd580"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/controller/zipball/6f20d087ac444c236d114a60c6536ec6d384f2eb",
-                "reference": "6f20d087ac444c236d114a60c6536ec6d384f2eb",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/8158957bd7dd2e0c39cf5f7e3cdb49e6bf1bd580",
+                "reference": "8158957bd7dd2e0c39cf5f7e3cdb49e6bf1bd580",
                 "shasum": ""
             },
             "require": {
@@ -158,23 +158,24 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2016-12-14 22:37:38"
+            "time": "2016-12-17 13:06:24"
         },
         {
             "name": "activecollab/cookies",
-            "version": "1.0.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/cookies.git",
-                "reference": "538639c62dba9efd30c55e818d11fefc983cc9b4"
+                "reference": "4b7f794b47b67d9289ccd46af29877c6d5f65457"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/cookies/zipball/538639c62dba9efd30c55e818d11fefc983cc9b4",
-                "reference": "538639c62dba9efd30c55e818d11fefc983cc9b4",
+                "url": "https://api.github.com/repos/activecollab/cookies/zipball/4b7f794b47b67d9289ccd46af29877c6d5f65457",
+                "reference": "4b7f794b47b67d9289ccd46af29877c6d5f65457",
                 "shasum": ""
             },
             "require": {
+                "activecollab/utils": "^1.0",
                 "dflydev/fig-cookies": "~1.0",
                 "ext-openssl": "*",
                 "php": ">=5.6.0"
@@ -205,7 +206,7 @@
                 "activecollab",
                 "cookies"
             ],
-            "time": "2016-10-20 12:15:12"
+            "time": "2016-12-15 00:33:03"
         },
         {
             "name": "activecollab/databaseconnection",
@@ -260,23 +261,23 @@
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "1.0.4",
+            "version": "v2.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "ef91d5b5f74d79b4a75695393eb25c7c47dad093"
+                "reference": "f455705dc1bad47a98a8ce7b6a618de614a57534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/ef91d5b5f74d79b4a75695393eb25c7c47dad093",
-                "reference": "ef91d5b5f74d79b4a75695393eb25c7c47dad093",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/f455705dc1bad47a98a8ce7b6a618de614a57534",
+                "reference": "f455705dc1bad47a98a8ce7b6a618de614a57534",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databasestructure": "^0.10",
+                "activecollab/databasestructure": "v1.0.x-dev",
                 "activecollab/filesystem": "^0.10",
                 "doctrine/inflector": "~1.0",
-                "php": ">=5.6.0",
+                "php": ">=7.1",
                 "psr/log": "^1.0"
             },
             "require-dev": {
@@ -311,7 +312,7 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2016-08-19 09:40:40"
+            "time": "2016-12-30 17:25:31"
         },
         {
             "name": "activecollab/databaseobject",
@@ -368,16 +369,16 @@
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "0.10.14",
+            "version": "v1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "6953de2bd644fa32ccc4b210f0f370039b30e432"
+                "reference": "60131b828b2b3b0d59ba5039c66a8cc5b5cd473e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/6953de2bd644fa32ccc4b210f0f370039b30e432",
-                "reference": "6953de2bd644fa32ccc4b210f0f370039b30e432",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/60131b828b2b3b0d59ba5039c66a8cc5b5cd473e",
+                "reference": "60131b828b2b3b0d59ba5039c66a8cc5b5cd473e",
                 "shasum": ""
             },
             "require": {
@@ -386,7 +387,7 @@
                 "activecollab/filesystem": "^0.10",
                 "activecollab/user": "^3.0",
                 "doctrine/inflector": "^1.0",
-                "php": ">=5.6.0"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.0",
@@ -417,7 +418,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2016-12-04 22:55:33"
+            "time": "2016-12-30 16:39:44"
         },
         {
             "name": "activecollab/datevalue",
@@ -610,16 +611,16 @@
         },
         {
             "name": "activecollab/logger",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/logger.git",
-                "reference": "e81ba0a9449b6635981e9e141f43d603c81ccfd4"
+                "reference": "41e7907e99d53418edb80648c390b94f6dc0dc24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/logger/zipball/e81ba0a9449b6635981e9e141f43d603c81ccfd4",
-                "reference": "e81ba0a9449b6635981e9e141f43d603c81ccfd4",
+                "url": "https://api.github.com/repos/activecollab/logger/zipball/41e7907e99d53418edb80648c390b94f6dc0dc24",
+                "reference": "41e7907e99d53418edb80648c390b94f6dc0dc24",
                 "shasum": ""
             },
             "require": {
@@ -659,7 +660,7 @@
                 "activecollab",
                 "logger"
             ],
-            "time": "2016-07-12 07:24:29"
+            "time": "2016-12-18 23:25:42"
         },
         {
             "name": "activecollab/object",
@@ -793,29 +794,38 @@
         },
         {
             "name": "activecollab/utils",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/utils.git",
-                "reference": "e53c6a8272d431dfaee7e8599cb895784fa7e818"
+                "reference": "25ce9ccc80fe6ba57d7f8e931952b410bcf7f27a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/utils/zipball/e53c6a8272d431dfaee7e8599cb895784fa7e818",
-                "reference": "e53c6a8272d431dfaee7e8599cb895784fa7e818",
+                "url": "https://api.github.com/repos/activecollab/utils/zipball/25ce9ccc80fe6ba57d7f8e931952b410bcf7f27a",
+                "reference": "25ce9ccc80fe6ba57d7f8e931952b410bcf7f27a",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "ext-openssl": "*",
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "^1.0",
-                "phpunit/phpunit": "^5.0"
+                "friendsofphp/php-cs-fixer": "^1.0",
+                "phpunit/phpunit": "^5.0",
+                "psr/http-message": "~1.0",
+                "vlucas/phpdotenv": "^2.2.0",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "suggest": {
+                "psr/http-message": "When you need to use RequestValuContainer",
+                "vlucas/phpdotenv": "When you want to use DotEnv config loader"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
+                    "ActiveCollab\\ConfigLoader\\": "src/ConfigLoader",
                     "ActiveCollab\\CurrentTimestamp\\": "src/CurrentTimestamp",
                     "ActiveCollab\\ValueContainer\\": "src/ValueContainer",
                     "ActiveCollab\\Encryptor\\": "src/Encryptor"
@@ -829,7 +839,7 @@
             "keywords": [
                 "timestamp"
             ],
-            "time": "2016-12-14 22:11:11"
+            "time": "2016-12-24 14:09:13"
         },
         {
             "name": "container-interop/container-interop",
@@ -1306,16 +1316,16 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "8ea928195fa9b907f0d6e48312d323c1a13cc2af"
+                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/8ea928195fa9b907f0d6e48312d323c1a13cc2af",
-                "reference": "8ea928195fa9b907f0d6e48312d323c1a13cc2af",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
+                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
                 "shasum": ""
             },
             "require": {
@@ -1345,7 +1355,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-06-12 19:08:51"
+            "time": "2016-10-20 17:36:47"
         },
         {
             "name": "pimple/pimple",
@@ -1590,16 +1600,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64"
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4254e40d81559e35cdf856bcbaca5f3af468b7ef",
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef",
                 "shasum": ""
             },
             "require": {
@@ -1649,14 +1659,14 @@
                 }
             ],
             "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
-            "homepage": "http://slimframework.com",
+            "homepage": "https://slimframework.com",
             "keywords": [
                 "api",
                 "framework",
                 "micro",
                 "router"
             ],
-            "time": "2016-11-20 20:48:49"
+            "time": "2016-12-20 20:30:47"
         },
         {
             "name": "symfony/console",
@@ -2318,16 +2328,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929"
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/903fd6318d0a90b4770a009ff73e4a4e9c437929",
-                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c14196e64a78570034afd0b7a9f3757ba71c2a0a",
+                "reference": "c14196e64a78570034afd0b7a9f3757ba71c2a0a",
                 "shasum": ""
             },
             "require": {
@@ -2377,7 +2387,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-11-28 16:00:31"
+            "time": "2016-12-20 15:22:42"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2562,16 +2572,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.4",
+            "version": "5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "af91da3f2671006ff5d0628023de3b7ac4d1ef09"
+                "reference": "50fd2be8f3e23e91da825f36f08e5f9633076ffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/af91da3f2671006ff5d0628023de3b7ac4d1ef09",
-                "reference": "af91da3f2671006ff5d0628023de3b7ac4d1ef09",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/50fd2be8f3e23e91da825f36f08e5f9633076ffe",
+                "reference": "50fd2be8f3e23e91da825f36f08e5f9633076ffe",
                 "shasum": ""
             },
             "require": {
@@ -2640,7 +2650,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-12-13 16:19:44"
+            "time": "2016-12-28 07:18:51"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3579,7 +3589,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "activecollab/controller": 20
+        "activecollab/controller": 20,
+        "activecollab/databasemigrations": 20,
+        "activecollab/databasestructure": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
