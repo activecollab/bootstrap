@@ -6,10 +6,11 @@
     ],
     "license": "MIT",
     "type": "library",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.1",
-        "activecollab/authentication": "^2.0",
+        "activecollab/authentication": "v3.0.x-dev",
         "activecollab/controller": "v1.0.x-dev",
         "activecollab/databasemigrations": "v2.0.x-dev",
         "activecollab/databasestructure": "v1.0.x-dev",
@@ -26,7 +27,7 @@
         "graylog2/gelf-php": "Log to Graylog2 using GELF"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.0",
         "phpunit/phpunit": "^5.0"
     },
     "autoload": {

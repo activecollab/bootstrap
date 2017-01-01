@@ -17,9 +17,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 interface AuthenticationAttributesInterface
 {
-    public function getAuthenticationAdapter(ServerRequestInterface $request): ? AdapterInterface;
+    public function getAuthenticationAdapter(ServerRequestInterface $request): ?AdapterInterface;
 
-    public function getAuthenticatedUser(ServerRequestInterface $request) : ? AuthenticatedUserInterface;
+    public function getAuthenticatedUser(ServerRequestInterface $request): ?AuthenticatedUserInterface;
 
-    public function getAuthenticatedWith(ServerRequestInterface $request) : ? AuthenticationResultInterface;
+    public function getAuthenticatedWith(ServerRequestInterface $request): ?AuthenticationResultInterface;
 }

@@ -41,12 +41,12 @@ class AuthenticatedUser implements AuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getFullName()
+    public function getFullName(): ?string
     {
         return $this->name;
     }

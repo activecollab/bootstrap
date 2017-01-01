@@ -126,7 +126,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->logger;
     }
 
-    protected function &setLogger(LoggerInterface $logger = null) : AppBootstrapperInterface
+    protected function &setLogger(LoggerInterface $logger = null): AppBootstrapperInterface
     {
         $this->logger = $logger;
 
