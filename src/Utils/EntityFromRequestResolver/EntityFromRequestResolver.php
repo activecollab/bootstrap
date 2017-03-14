@@ -80,7 +80,7 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
             );
         }
 
-        return null;
+        return $result;
     }
 
     private function getEntityIdFromParams($params, string $param_name): ?int
