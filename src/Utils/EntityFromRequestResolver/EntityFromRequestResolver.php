@@ -15,6 +15,8 @@ use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use ActiveCollab\DatabaseObject\PoolInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use InvalidArgumentException;
+use Slim\Interfaces\RouteInterface;
 
 class EntityFromRequestResolver implements EntityFromRequestResolverInterface
 {
@@ -38,13 +40,13 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
         ServerRequestInterface $request,
         string $entity_type,
         string $param_name,
-        bool $get_param_from_body = false): ?EntityInterface
+        string $param_source = self::PARAM_SOURCE_ROUTE_ARGUMENT
+    ): ?EntityInterface
     {
-        if ($get_param_from_body) {
-            $entity_id = $this->getEntityIdFromParams($request->getParsedBody(), $param_name);
-        } else {
-            $entity_id = $this->getEntityIdFromParams($request->getQueryParams(), $param_name);
-        }
+        $entity_id = $this->getEntityIdFromParams(
+            $this->getParamsFromSource($request, $param_source),
+            $param_name
+        );
 
         $result = $entity_id ? $this->pool->getById($entity_type, $entity_id) : null;
 
@@ -59,14 +61,15 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
         ServerRequestInterface $request,
         string $entity_type,
         string $param_name,
-        bool $get_param_from_body = false
+        string $param_source = self::PARAM_SOURCE_ROUTE_ARGUMENT
     ): EntityInterface
     {
-        if ($get_param_from_body) {
-            $entity_id = $this->mustGetEntityIdFromParams($request, $entity_type, $request->getParsedBody(), $param_name);
-        } else {
-            $entity_id = $this->mustGetEntityIdFromParams($request, $entity_type, $request->getQueryParams(), $param_name);
-        }
+        $entity_id = $this->mustGetEntityIdFromParams(
+            $request,
+            $entity_type,
+            $this->getParamsFromSource($request, $param_source),
+            $param_name
+        );
 
         $result = $entity_id ? $this->pool->getById($entity_type, $entity_id) : null;
 
@@ -83,20 +86,45 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
         return $result;
     }
 
-    private function getEntityIdFromParams($params, string $param_name): ?int
+    private function getParamsFromSource(ServerRequestInterface $request, string $param_source): array
     {
-        return is_array($params) && array_key_exists($param_name, $params) && (is_int($params[$param_name]) || ctype_digit($params[$param_name])) ?
+        $params = null;
+
+        switch ($param_source) {
+            case self::PARAM_SOURCE_ROUTE_ARGUMENT:
+                $route = $request->getAttribute('route');
+
+                return $route instanceof RouteInterface ? $route->getArguments() : [];
+            case self::PARAM_SOURCE_QUERY_STRING:
+                return $request->getQueryParams();
+            case self::PARAM_SOURCE_BODY_PARAM:
+                $params = $request->getParsedBody();
+
+                if (!is_array($params)) {
+                    $params = [];
+                }
+
+                return $params;
+            default:
+                throw new InvalidArgumentException("Unknown param source '$param_source'.");
+        }
+    }
+
+    private function getEntityIdFromParams(array $params, string $param_name): ?int
+    {
+        return array_key_exists($param_name, $params) && (is_int($params[$param_name]) || ctype_digit($params[$param_name])) ?
             (int) $params[$param_name] :
             null;
     }
 
     private function mustGetEntityIdFromParams(
         ServerRequestInterface $request,
-        string $entity_type, $params,
+        string $entity_type,
+        array $params,
         string $param_name
     ): int
     {
-        if (is_array($params) && array_key_exists($param_name, $params)) {
+        if (array_key_exists($param_name, $params)) {
             $entity_id = $params[$param_name];
 
             if ($entity_id && (is_int($entity_id) || ctype_digit($entity_id))) {
