@@ -85,7 +85,7 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
 
     private function getEntityIdFromParams($params, string $param_name): ?int
     {
-        return is_array($params) && array_key_exists($param_name, $params) && ctype_digit($params[$param_name]) ?
+        return is_array($params) && array_key_exists($param_name, $params) && (is_int($params[$param_name]) || ctype_digit($params[$param_name])) ?
             (int) $params[$param_name] :
             null;
     }
@@ -99,7 +99,7 @@ class EntityFromRequestResolver implements EntityFromRequestResolverInterface
         if (is_array($params) && array_key_exists($param_name, $params)) {
             $entity_id = $params[$param_name];
 
-            if ($entity_id && ctype_digit($entity_id)) {
+            if ($entity_id && (is_int($entity_id) || ctype_digit($entity_id))) {
                 return (int) $entity_id;
             }
 
