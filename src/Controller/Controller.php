@@ -12,7 +12,9 @@ namespace ActiveCollab\Bootstrap\Controller;
 
 use ActiveCollab\Bootstrap\Controller\AuthenticationAttributes\AuthenticationAttributesInterface;
 use ActiveCollab\Bootstrap\Controller\AuthenticationAttributes\AuthenticationAttributesTrait;
+use ActiveCollab\Bootstrap\Exception\RequiredEntityNotFoundException;
 use ActiveCollab\Controller\Controller as BaseController;
+use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\RouteInterface;
 
