@@ -32,4 +32,19 @@ abstract class Controller extends BaseController implements AuthenticationAttrib
 
         return $default;
     }
+
+    protected function getCurrentPage(
+        ServerRequestInterface $request,
+        string $query_param_name = 'page',
+        int $default_current_page = 1
+    ): int
+    {
+        $current_page = (int) $this->getQueryParam($request, $query_param_name);
+
+        if ($current_page < 1) {
+            $current_page = $default_current_page;
+        }
+
+        return $current_page;
+    }
 }
