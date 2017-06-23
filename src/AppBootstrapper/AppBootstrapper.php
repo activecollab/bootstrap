@@ -58,9 +58,6 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBootstrapped(): bool
     {
         return $this->is_bootstrapped;

@@ -13,9 +13,9 @@ namespace ActiveCollab\Bootstrap\Utils\EntityFromRequestResolver;
 use ActiveCollab\Bootstrap\Exception\RequiredEntityNotFoundException;
 use ActiveCollab\DatabaseObject\Entity\EntityInterface;
 use ActiveCollab\DatabaseObject\PoolInterface;
+use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use InvalidArgumentException;
 use Slim\Interfaces\RouteInterface;
 
 class EntityFromRequestResolver implements EntityFromRequestResolverInterface

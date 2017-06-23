@@ -37,7 +37,10 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
         parent::bootstrap();
 
         $this->beforeAppConstruction();
-        $this->app = new Application($this->getAppMetadata()->getName(), $this->getAppMetadata()->getVersion());
+        $this->app = new Application(
+            $this->getAppMetadata()->getName(),
+            $this->getAppMetadata()->getVersion()
+        );
         $this->afterAppConstruction();
 
         $this->setIsBootstrapped();
@@ -85,13 +88,16 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
 
     protected function scanDirsForCommands(Application $app, ContainerInterface $container)
     {
-        (new ClassFinder())->scanDirsForInstances($this->getDirsToScan(), function (Command $command) use (&$app, &$container) {
-            if ($command instanceof ContainerAccessInterface) {
-                $command->setContainer($container);
-            }
+        (new ClassFinder())->scanDirsForInstances(
+            $this->getDirsToScan(),
+            function (Command $command) use (&$app, &$container) {
+                if ($command instanceof ContainerAccessInterface) {
+                    $command->setContainer($container);
+                }
 
-            $this->addCommand($command);
-        });
+                $this->addCommand($command);
+            }
+        );
     }
 
     /**
@@ -100,7 +106,10 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
     protected function getDirsToScan()
     {
         return [
-            new ClassDir(dirname(__DIR__, 2) . '/Command', '\ActiveCollab\Bootstrap\Command', CommandInterface::class),
+            new ClassDir(
+                dirname(__DIR__, 2) . '/Command',
+                '\ActiveCollab\Bootstrap\Command',
+                CommandInterface::class),
         ];
     }
 }
