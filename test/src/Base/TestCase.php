@@ -13,11 +13,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Http\Environment as SlimEnvironment;
 use Slim\Http\Request as SlimRequest;
 use Slim\Http\Response as SlimResponse;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 /**
  * @package ActiveCollab\Bootstrap\Test\Base
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends BaseTestCase
 {
     /**
      * Prepare server request based on the given arguments.
