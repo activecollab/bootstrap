@@ -8,12 +8,12 @@
 
 namespace ActiveCollab\Bootstrap\Test\Base;
 
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Http\Environment as SlimEnvironment;
 use Slim\Http\Request as SlimRequest;
 use Slim\Http\Response as SlimResponse;
-use PHPUnit\Framework\TestCase as BaseTestCase;
 
 /**
  * @package ActiveCollab\Bootstrap\Test\Base
