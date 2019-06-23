@@ -36,7 +36,7 @@ class RouteExtender
      * @param string $controller_namespace
      * @param array  $settings
      */
-    public function __construct(App &$app, $controller_namespace = 'App\Controllers', array $settings)
+    public function __construct(App &$app, $controller_namespace, array $settings)
     {
         $this->app = $app;
         $this->controller_namespace = $controller_namespace;

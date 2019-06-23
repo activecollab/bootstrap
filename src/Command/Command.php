@@ -6,9 +6,10 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare(strict_types=1);
+
 namespace ActiveCollab\Bootstrap\Command;
 
-use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessInterfaceImplementation;
 use Doctrine\Common\Inflector\Inflector;
 use Exception;
@@ -20,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @package ActiveCollab\Bootstrap\Command
  */
-abstract class Command extends BaseCommand implements ContainerAccessInterface
+abstract class Command extends BaseCommand implements CommandInterface
 {
     use ContainerAccessInterfaceImplementation;
 
@@ -33,7 +34,14 @@ abstract class Command extends BaseCommand implements ContainerAccessInterface
 
         $bits = explode('\\', get_class($this));
 
-        $this->setName($this->getCommandNamePrefix() . rtrim(Inflector::tableize(array_pop($bits)), '_command'))
+        $last_bit = Inflector::tableize(array_pop($bits));
+        $last_bit_len = strlen($last_bit);
+
+        if (substr($last_bit, $last_bit_len - 8) == '_command') {
+            $last_bit = substr($last_bit, 0, $last_bit_len - 8);
+        }
+
+        $this->setName($this->getCommandNamePrefix() . $last_bit)
              ->addOption('debug', '', InputOption::VALUE_NONE, 'Output debug details')
              ->addOption('json', '', InputOption::VALUE_NONE, 'Output JSON');
     }
