@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5bf44f8d75888077a91fa94b33a5577",
+    "content-hash": "0acc3684879319c709d183baad574233",
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "v3.0.x-dev",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "f53698a03227f0453416927d48828deef682b9eb"
+                "reference": "113208eb2862f27ede9455dc6a6c95ca87d26832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/f53698a03227f0453416927d48828deef682b9eb",
-                "reference": "f53698a03227f0453416927d48828deef682b9eb",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/113208eb2862f27ede9455dc6a6c95ca87d26832",
+                "reference": "113208eb2862f27ede9455dc6a6c95ca87d26832",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2019-06-23T18:38:22+00:00"
+            "time": "2019-06-23T19:35:51+00:00"
         },
         {
             "name": "activecollab/containeraccess",
@@ -260,30 +260,30 @@
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "v2.0.x-dev",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "80fb87a2ddb16f19a8d44c065eeb838d13dfaade"
+                "reference": "a38249978b379f44bb1763abacd397b4d359a55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/80fb87a2ddb16f19a8d44c065eeb838d13dfaade",
-                "reference": "80fb87a2ddb16f19a8d44c065eeb838d13dfaade",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/a38249978b379f44bb1763abacd397b4d359a55d",
+                "reference": "a38249978b379f44bb1763abacd397b4d359a55d",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databasestructure": "v1.0.x-dev",
+                "activecollab/databaseconnection": "^3.0",
                 "activecollab/filesystem": "^0.10",
                 "doctrine/inflector": "~1.0",
                 "php": ">=7.1",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.0",
+                "friendsofphp/php-cs-fixer": "^2.0",
                 "monolog/monolog": "^1.0",
                 "phpunit/phpunit": "^5.0",
-                "symfony/console": "^2.7"
+                "symfony/console": "^4.0"
             },
             "suggest": {
                 "symfony/console": "Quickly implement commands that work with migrations via CLI"
@@ -311,7 +311,7 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2017-05-13T19:54:50+00:00"
+            "time": "2019-06-23T19:30:45+00:00"
         },
         {
             "name": "activecollab/databaseobject",
@@ -369,16 +369,16 @@
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "v1.0.x-dev",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "09727c2db3fae5ba286d0d61005fba99aa073266"
+                "reference": "151c83e14cbc440fd3ca2bca5c28fc32ba9489ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/09727c2db3fae5ba286d0d61005fba99aa073266",
-                "reference": "09727c2db3fae5ba286d0d61005fba99aa073266",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/151c83e14cbc440fd3ca2bca5c28fc32ba9489ec",
+                "reference": "151c83e14cbc440fd3ca2bca5c28fc32ba9489ec",
                 "shasum": ""
             },
             "require": {
@@ -417,7 +417,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-06-23T17:33:56+00:00"
+            "time": "2019-06-23T17:42:47+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -4964,10 +4964,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "activecollab/authentication": 20,
-        "activecollab/databasemigrations": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

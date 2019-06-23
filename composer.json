@@ -10,9 +10,9 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.1",
-        "activecollab/authentication": "v3.0.x-dev",
+        "activecollab/authentication": "^3.0",
         "activecollab/controller": "^1.0",
-        "activecollab/databasemigrations": "v2.0.x-dev",
+        "activecollab/databasemigrations": "^2.0",
         "activecollab/databasestructure": "^1.0",
         "activecollab/logger": "^1.0",
         "activecollab/utils": "^1.0",
