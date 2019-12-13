@@ -9,8 +9,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "activecollab/authentication": "^3.0",
+        "activecollab/baseline": "^1.0",
         "activecollab/controller": "^1.0",
         "activecollab/databasemigrations": "^2.0",
         "activecollab/databasestructure": "^1.0",
@@ -28,7 +29,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "psr-4": {
