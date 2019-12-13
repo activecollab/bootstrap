@@ -39,7 +39,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->app_metadata;
     }
 
-    protected function &setAppMetadata(AppMetadataInterface $app_metadata): AppBootstrapperInterface
+    protected function setAppMetadata(AppMetadataInterface $app_metadata): AppBootstrapperInterface
     {
         $this->app_metadata = $app_metadata;
 
@@ -51,7 +51,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->container;
     }
 
-    public function &setContainer(ContainerInterface $container): AppBootstrapperInterface
+    public function setContainer(ContainerInterface $container): AppBootstrapperInterface
     {
         $this->container = $container;
 
@@ -63,7 +63,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->is_bootstrapped;
     }
 
-    public function &setIsBootstrapped(bool $is_bootstrapped = true): AppBootstrapperInterface
+    public function setIsBootstrapped(bool $is_bootstrapped = true): AppBootstrapperInterface
     {
         $this->is_bootstrapped = $is_bootstrapped;
 
@@ -75,14 +75,14 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->is_ran;
     }
 
-    protected function &setIsRan(bool $is_ran = true): AppBootstrapperInterface
+    protected function setIsRan(bool $is_ran = true): AppBootstrapperInterface
     {
         $this->is_ran = $is_ran;
 
         return $this;
     }
 
-    public function &bootstrap(): AppBootstrapperInterface
+    public function bootstrap(): AppBootstrapperInterface
     {
         if ($this->isBootstrapped()) {
             throw new LogicException('App is already bootstrapped.');
@@ -105,7 +105,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
     {
     }
 
-    public function &run(bool $silent = false): AppBootstrapperInterface
+    public function run(bool $silent = false): AppBootstrapperInterface
     {
         if (!$this->isBootstrapped()) {
             throw new LogicException('App needs to be bootstrapped before it can be ran.');
@@ -123,7 +123,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->logger;
     }
 
-    protected function &setLogger(LoggerInterface $logger = null): AppBootstrapperInterface
+    protected function setLogger(LoggerInterface $logger = null): AppBootstrapperInterface
     {
         $this->logger = $logger;
 

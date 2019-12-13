@@ -92,7 +92,10 @@ class RequestExecutor implements RequestExecutorInterface
         }
     }
 
-    public function &as(AuthenticatedUserInterface $user, string $authentication_method = self::SESSION): RequestExecutorInterface
+    public function as(
+        AuthenticatedUserInterface $user,
+        string $authentication_method = self::SESSION
+    ): RequestExecutorInterface
     {
         $this->impersonate_user = $user;
         $this->authentication_method = $authentication_method;
@@ -102,7 +105,7 @@ class RequestExecutor implements RequestExecutorInterface
 
     private $using_session;
 
-    public function &usingSession(SessionInterface $session): RequestExecutorInterface
+    public function usingSession(SessionInterface $session): RequestExecutorInterface
     {
         $this->using_session = $session;
 
@@ -111,7 +114,7 @@ class RequestExecutor implements RequestExecutorInterface
 
     private $using_token;
 
-    public function &usingToken(TokenInterface $token): RequestExecutorInterface
+    public function usingToken(TokenInterface $token): RequestExecutorInterface
     {
         $this->using_token = $token;
 

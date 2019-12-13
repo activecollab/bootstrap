@@ -30,7 +30,7 @@ abstract class Command extends DevCommand
      *
      * @return MigrationsInterface
      */
-    public function &getMigrations()
+    public function getMigrations()
     {
         $migrations = $this->getContainer()->get('migrations');
 

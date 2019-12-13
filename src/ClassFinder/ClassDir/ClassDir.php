@@ -30,7 +30,7 @@ class ClassDir implements ClassDirInterface
         return $this->path;
     }
 
-    protected function &setPath(string $path): ClassDirInterface
+    protected function setPath(string $path): ClassDirInterface
     {
         $this->path = $path;
 
@@ -42,7 +42,7 @@ class ClassDir implements ClassDirInterface
         return $this->namespace;
     }
 
-    protected function &setNamespace(string $namespace): ClassDirInterface
+    protected function setNamespace(string $namespace): ClassDirInterface
     {
         $this->namespace = $namespace;
 
@@ -54,7 +54,7 @@ class ClassDir implements ClassDirInterface
         return $this->instance_class;
     }
 
-    protected function &setInstanceClass(string $instance_class): ClassDirInterface
+    protected function setInstanceClass(string $instance_class): ClassDirInterface
     {
         $this->instance_class = $instance_class;
 

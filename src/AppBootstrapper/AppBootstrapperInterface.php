@@ -16,14 +16,11 @@ use Interop\Container\ContainerInterface;
 interface AppBootstrapperInterface
 {
     public function getAppMetadata(): AppMetadataInterface;
-
     public function getContainer(): ContainerInterface;
 
     public function isBootstrapped(): bool;
-
-    public function &bootstrap(): AppBootstrapperInterface;
+    public function bootstrap(): AppBootstrapperInterface;
 
     public function isRan(): bool;
-
-    public function &run(bool $silent = false): AppBootstrapperInterface;
+    public function run(bool $silent = false): AppBootstrapperInterface;
 }

@@ -32,7 +32,7 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
 
     private $exit_code = 0;
 
-    public function &bootstrap(): AppBootstrapperInterface
+    public function bootstrap(): AppBootstrapperInterface
     {
         parent::bootstrap();
 
@@ -50,7 +50,7 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
         return $this;
     }
 
-    public function &run(bool $silent = false): AppBootstrapperInterface
+    public function run(bool $silent = false): AppBootstrapperInterface
     {
         parent::run($silent);
 
@@ -75,7 +75,7 @@ class SymfonyConsoleAppBootstrapper extends AppBootstrapper implements CliAppBoo
      * @param  Command|CommandInterface    $command
      * @return CliAppBootstrapperInterface
      */
-    public function &addCommand(CommandInterface $command): CliAppBootstrapperInterface
+    public function addCommand(CommandInterface $command): CliAppBootstrapperInterface
     {
         if (!$this->isBootstrapped()) {
             throw new LogicException('App needs to be bootstrapped before we can add commands to it.');

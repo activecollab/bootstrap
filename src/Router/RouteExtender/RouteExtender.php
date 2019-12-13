@@ -46,7 +46,7 @@ class RouteExtender
     /**
      * {@inheritdoc}
      */
-    public function &extend($path, array $method_to_action = [], $name = '', $controller_name = null)
+    public function extend($path, array $method_to_action = [], $name = '', $controller_name = null)
     {
         if (empty($path)) {
             throw new InvalidArgumentException('Route path is required');

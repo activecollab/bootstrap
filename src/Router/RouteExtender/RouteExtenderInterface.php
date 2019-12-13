@@ -28,5 +28,5 @@ interface RouteExtenderInterface
      * @param  string|null $controller_name
      * @return Route
      */
-    public function &extend($path, array $method_to_action = [], $name = '', $controller_name = null);
+    public function extend($path, array $method_to_action = [], $name = '', $controller_name = null);
 }

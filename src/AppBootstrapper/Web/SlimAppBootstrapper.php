@@ -44,7 +44,7 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         return $this->response;
     }
 
-    public function &bootstrap(): AppBootstrapperInterface
+    public function bootstrap(): AppBootstrapperInterface
     {
         parent::bootstrap();
 
@@ -57,7 +57,7 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         return $this;
     }
 
-    public function &run(bool $silent = false): AppBootstrapperInterface
+    public function run(bool $silent = false): AppBootstrapperInterface
     {
         parent::run($silent);
 
@@ -67,7 +67,7 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         return $this;
     }
 
-    public function &logResponse(): AppBootstrapperInterface
+    public function logResponse(): AppBootstrapperInterface
     {
         if (!$this->isBootstrapped()) {
             throw new LogicException('App needs to be bootstrapped before it can be ran.');
