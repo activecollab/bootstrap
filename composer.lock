@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2254c1d158eb2cfe2465052d56a7f02",
+    "content-hash": "de3a11598f477f7d27989149917c7e68",
     "packages": [
         {
             "name": "activecollab/authentication",
