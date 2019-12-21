@@ -6,6 +6,8 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare(strict_types=1);
+
 namespace ActiveCollab\Bootstrap\Command\DevCommand\Migrations;
 
 use ActiveCollab\DatabaseMigrations\Command\Create as CreateMigrationsHelper;
@@ -13,24 +15,32 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
-/**
- * @package ActiveCollab\Bootstrap\Command\DevCommand\Migrations
- */
 class Create extends Command
 {
     use CreateMigrationsHelper;
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure()
     {
         parent::configure();
 
-        $this->setDescription('Create a new migration')
-            ->addArgument('migration_name', InputArgument::REQUIRED, 'What is this migration supposed to do (use imperative voice)')
-            ->addOption('changeset', '', InputOption::VALUE_REQUIRED, 'Changeset name')
-            ->addOption('dry-run', '', InputOption::VALUE_NONE, "Example what you'll do, without creating an actual file");
+        $this
+            ->setDescription('Create a new migration')
+            ->addArgument(
+                'migration_name',
+                InputArgument::REQUIRED,
+                'What is this migration supposed to do (use imperative voice)'
+            )
+            ->addOption(
+                'changeset',
+                '',
+                InputOption::VALUE_REQUIRED, 'Changeset name'
+            )
+            ->addOption(
+                'dry-run',
+                '',
+                InputOption::VALUE_NONE,
+                "Example what you'll do, without creating an actual file"
+            );
     }
 
     /**

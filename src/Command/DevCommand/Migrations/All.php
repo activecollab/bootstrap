@@ -6,20 +6,16 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare(strict_types=1);
+
 namespace ActiveCollab\Bootstrap\Command\DevCommand\Migrations;
 
 use ActiveCollab\DatabaseMigrations\Command\All as AllMigrationsHelper;
 
-/**
- * @package ActiveCollab\Bootstrap\Command\DevCommand\Migrations
- */
 class All extends Command
 {
     use AllMigrationsHelper;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         parent::configure();
