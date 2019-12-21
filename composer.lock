@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36abb44da3bb2a14b41c55579825a0b1",
+    "content-hash": "49a351d878862092cd6f71b6d702aed1",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -144,11 +144,11 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "dev-master",
+            "version": "dev-next",
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Dropbox/Projects/Components/Controller",
-                "reference": "297ad5e0c131ddcd380cde006cc48e54e024e470"
+                "reference": "6c6a21e43b582727f74ec74ac0fdc7fb9f1c3155"
             },
             "require": {
                 "activecollab/containeraccess": "^1.0",
@@ -188,7 +188,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2019-12-13T20:45:30+00:00"
+            "time": "2019-12-13T20:58:24+00:00"
         },
         {
             "name": "activecollab/cookies",

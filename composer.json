@@ -18,7 +18,7 @@
         "php": ">=7.2",
         "activecollab/authentication": "^3.0",
         "activecollab/baseline": "^1.0",
-        "activecollab/controller": "dev-master",
+        "activecollab/controller": "dev-next",
         "activecollab/databasemigrations": "^2.0",
         "activecollab/databasestructure": "^1.0",
         "activecollab/logger": "^1.0",
