@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\App\Metadata;
 
-use ActiveCollab\Bootstrap\Apo\Metadata\EnvironmentInterface;
 use InvalidArgumentException;
 
 class Environment implements EnvironmentInterface

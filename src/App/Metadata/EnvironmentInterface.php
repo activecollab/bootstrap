@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Apo\Metadata;
+namespace ActiveCollab\Bootstrap\App\Metadata;
 
 interface EnvironmentInterface
 {
