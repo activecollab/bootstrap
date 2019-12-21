@@ -23,16 +23,28 @@ class AuthenticationAttributesTest extends TestCase
 {
     public function testAuthenticationAdapter()
     {
-        $request = $this->createRequest()->withAttribute('authentication_adapter', $this->createMock(BrowserSessionAdapter::class));
+        $request = $this->createRequest()->withAttribute(
+            'authentication_adapter',
+            $this->createMock(BrowserSessionAdapter::class)
+        );
 
-        $this->assertInstanceOf(AdapterInterface::class, (new TestController())->getAuthenticationAdapter($request));
+        $this->assertInstanceOf(
+            AdapterInterface::class,
+            (new TestController())->getAuthenticationAdapter($request)
+        );
     }
 
     public function testAuthenticatedUser()
     {
-        $request = $this->createRequest()->withAttribute('authenticated_user', new AuthenticatedUser(1, 'john.doe@example.com', 'Jonh Doe', '123'));
+        $request = $this->createRequest()->withAttribute(
+            'authenticated_user',
+            new AuthenticatedUser(1, 'john.doe@example.com', 'Jonh Doe', '123')
+        );
 
-        $this->assertInstanceOf(AuthenticatedUserInterface::class, (new TestController())->getAuthenticatedUser($request));
+        $this->assertInstanceOf(
+            AuthenticatedUserInterface::class,
+            (new TestController())->getAuthenticatedUser($request)
+        );
     }
 
     public function testAuthenticatedWith()
