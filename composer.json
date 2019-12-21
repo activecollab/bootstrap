@@ -15,12 +15,12 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "activecollab/authentication": "^3.0",
         "activecollab/baseline": "^1.0",
         "activecollab/controller": "dev-next",
-        "activecollab/databasemigrations": "^2.0",
-        "activecollab/databasestructure": "^1.0",
+        "activecollab/databasemigrations": "2.0.1",
+        "activecollab/databasestructure": "^2.0",
         "activecollab/eventsdispatcher": "^1.0",
         "activecollab/logger": "^1.0",
         "activecollab/utils": "^1.0",
@@ -30,8 +30,7 @@
         "zendframework/zend-diactoros": "^2.2",
         "symfony/console": "^4.0||^5.0",
         "vlucas/phpdotenv": "^2.2.0",
-        "php-di/slim-bridge": "^3.0",
-        "container-interop/container-interop": "^1.2"
+        "php-di/slim-bridge": "^3.0"
     },
     "suggest": {
         "activecollab/jobsqueue": "Queue for background, delayed, parallel or remote jobs",

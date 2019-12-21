@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bbd1f017ba1a4cc0228bff03904b8e1",
+    "content-hash": "032a2e779c2da3b455c56943ecb8f263",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -97,24 +97,24 @@
         },
         {
             "name": "activecollab/containeraccess",
-            "version": "1.0.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/containeraccess.git",
-                "reference": "30bf92724df248f77f7b0debd93eca3e7097513a"
+                "reference": "950deccdec3dd6484b2149fae48ce346c3afe0b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/containeraccess/zipball/30bf92724df248f77f7b0debd93eca3e7097513a",
-                "reference": "30bf92724df248f77f7b0debd93eca3e7097513a",
+                "url": "https://api.github.com/repos/activecollab/containeraccess/zipball/950deccdec3dd6484b2149fae48ce346c3afe0b7",
+                "reference": "950deccdec3dd6484b2149fae48ce346c3afe0b7",
                 "shasum": ""
             },
             "require": {
-                "container-interop/container-interop": "^1.2.0",
-                "php": ">=5.6.0"
+                "php": ">=7.3",
+                "psr/container": "^1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5.3"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -140,7 +140,7 @@
                 "ioc",
                 "service-container"
             ],
-            "time": "2017-11-12T16:38:02+00:00"
+            "time": "2019-12-21T13:14:15+00:00"
         },
         {
             "name": "activecollab/controller",
@@ -148,15 +148,15 @@
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Dropbox/Projects/Components/Controller",
-                "reference": "6c6a21e43b582727f74ec74ac0fdc7fb9f1c3155"
+                "reference": "d1c6f6e8994d5cbe0e51ed328012500befbb1715"
             },
             "require": {
-                "activecollab/containeraccess": "^1.0",
+                "activecollab/containeraccess": "^2.0",
                 "activecollab/etag": "^1.0",
                 "activecollab/templateengine": "^1.0",
                 "activecollab/utils": "^1.0",
                 "ext-json": "*",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "psr/http-message": "^1.0",
                 "psr/log": "~1.0"
             },
@@ -188,7 +188,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2019-12-13T20:58:24+00:00"
+            "time": "2019-12-21T13:18:21+00:00"
         },
         {
             "name": "activecollab/cookies",
@@ -240,24 +240,24 @@
         },
         {
             "name": "activecollab/databaseconnection",
-            "version": "3.0.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databaseconnection.git",
-                "reference": "9824e8dd4368f55f72146cac71d6d60f1ac61167"
+                "reference": "7192b59cda4022a381ab0b9fe0bdd670f9b083ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databaseconnection/zipball/9824e8dd4368f55f72146cac71d6d60f1ac61167",
-                "reference": "9824e8dd4368f55f72146cac71d6d60f1ac61167",
+                "url": "https://api.github.com/repos/activecollab/databaseconnection/zipball/7192b59cda4022a381ab0b9fe0bdd670f9b083ca",
+                "reference": "7192b59cda4022a381ab0b9fe0bdd670f9b083ca",
                 "shasum": ""
             },
             "require": {
-                "activecollab/containeraccess": "^1.0",
+                "activecollab/containeraccess": "^2.0",
                 "activecollab/datevalue": "^2.0",
                 "ext-json": "*",
                 "ext-mysqli": "*",
-                "php": ">=7.1",
+                "php": ">=7.3",
                 "psr/log": "^1.0.0"
             },
             "require-dev": {
@@ -288,24 +288,24 @@
                 "activecollab",
                 "mysql"
             ],
-            "time": "2019-06-23T17:02:50+00:00"
+            "time": "2019-12-21T13:48:35+00:00"
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "a38249978b379f44bb1763abacd397b4d359a55d"
+                "reference": "9c817725477949df9142ed650c1e14be0ffdd8fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/a38249978b379f44bb1763abacd397b4d359a55d",
-                "reference": "a38249978b379f44bb1763abacd397b4d359a55d",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/9c817725477949df9142ed650c1e14be0ffdd8fe",
+                "reference": "9c817725477949df9142ed650c1e14be0ffdd8fe",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databaseconnection": "^3.0",
+                "activecollab/databaseconnection": "^3.0||^4.0",
                 "activecollab/filesystem": "^0.10",
                 "doctrine/inflector": "~1.0",
                 "php": ">=7.1",
@@ -343,41 +343,41 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2019-06-23T19:30:45+00:00"
+            "time": "2019-12-21T14:01:56+00:00"
         },
         {
             "name": "activecollab/databaseobject",
-            "version": "4.0.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databaseobject.git",
-                "reference": "a3c0abced3ffe9f59c21a5ed12060f0253abda44"
+                "reference": "23c1ba07c6d6618a441fcdd225d754ef37cb0883"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databaseobject/zipball/a3c0abced3ffe9f59c21a5ed12060f0253abda44",
-                "reference": "a3c0abced3ffe9f59c21a5ed12060f0253abda44",
+                "url": "https://api.github.com/repos/activecollab/databaseobject/zipball/23c1ba07c6d6618a441fcdd225d754ef37cb0883",
+                "reference": "23c1ba07c6d6618a441fcdd225d754ef37cb0883",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databaseconnection": "^3.0",
+                "activecollab/databaseconnection": "^3.0||^4.0",
                 "activecollab/etag": "^1.0",
                 "activecollab/object": "^1.0",
                 "doctrine/inflector": "^1.0",
-                "php": ">=7.1",
+                "php": ">=7.3",
                 "psr/log": "^1.0.0"
             },
             "require-dev": {
+                "ext-mysqli": "*",
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "monolog/monolog": "^1.0",
-                "phpunit/phpunit": "~5.0",
+                "phpunit/phpunit": "~7.0",
                 "pimple/pimple": "~3.0.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ActiveCollab\\DatabaseObject\\": "src",
-                    "ActiveCollab\\DatabaseObject\\Test\\": "test/src"
+                    "ActiveCollab\\DatabaseObject\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -397,32 +397,33 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-06-23T17:18:52+00:00"
+            "time": "2019-12-21T14:21:04+00:00"
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "1.0.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "ebbf79697ad61dd7d1db48319aa5490dd4f73705"
+                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/ebbf79697ad61dd7d1db48319aa5490dd4f73705",
-                "reference": "ebbf79697ad61dd7d1db48319aa5490dd4f73705",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/6ff1510ee1a8d382255a74a232f718dda6c4986a",
+                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a",
                 "shasum": ""
             },
             "require": {
-                "activecollab/databaseobject": "^4.0",
+                "activecollab/databaseobject": "^5.0",
                 "activecollab/filesystem": "^0.10",
                 "activecollab/user": "^4.0",
                 "doctrine/inflector": "^1.0",
-                "php": ">=7.1"
+                "php": ">=7.3"
             },
             "require-dev": {
+                "ext-mysqli": "*",
                 "friendsofphp/php-cs-fixer": "^2.0",
-                "phpunit/phpunit": "^5.0"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -449,7 +450,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-06-24T10:19:41+00:00"
+            "time": "2019-12-21T14:28:18+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -1021,38 +1022,6 @@
                 "performance"
             ],
             "time": "2019-11-06T16:40:04+00:00"
-        },
-        {
-            "name": "container-interop/container-interop",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/container-interop/container-interop.git",
-                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/container-interop/container-interop/zipball/79cbf1341c22ec75643d841642dd5d6acd83bdb8",
-                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8",
-                "shasum": ""
-            },
-            "require": {
-                "psr/container": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Interop\\Container\\": "src/Interop/Container/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
-            "homepage": "https://github.com/container-interop/container-interop",
-            "abandoned": "psr/container",
-            "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "dflydev/fig-cookies",
@@ -1645,16 +1614,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.0",
+            "version": "6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5"
+                "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0274c05370a7bc9bb3a33838858253418bd7d14b",
+                "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b",
                 "shasum": ""
             },
             "require": {
@@ -1708,7 +1677,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-07T18:20:45+00:00"
+            "time": "2019-12-21T08:51:15+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -5705,7 +5674,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.3"
     },
     "platform-dev": []
 }
