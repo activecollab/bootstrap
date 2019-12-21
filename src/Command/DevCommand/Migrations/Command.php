@@ -12,27 +12,16 @@ use ActiveCollab\Bootstrap\Command\DevCommand\DevCommand;
 use ActiveCollab\DatabaseMigrations\MigrationsInterface;
 use RuntimeException;
 
-/**
- * @package ActiveCollab\Bootstrap\Command\DevCommand\Migrations
- */
 abstract class Command extends DevCommand
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getCommandNamePrefix()
+    public function getCommandNamePrefix(): string
     {
         return parent::getCommandNamePrefix() . 'migrations:';
     }
 
-    /**
-     * Return migrations instance.
-     *
-     * @return MigrationsInterface
-     */
-    public function getMigrations()
+    public function getMigrations(): MigrationsInterface
     {
-        $migrations = $this->getContainer()->get('migrations');
+        $migrations = $this->getContainer()->get(MigrationsInterface::class);
 
         if ($migrations instanceof MigrationsInterface) {
             return $migrations;

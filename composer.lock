@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "032a2e779c2da3b455c56943ecb8f263",
+    "content-hash": "33a2836b7a82372115a02563e48e1524",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -292,16 +292,16 @@
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "2.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "9c817725477949df9142ed650c1e14be0ffdd8fe"
+                "reference": "76863e4caa848854309c6cc501957c0fdcde6d34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/9c817725477949df9142ed650c1e14be0ffdd8fe",
-                "reference": "9c817725477949df9142ed650c1e14be0ffdd8fe",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/76863e4caa848854309c6cc501957c0fdcde6d34",
+                "reference": "76863e4caa848854309c6cc501957c0fdcde6d34",
                 "shasum": ""
             },
             "require": {
@@ -343,7 +343,7 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2019-12-21T14:01:56+00:00"
+            "time": "2019-12-21T15:11:22+00:00"
         },
         {
             "name": "activecollab/databaseobject",
@@ -5674,7 +5674,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=7.3",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

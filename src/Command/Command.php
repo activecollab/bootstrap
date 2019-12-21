@@ -18,16 +18,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @package ActiveCollab\Bootstrap\Command
- */
 abstract class Command extends BaseCommand implements CommandInterface
 {
     use ContainerAccessInterfaceImplementation;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         parent::configure();
@@ -41,17 +35,13 @@ abstract class Command extends BaseCommand implements CommandInterface
             $last_bit = substr($last_bit, 0, $last_bit_len - 8);
         }
 
-        $this->setName($this->getCommandNamePrefix() . $last_bit)
-             ->addOption('debug', '', InputOption::VALUE_NONE, 'Output debug details')
-             ->addOption('json', '', InputOption::VALUE_NONE, 'Output JSON');
+        $this
+            ->setName($this->getCommandNamePrefix() . $last_bit)
+            ->addOption('debug', '', InputOption::VALUE_NONE, 'Output debug details')
+            ->addOption('json', '', InputOption::VALUE_NONE, 'Output JSON');
     }
 
-    /**
-     * Return command name prefix.
-     *
-     * @return string
-     */
-    protected function getCommandNamePrefix()
+    public function getCommandNamePrefix(): string
     {
         return '';
     }
@@ -68,11 +58,15 @@ abstract class Command extends BaseCommand implements CommandInterface
     protected function abort($message, $error_code, InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption('json')) {
-            $output->writeln(json_encode([
-                'ok' => false,
-                'error_message' => $message,
-                'error_code' => $error_code,
-            ]));
+            $output->writeln(
+                json_encode(
+                    [
+                        'ok' => false,
+                        'error_message' => $message,
+                        'error_code' => $error_code,
+                    ]
+                )
+            );
         } else {
             $output->writeln("<error>Error #{$error_code}:</error> " . $message);
         }

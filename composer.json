@@ -16,10 +16,11 @@
     ],
     "require": {
         "php": ">=7.3",
+        "ext-json": "*",
         "activecollab/authentication": "^3.0",
         "activecollab/baseline": "^1.0",
         "activecollab/controller": "dev-next",
-        "activecollab/databasemigrations": "2.0.1",
+        "activecollab/databasemigrations": "^3.0",
         "activecollab/databasestructure": "^2.0",
         "activecollab/eventsdispatcher": "^1.0",
         "activecollab/logger": "^1.0",
