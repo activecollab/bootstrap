@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
-use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
+use ActiveCollab\Bootstrap\App\MetadataInterface;
 use LogicException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -28,7 +28,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
     private $is_ran = false;
 
     public function __construct(
-        AppMetadataInterface $app_metadata,
+        MetadataInterface $app_metadata,
         ContainerInterface $container,
         LoggerInterface $logger = null
     )
@@ -38,12 +38,12 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         $this->setLogger($logger);
     }
 
-    public function getAppMetadata(): AppMetadataInterface
+    public function getAppMetadata(): MetadataInterface
     {
         return $this->app_metadata;
     }
 
-    protected function setAppMetadata(AppMetadataInterface $app_metadata): AppBootstrapperInterface
+    protected function setAppMetadata(MetadataInterface $app_metadata): AppBootstrapperInterface
     {
         $this->app_metadata = $app_metadata;
 

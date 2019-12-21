@@ -8,9 +8,11 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\AppMetadata;
+namespace ActiveCollab\Bootstrap\App;
 
-class AppMetadata implements AppMetadataInterface
+use ActiveCollab\Bootstrap\App\MetadataInterface;
+
+class Metadata implements MetadataInterface
 {
     private $name = '';
 

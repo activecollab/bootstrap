@@ -8,13 +8,11 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\AppMetadata;
+namespace ActiveCollab\Bootstrap\App;
 
-interface AppMetadataInterface
+interface MetadataInterface
 {
     public function getName(): string;
-
     public function getVersion(): string;
-
     public function getPath(): string;
 }
