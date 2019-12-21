@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
 use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
-use Interop\Container\ContainerInterface;
 use LogicException;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class AppBootstrapper implements AppBootstrapperInterface

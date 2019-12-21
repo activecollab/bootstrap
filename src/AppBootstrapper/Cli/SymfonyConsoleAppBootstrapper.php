@@ -17,9 +17,9 @@ use ActiveCollab\Bootstrap\ClassFinder\ClassDir\ClassDirInterface;
 use ActiveCollab\Bootstrap\ClassFinder\ClassFinder;
 use ActiveCollab\Bootstrap\Command\CommandInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface;
-use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use LogicException;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
