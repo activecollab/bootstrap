@@ -32,21 +32,6 @@ class Environment implements EnvironmentInterface
         return $this->environment;
     }
 
-    public function setEnvironment(string $environment): EnvironmentInterface
-    {
-        if (!$this->isTest()) {
-            throw new LogicException('Environment can be changed only when in test mode.');
-        }
-
-        if (!$this->isValidEnvironment($environment)) {
-            throw new InvalidArgumentException("Value '{$environment}' is not a supported environment.");
-        }
-
-        $this->environment = $environment;
-
-        return $this;
-    }
-
     private function isValidEnvironment(string $environment): bool
     {
         return in_array($environment, self::VALID_ENVIRONMENTS);
