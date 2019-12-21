@@ -65,6 +65,8 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
             throw new LogicException('App is already bootstrapped.');
         }
 
+        $this->logger->debug(sprintf('%s bootstrapped.', get_class($this)));
+
         return $this;
     }
 
@@ -91,6 +93,8 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         if ($this->isRan()) {
             throw new LogicException('App is already ran.');
         }
+
+        $this->logger->debug(sprintf('%s ran.', get_class($this)));
 
         return $this;
     }
