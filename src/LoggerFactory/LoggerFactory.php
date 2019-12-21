@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router;
+namespace ActiveCollab\Bootstrap\LoggerFactory;
 
 use ActiveCollab\Bootstrap\App\Metadata\EnvironmentInterface;
 use ActiveCollab\Bootstrap\App\Metadata\PathInterface;
