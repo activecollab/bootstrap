@@ -65,7 +65,12 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
             throw new LogicException('App is already bootstrapped.');
         }
 
-        $this->logger->debug(sprintf('%s bootstrapped.', get_class($this)));
+        $this->logger->debug(
+            'Application bootstrapped.',
+            [
+                'sapi' => php_sapi_name(),
+            ]
+        );
 
         return $this;
     }
@@ -94,7 +99,12 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
             throw new LogicException('App is already ran.');
         }
 
-        $this->logger->debug(sprintf('%s ran.', get_class($this)));
+        $this->logger->debug(
+            'Application ran.',
+            [
+                'sapi' => php_sapi_name(),
+            ]
+        );
 
         return $this;
     }
