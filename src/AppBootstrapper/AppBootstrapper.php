@@ -17,25 +17,21 @@ use Psr\Log\LoggerInterface;
 
 abstract class AppBootstrapper implements AppBootstrapperInterface
 {
-    private $logger;
-
     private $app_metadata;
-
     private $container;
-
+    private $logger;
     private $is_bootstrapped = false;
-
     private $is_ran = false;
 
     public function __construct(
         MetadataInterface $app_metadata,
         ContainerInterface $container,
-        LoggerInterface $logger = null
+        LoggerInterface $logger
     )
     {
-        $this->setAppMetadata($app_metadata);
-        $this->setContainer($container);
-        $this->setLogger($logger);
+        $this->app_metadata = $app_metadata;
+        $this->container = $container;
+        $this->logger = $logger;
     }
 
     public function getAppMetadata(): MetadataInterface
@@ -43,23 +39,9 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->app_metadata;
     }
 
-    protected function setAppMetadata(MetadataInterface $app_metadata): AppBootstrapperInterface
-    {
-        $this->app_metadata = $app_metadata;
-
-        return $this;
-    }
-
     public function getContainer(): ContainerInterface
     {
         return $this->container;
-    }
-
-    public function setContainer(ContainerInterface $container): AppBootstrapperInterface
-    {
-        $this->container = $container;
-
-        return $this;
     }
 
     public function isBootstrapped(): bool
@@ -67,23 +49,9 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->is_bootstrapped;
     }
 
-    public function setIsBootstrapped(bool $is_bootstrapped = true): AppBootstrapperInterface
-    {
-        $this->is_bootstrapped = $is_bootstrapped;
-
-        return $this;
-    }
-
     public function isRan(): bool
     {
         return $this->is_ran;
-    }
-
-    protected function setIsRan(bool $is_ran = true): AppBootstrapperInterface
-    {
-        $this->is_ran = $is_ran;
-
-        return $this;
     }
 
     public function bootstrap(): AppBootstrapperInterface
@@ -118,18 +86,6 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         if ($this->isRan()) {
             throw new LogicException('App is already ran.');
         }
-
-        return $this;
-    }
-
-    protected function getLogger(): ? LoggerInterface
-    {
-        return $this->logger;
-    }
-
-    protected function setLogger(LoggerInterface $logger = null): AppBootstrapperInterface
-    {
-        $this->logger = $logger;
 
         return $this;
     }
