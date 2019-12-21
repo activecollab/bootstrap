@@ -12,6 +12,7 @@ namespace ActiveCollab\Bootstrap\AppBootstrapper\Web;
 
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapper;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use DI\Bridge\Slim\Bridge;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -49,7 +50,7 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         parent::bootstrap();
 
         $this->beforeAppConstruction();
-        $this->app = new SlimApp($this->getContainer());
+        $this->app = Bridge::create($this->getContainer());
         $this->afterAppConstruction();
 
         $this->setIsBootstrapped();

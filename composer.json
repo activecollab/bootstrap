@@ -21,6 +21,7 @@
         "activecollab/controller": "dev-next",
         "activecollab/databasemigrations": "^2.0",
         "activecollab/databasestructure": "^1.0",
+        "activecollab/eventsdispatcher": "^1.0",
         "activecollab/logger": "^1.0",
         "activecollab/utils": "^1.0",
         "slim/http-cache": "~0.3.0",
@@ -28,7 +29,8 @@
         "slim/slim": "^3.0||^4.0",
         "zendframework/zend-diactoros": "^2.2",
         "symfony/console": "^4.0||^5.0",
-        "vlucas/phpdotenv": "^2.2.0"
+        "vlucas/phpdotenv": "^2.2.0",
+        "php-di/slim-bridge": "^3.0"
     },
     "suggest": {
         "activecollab/jobsqueue": "Queue for background, delayed, parallel or remote jobs",

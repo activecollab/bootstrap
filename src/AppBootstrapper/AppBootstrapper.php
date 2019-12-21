@@ -27,7 +27,11 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
 
     private $is_ran = false;
 
-    public function __construct(AppMetadataInterface $app_metadata, ContainerInterface $container, LoggerInterface $logger = null)
+    public function __construct(
+        AppMetadataInterface $app_metadata,
+        ContainerInterface $container,
+        LoggerInterface $logger = null
+    )
     {
         $this->setAppMetadata($app_metadata);
         $this->setContainer($container);
