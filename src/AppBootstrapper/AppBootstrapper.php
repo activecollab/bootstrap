@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
-use ActiveCollab\Bootstrap\App\MetadataInterface;
+use ActiveCollab\Bootstrap\App\Metadata\MetadataInterface;
 use LogicException;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;

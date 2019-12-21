@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\App;
+namespace ActiveCollab\Bootstrap\App\Metadata;
 
-interface PathInterface
+interface VersionInterface
 {
-    public function getPath(): string;
+    public function getVersion(): string;
 }

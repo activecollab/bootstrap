@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\App;
+namespace ActiveCollab\Bootstrap\App\Metadata;
 
 class Metadata implements MetadataInterface
 {
