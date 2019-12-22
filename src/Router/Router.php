@@ -13,9 +13,6 @@ use Doctrine\Common\Inflector\Inflector;
 use InvalidArgumentException;
 use Slim\App;
 
-/**
- * @package ActiveCollab\Bootstrap\Router
- */
 class Router implements RouterInterface
 {
     /**
