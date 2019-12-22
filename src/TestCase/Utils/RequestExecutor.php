@@ -149,14 +149,26 @@ class RequestExecutor implements RequestExecutorInterface
      * @param  callable|null          $modify_request_and_response
      * @return ResponseInterface
      */
-    private function executeRequest(ServerRequestInterface $request, ResponseInterface $response = null, callable $modify_request_and_response = null): ResponseInterface
+    private function executeRequest(
+        ServerRequestInterface $request,
+        ResponseInterface $response = null,
+        callable $modify_request_and_response = null
+    ): ResponseInterface
     {
         if (!$response) {
             $response = $this->createResponse();
         }
 
         if ($this->impersonate_user) {
-            list($request, $response) = $this->prepareRequestAndResponseFor($this->impersonate_user, $request, $response, $this->authentication_method === self::SESSION);
+            [
+                $request,
+                $response,
+            ] = $this->prepareRequestAndResponseFor(
+                $this->impersonate_user,
+                $request,
+                $response,
+                $this->authentication_method === self::SESSION
+            );
 
             if (!$request instanceof ServerRequestInterface || !$response instanceof ResponseInterface) {
                 throw new RuntimeException('Request/response modification callback is expected to return a modified request');

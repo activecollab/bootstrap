@@ -59,6 +59,11 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this->is_ran;
     }
 
+    protected function setIsRan(): void
+    {
+        $this->is_ran = true;
+    }
+
     public function bootstrap(): AppBootstrapperInterface
     {
         if ($this->isBootstrapped()) {

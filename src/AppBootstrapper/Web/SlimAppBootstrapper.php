@@ -50,7 +50,10 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         parent::bootstrap();
 
         $this->beforeAppConstruction();
+
         $this->app = Bridge::create($this->getContainer());
+        $this->app->addRoutingMiddleware();
+
         $this->afterAppConstruction();
 
         $this->setIsBootstrapped();
@@ -62,31 +65,21 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
     {
         parent::run($silent);
 
-        $this->response = $this->app->run($silent);
+        $this->app->run();
         $this->setIsRan();
 
         return $this;
     }
 
-    public function logResponse(): AppBootstrapperInterface
+    public function process(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface
     {
         if (!$this->isBootstrapped()) {
             throw new LogicException('App needs to be bootstrapped before it can be ran.');
         }
 
-        if (!$this->isRan()) {
-            throw new LogicException('App needs to be ran before response can be logged.');
-        }
-
-        return $this;
-    }
-
-    public function process(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
-        if (!$this->isBootstrapped()) {
-            throw new LogicException('App needs to be bootstrapped before it can be ran.');
-        }
-
-        return $this->app->process($request, $response);
+        return $this->app->handle($request);
     }
 }
