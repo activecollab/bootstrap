@@ -45,40 +45,26 @@ class Create extends Command
             );
     }
 
-    /**
-     * @return string
-     */
-    protected function getHeaderComment()
+    protected function getHeaderComment(): string
     {
         return $this->getContainer()
             ->get(MigrationsHeaderCommentResolverInterface::class)
                 ->getMigrationsHeaderComment();
     }
 
-    /**
-     * @return string
-     */
-    protected function getNamespace()
+    protected function getNamespace(): string
     {
         return $this->getContainer()
             ->get(MigrationsNamespaceResolverInterface::class)
                 ->getMigrationsNamespace();
     }
 
-    /**
-     * @param  InputInterface $input
-     * @return string
-     */
-    public function getMigrationName(InputInterface $input)
+    public function getMigrationName(InputInterface $input): string
     {
         return trim($input->getArgument('migration_name'));
     }
 
-    /**
-     * @param  InputInterface $input
-     * @return array
-     */
-    protected function getExtraArguments(InputInterface $input)
+    protected function getExtraArguments(InputInterface $input): array
     {
         $result = [];
 
@@ -89,11 +75,7 @@ class Create extends Command
         return $result;
     }
 
-    /**
-     * @param  InputInterface $input
-     * @return bool
-     */
-    protected function isDryRun(InputInterface $input)
+    protected function isDryRun(InputInterface $input): bool
     {
         return (bool) $input->getOption('dry-run');
     }
