@@ -17,16 +17,6 @@ use RuntimeException;
 
 class RetroRouterTest extends TestCase
 {
-    private $blog_example_dir;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->blog_example_dir = dirname(dirname(__DIR__)) . '/fixtures/blog_example';
-        $this->assertDirectoryExists($this->blog_example_dir);
-    }
-
     /**
      * @expectedException RuntimeException
      * @expectedExceptionMessage Path "not a directory" is not a directory.
@@ -38,7 +28,11 @@ class RetroRouterTest extends TestCase
 
     public function testWillWalkRecursivelyThrougDir(): void
     {
-        $routing_root = (new Router())->scan($this->blog_example_dir);
+        $blog_example_path = $this->fixtures_dir . '/blog_example';
+
+        $this->assertDirectoryExists($blog_example_path);
+
+        $routing_root = (new Router())->scan($blog_example_path);
 
         $this->assertInstanceOf(DirectoryInterface::class, $routing_root);
 

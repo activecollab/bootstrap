@@ -19,6 +19,15 @@ use Zend\Diactoros\Stream;
 
 abstract class TestCase extends BaseTestCase
 {
+    protected $fixtures_dir;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $this->fixtures_dir = dirname(dirname(__DIR__)) . '/fixtures';
+    }
+
     protected function createRequest(
         string $method = 'GET',
         string $path = '/',
