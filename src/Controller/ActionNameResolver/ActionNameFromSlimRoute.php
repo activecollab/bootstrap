@@ -15,9 +15,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
 use Slim\Interfaces\RouteInterface;
 
-/**
- * @package ActiveCollab\Bootstrap\Controller\ActionNameResolver
- */
 class ActionNameFromSlimRoute implements ActionNameResolverInterface
 {
     /**
@@ -34,7 +31,10 @@ class ActionNameFromSlimRoute implements ActionNameResolverInterface
      * @param string $route_request_attribute_name
      * @param string $action_route_argument_name
      */
-    public function __construct(string $route_request_attribute_name = 'route', string $action_route_argument_name = '%s_action')
+    public function __construct(
+        string $route_request_attribute_name = 'route',
+        string $action_route_argument_name = '%s_action'
+    )
     {
         $this->route_request_attribute_name = $route_request_attribute_name;
         $this->action_route_argument_name = $action_route_argument_name;

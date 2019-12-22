@@ -36,15 +36,6 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         return $this->app;
     }
 
-    public function getResponse(): ResponseInterface
-    {
-        if (empty($this->response)) {
-            throw new LogicException('Response not set up.');
-        }
-
-        return $this->response;
-    }
-
     public function bootstrap(): AppBootstrapperInterface
     {
         parent::bootstrap();
@@ -71,9 +62,8 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         return $this;
     }
 
-    public function process(
-        ServerRequestInterface $request,
-        ResponseInterface $response
+    public function handle(
+        ServerRequestInterface $request
     ): ResponseInterface
     {
         if (!$this->isBootstrapped()) {

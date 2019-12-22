@@ -16,21 +16,5 @@ use Psr\Http\Message\ServerRequestInterface;
 
 interface WebAppBootstrapperInterface extends AppBootstrapperInterface
 {
-    /**
-     * Return the response.
-     *
-     * If app was not ran, this function will throw an exception.
-     *
-     * @return ResponseInterface
-     */
-    public function getResponse(): ResponseInterface;
-
-    /**
-     * Process the request and get the response. This method is userful for testing the full middleware stack execution.
-     *
-     * @param  ServerRequestInterface $request
-     * @param  ResponseInterface      $response
-     * @return ResponseInterface
-     */
-    public function process(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface;
+    public function handle(ServerRequestInterface $request): ResponseInterface;
 }

@@ -6,53 +6,53 @@
  * (c) A51 doo <info@activecollab.com>. All rights reserved.
  */
 
+declare(strict_types=1);
+
 namespace ActiveCollab\Bootstrap\Test\Base;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Http\Environment as SlimEnvironment;
-use Slim\Http\Request as SlimRequest;
-use Slim\Http\Response as SlimResponse;
+use Zend\Diactoros\ResponseFactory;
+use Zend\Diactoros\ServerRequestFactory;
+use Zend\Diactoros\Stream;
 
-/**
- * @package ActiveCollab\Bootstrap\Test\Base
- */
 abstract class TestCase extends BaseTestCase
 {
-    /**
-     * Prepare server request based on the given arguments.
-     *
-     * @param  string                 $method
-     * @param  string                 $path
-     * @param  array                  $query_params
-     * @param  array                  $payload
-     * @return ServerRequestInterface
-     */
-    protected function createRequest(string $method = 'GET', string $path = '/', array $query_params = [], array $payload = []): ServerRequestInterface
+    protected function createRequest(
+        string $method = 'GET',
+        string $path = '/',
+        array $query_params = [],
+        array $payload = null
+    ): ServerRequestInterface
     {
-        $environment_user_data = [
-            'REQUEST_METHOD' => $method,
-            'REQUEST_URI' => '/' . trim($path, '/'),
-        ];
+        /** @var ServerRequestInterface $request */
+        $request = (new ServerRequestFactory())
+            ->createServerRequest($method, $this->prepareRequestUri($path, $query_params));
 
-        if (!empty($query_params)) {
-            $environment_user_data['QUERY_STRING'] = http_build_query($query_params);
-        }
+        $stream = new Stream('php://memory', 'r+');
+        $stream->write(json_encode($payload));
 
-        $environment = SlimEnvironment::mock($environment_user_data);
-
-        $request = SlimRequest::createFromEnvironment($environment)
-            ->withParsedBody($payload);
+        $request
+            ->withHeader('Content-Type', 'application/json')
+            ->withBody($stream);
 
         return $request;
     }
 
-    /**
-     * @return ResponseInterface
-     */
+    private function prepareRequestUri(string $path, array $query_params): string
+    {
+        $result = '/' . trim($path, '/');
+
+        if (!empty($query_params)) {
+            $result .= '?' . http_build_query($query_params);
+        }
+
+        return $result;
+    }
+
     protected function createResponse(): ResponseInterface
     {
-        return new SlimResponse();
+        return (new ResponseFactory())->createResponse();
     }
 }
