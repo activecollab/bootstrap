@@ -13,6 +13,7 @@ namespace ActiveCollab\Bootstrap\Test\Retro;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use RuntimeException;
 
 class RetroRouterTest extends TestCase
 {
@@ -27,7 +28,7 @@ class RetroRouterTest extends TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      * @expectedExceptionMessage Path "not a directory" is not a directory.
      */
     public function testWillThrowExceptionOnMissingDir()
@@ -71,6 +72,9 @@ class RetroRouterTest extends TestCase
             $files[] = $file->getNodePath();
         }
 
-        return [$dirs, $files];
+        return [
+            $dirs,
+            $files,
+        ];
     }
 }
