@@ -148,7 +148,7 @@
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Dropbox/Projects/Components/Controller",
-                "reference": "d1c6f6e8994d5cbe0e51ed328012500befbb1715"
+                "reference": "49c1bc55b46587e51fcbf4b316216f8db5520243"
             },
             "require": {
                 "activecollab/containeraccess": "^2.0",
@@ -157,8 +157,10 @@
                 "activecollab/utils": "^1.0",
                 "ext-json": "*",
                 "php": ">=7.3",
+                "psr/http-factory": "^1.0",
                 "psr/http-message": "^1.0",
-                "psr/log": "~1.0"
+                "psr/log": "~1.0",
+                "zendframework/zend-diactoros": "^2.2"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
@@ -188,7 +190,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2019-12-21T13:18:21+00:00"
+            "time": "2019-12-22T07:45:03+00:00"
         },
         {
             "name": "activecollab/cookies",
