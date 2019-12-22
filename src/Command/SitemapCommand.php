@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\Command;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
 use Symfony\Component\Console\Helper\Table;
@@ -40,7 +41,7 @@ class SitemapCommand extends Command
     {
         $table->addRow(
             [
-                $indent . $directory->getNodePath(),
+                $this->getNodePath($directory, $indent),
                 'dir',
             ]
         );
@@ -52,11 +53,16 @@ class SitemapCommand extends Command
         foreach ($directory->getFiles() as $file) {
             $table->addRow(
                 [
-                    $indent . $file->getNodePath(),
+                    $this->getNodePath($file, $indent),
                     'file',
                 ]
             );
         }
+    }
+
+    private function getNodePath(NodeInterface $node, string $indent): string
+    {
+        return $indent . '/' . $node->getNodePath();
     }
 
     protected function getSitemapPath(): string
