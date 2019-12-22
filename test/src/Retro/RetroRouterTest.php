@@ -21,7 +21,7 @@ class RetroRouterTest extends TestCase
      * @expectedException RuntimeException
      * @expectedExceptionMessage Path "not a directory" is not a directory.
      */
-    public function testWillThrowExceptionOnMissingDir()
+    public function testWillThrowExceptionOnMissingDir(): void
     {
         (new Router())->scan('not a directory');
     }
@@ -69,6 +69,45 @@ class RetroRouterTest extends TestCase
         return [
             $dirs,
             $files,
+        ];
+    }
+
+    /**
+     * @dataProvider provideDataForDirectoryElementsTest
+     * @param string $subdirectory_name
+     * @param bool   $is_empty
+     * @param bool   $has_index
+     * @param bool   $has_middleware
+     */
+    public function testWillDetectDirectoryElements(
+        string $subdirectory_name,
+        bool $is_empty,
+        bool $has_index,
+        bool $has_middleware
+    ): void
+    {
+        $directory_example_path = $this->fixtures_dir . '/directory_example';
+
+        $this->assertDirectoryExists($directory_example_path);
+
+        $routing_root = (new Router())->scan($directory_example_path);
+
+        $subdirectory = $routing_root->getSubdirectory($subdirectory_name);
+
+        $this->assertInstanceOf(DirectoryInterface::class, $subdirectory);
+
+        $this->assertSame($is_empty, $subdirectory->isEmpty());
+        $this->assertSame($has_middleware, $subdirectory->hasMiddleware());
+        $this->assertSame($has_index, $subdirectory->hasIndex());
+    }
+
+    public function provideDataForDirectoryElementsTest(): array
+    {
+        return [
+            ['empty', true, false, false],
+            ['with-index', false, true, false],
+            ['with-middleware', false, false, true],
+            ['with-middleware-and-index', false, true, true],
         ];
     }
 }

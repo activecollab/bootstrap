@@ -34,7 +34,7 @@ class Router implements RouterInterface
         $result = new Directory($routing_root, $dir_path);
 
         foreach (new DirectoryIterator($routing_root . '/' . $dir_path) as $entity) {
-            if ($entity->isDot() || $entity->isLink()) {
+            if ($entity->isDot() || $this->isHiddenFile($entity->getFilename()) || $entity->isLink()) {
                 continue;
             }
 
@@ -48,6 +48,11 @@ class Router implements RouterInterface
         }
 
         return $result;
+    }
+
+    private function isHiddenFile(string $filename): bool
+    {
+        return mb_substr($filename, 0, 1) === '.';
     }
 
     private function getNodePath(string $routing_root, string $node_path): string

@@ -15,6 +15,21 @@ class Directory extends Node implements DirectoryInterface
     private $subdirectories = [];
     private $files = [];
 
+    public function isEmpty(): bool
+    {
+        return empty($this->subdirectories) && empty($this->files);
+    }
+
+    public function hasIndex(): bool
+    {
+        return !empty($this->files['index.php']);
+    }
+
+    public function hasMiddleware(): bool
+    {
+        return !empty($this->files['__middleware.php']);
+    }
+
     public function addSubdirectory(DirectoryInterface ...$directories): void
     {
         foreach ($directories as $directory) {
@@ -25,6 +40,11 @@ class Directory extends Node implements DirectoryInterface
     public function getSubdirectories(): array
     {
         return $this->subdirectories;
+    }
+
+    public function getSubdirectory(string $name): ?DirectoryInterface
+    {
+        return $this->subdirectories[$name] ?? null;
     }
 
     public function addFiles(FileInterface ...$files): void
