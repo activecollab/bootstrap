@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9719e0040bd54aa3d54f75491dacbc48",
+    "content-hash": "54f09436bbdddca9d7b3bfbae4fff1a3",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -292,16 +292,16 @@
         },
         {
             "name": "activecollab/databasemigrations",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasemigrations.git",
-                "reference": "76863e4caa848854309c6cc501957c0fdcde6d34"
+                "reference": "4005dff459b520d3ad0f7d50e734867d364b4844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/76863e4caa848854309c6cc501957c0fdcde6d34",
-                "reference": "76863e4caa848854309c6cc501957c0fdcde6d34",
+                "url": "https://api.github.com/repos/activecollab/databasemigrations/zipball/4005dff459b520d3ad0f7d50e734867d364b4844",
+                "reference": "4005dff459b520d3ad0f7d50e734867d364b4844",
                 "shasum": ""
             },
             "require": {
@@ -312,6 +312,7 @@
                 "psr/log": "^1.0"
             },
             "require-dev": {
+                "ext-mysqli": "*",
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "monolog/monolog": "^1.0",
                 "phpunit/phpunit": "^5.0",
@@ -343,7 +344,7 @@
                 "migrations",
                 "mysql"
             ],
-            "time": "2019-12-21T15:11:22+00:00"
+            "time": "2019-12-22T05:58:58+00:00"
         },
         {
             "name": "activecollab/databaseobject",

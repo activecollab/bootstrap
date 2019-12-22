@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Command\DevCommand\Migrations;
 
+use ActiveCollab\Bootstrap\MigrationsHeaderCommentResolver\MigrationsHeaderCommentResolverInterface;
 use ActiveCollab\Bootstrap\MigrationsNamespaceResolver\MigrationsNamespaceResolverInterface;
 use ActiveCollab\DatabaseMigrations\Command\Create as CreateMigrationsHelper;
 use Symfony\Component\Console\Input\InputArgument;
@@ -49,7 +50,9 @@ class Create extends Command
      */
     protected function getHeaderComment()
     {
-        return "This file is part of the Active Collab ID project.\n\n(c) A51 doo <info@activecollab.com>. All rights reserved.";
+        return $this->getContainer()
+            ->get(MigrationsHeaderCommentResolverInterface::class)
+                ->getMigrationsHeaderComment();
     }
 
     /**
@@ -57,7 +60,9 @@ class Create extends Command
      */
     protected function getNamespace()
     {
-        return $this->getContainer()->get(MigrationsNamespaceResolverInterface::class)->getMigrationsNamespace();
+        return $this->getContainer()
+            ->get(MigrationsNamespaceResolverInterface::class)
+                ->getMigrationsNamespace();
     }
 
     /**
