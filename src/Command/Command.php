@@ -17,6 +17,7 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 abstract class Command extends BaseCommand implements CommandInterface
 {
@@ -139,6 +140,24 @@ abstract class Command extends BaseCommand implements CommandInterface
         }
 
         return $code;
+    }
+
+    protected function askYesNoQuestion(
+        string $question,
+        InputInterface $input,
+        OutputInterface $output
+    ): bool
+    {
+        return in_array(
+            mb_strtolower(
+                $this->getHelper('question')->ask(
+                    $input,
+                    $output,
+                    (new Question(sprintf('%s (<comment>yes</comment> or <comment>y</comment> to confirm) ', $question)))
+                )
+            ),
+            ['y', 'yes']
+        );
     }
 
     /**
