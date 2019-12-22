@@ -26,14 +26,14 @@ class Router implements RouterInterface
             throw new RuntimeException(sprintf('Path "%s" is not a directory.', $routing_root));
         }
 
-        return $this->scanDir($routing_root, '/');
+        return $this->scanDir($routing_root, '');
     }
 
     private function scanDir(string $routing_root, string $dir_path): DirectoryInterface
     {
         $result = new Directory($routing_root, $dir_path);
 
-        foreach (new DirectoryIterator($routing_root . $dir_path) as $entity) {
+        foreach (new DirectoryIterator($routing_root . '/' . $dir_path) as $entity) {
             if ($entity->isDot() || $entity->isLink()) {
                 continue;
             }
