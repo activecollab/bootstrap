@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Command;
+namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class SitemapCommand extends Command
+class SitemapCommand extends DevCommand
 {
     protected function execute(InputInterface $input, OutputInterface $output)
     {
