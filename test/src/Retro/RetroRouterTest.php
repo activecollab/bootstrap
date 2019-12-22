@@ -46,18 +46,18 @@ class RetroRouterTest extends TestCase
             $files,
         ] = $this->recursivelyWalk($routing_root);
 
-        $this->assertCount(6, $dirs);
+        $this->assertCount(7, $dirs);
         $this->assertCount(4, $files);
     }
 
     private function recursivelyWalk(DirectoryInterface $directory): array
     {
-        $dirs = [];
+        $dirs = [
+            $directory->getNodePath(),
+        ];
         $files = [];
 
         foreach ($directory->getSubdirectories() as $subdirectory) {
-            $dirs[] = $subdirectory->getNodePath();
-
             [
                 $subdir_dirs,
                 $subdir_files,
