@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Command\DevCommand\Migrations;
 
+use ActiveCollab\Bootstrap\MigrationsNamespaceResolver\MigrationsNamespaceResolverInterface;
 use ActiveCollab\DatabaseMigrations\Command\Create as CreateMigrationsHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,7 +57,7 @@ class Create extends Command
      */
     protected function getNamespace()
     {
-        return 'ActiveCollab\Id\Model\Migrations';
+        return $this->getContainer()->get(MigrationsNamespaceResolverInterface::class)->getMigrationsNamespace();
     }
 
     /**
