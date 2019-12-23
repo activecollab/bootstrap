@@ -63,7 +63,9 @@ class NodeNameParser implements NodeNameParserInterface
     public function getDirectoryProperties(): array
     {
         return [
-            $this->node_name,
+            $this->extension
+                ? $this->node_name . '.' . $this->extension
+                : $this->node_name,
             $this->is_hidden,
             $this->is_system,
             $this->is_variable,
