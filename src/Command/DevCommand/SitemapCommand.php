@@ -42,7 +42,7 @@ class SitemapCommand extends DevCommand
         $table->addRow(
             [
                 $this->getNodePath($directory, $indent),
-                'dir',
+                $directory->isSystem() ? '<info>system dir</info>' : 'dir',
             ]
         );
 
@@ -54,7 +54,7 @@ class SitemapCommand extends DevCommand
             $table->addRow(
                 [
                     $this->getNodePath($file, $indent),
-                    'file',
+                    $file->isSystem() ? '<info>system file</info>' : 'file',
                 ]
             );
         }
