@@ -62,7 +62,7 @@ class SitemapCommand extends DevCommand
 
     private function getNodePath(NodeInterface $node, string $indent): string
     {
-        return $indent . '/' . $node->getNodePath();
+        return $indent . '/' . $node->getNodeName();
     }
 
     protected function getSitemapPath(): string
