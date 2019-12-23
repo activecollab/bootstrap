@@ -47,13 +47,13 @@ class SitemapCommand extends DevCommand
         );
 
         foreach ($directory->getSubdirectories() as $subdirectory) {
-            $this->recursivelyPopulateRows($subdirectory, $indent . '  ', $table);
+            $this->recursivelyPopulateRows($subdirectory, $this->increaseIndent($indent), $table);
         }
 
         foreach ($directory->getFiles() as $file) {
             $table->addRow(
                 [
-                    $this->getNodePath($file, $indent . '  '),
+                    $this->getNodePath($file, $this->increaseIndent($indent)),
                     $file->isSystem() ? '<info>system file</info>' : 'file',
                 ]
             );
@@ -68,5 +68,10 @@ class SitemapCommand extends DevCommand
     protected function getSitemapPath(): string
     {
         return $this->getContainer()->get(SitemapPathResolverInterface::class)->getSitemapPath();
+    }
+
+    private function increaseIndent(string $indent): string
+    {
+        return $indent . '    ';
     }
 }
