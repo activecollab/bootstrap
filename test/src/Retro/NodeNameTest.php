@@ -74,6 +74,7 @@ class NodeNameTest extends TestCase
             ['.gitignore', 'gitignore', '', true, false, false, false],
             ['.phpunit.xml', 'phpunit', 'xml', true, false, false, false],
             ['authors.html', 'authors', 'html', false, false, false, false],
+            ['awesome.handler.php', 'awesome.handler', 'php', false, true, false, false],
             ['index.php', 'index', 'php', false, true, false, false],
             ['__middleware.php', 'middleware', 'php', false, true, true, false],
             ['__post_id__.php', 'post_id', 'php', false, true, false, true],
