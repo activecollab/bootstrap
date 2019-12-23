@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing\RouteInterface;
+
 interface NodeInterface
 {
     public function getRoutingRoot(): string;

@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing\Route;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing\RouteInterface;
+
 abstract class Node implements NodeInterface
 {
     private $routing_root;

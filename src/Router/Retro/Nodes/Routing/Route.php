@@ -8,7 +8,9 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
+namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing;
+
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 
 class Route implements RouteInterface
 {
