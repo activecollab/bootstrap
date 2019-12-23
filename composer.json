@@ -23,6 +23,7 @@
         "activecollab/databasemigrations": "^3.0",
         "activecollab/databasestructure": "^2.0",
         "activecollab/eventsdispatcher": "^1.0",
+        "activecollab/templateengine": "^2.0",
         "activecollab/utils": "^1.0",
         "slim/http-cache": "~0.3.0",
         "slim/php-view": "^2.0",

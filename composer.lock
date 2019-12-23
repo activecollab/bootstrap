@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9719e0040bd54aa3d54f75491dacbc48",
+    "content-hash": "2429eaca6b75ca1f91d70a8fc6ecf97e",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -148,12 +148,12 @@
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Dropbox/Projects/Components/Controller",
-                "reference": "49c1bc55b46587e51fcbf4b316216f8db5520243"
+                "reference": "7056ee7dc14aad4c40316f3d40eca770eab2f152"
             },
             "require": {
                 "activecollab/containeraccess": "^2.0",
                 "activecollab/etag": "^1.0",
-                "activecollab/templateengine": "^1.0",
+                "activecollab/templateengine": "^2.0",
                 "activecollab/utils": "^1.0",
                 "ext-json": "*",
                 "php": ">=7.3",
@@ -190,7 +190,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2019-12-22T07:45:03+00:00"
+            "time": "2019-12-23T23:11:30+00:00"
         },
         {
             "name": "activecollab/cookies",
@@ -733,24 +733,24 @@
         },
         {
             "name": "activecollab/templateengine",
-            "version": "1.0.1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/templateengine.git",
-                "reference": "a0fb6171a5949500985df574135551a0bce78766"
+                "reference": "26c07477e82253f29134c2065e7178a39c1d8f41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/templateengine/zipball/a0fb6171a5949500985df574135551a0bce78766",
-                "reference": "a0fb6171a5949500985df574135551a0bce78766",
+                "url": "https://api.github.com/repos/activecollab/templateengine/zipball/26c07477e82253f29134c2065e7178a39c1d8f41",
+                "reference": "26c07477e82253f29134c2065e7178a39c1d8f41",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "php": ">=7.3"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "^1.0",
-                "phpunit/phpunit": "^5.0"
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "autoload": {
@@ -768,7 +768,7 @@
                 "template",
                 "view"
             ],
-            "time": "2016-05-22T11:42:16+00:00"
+            "time": "2019-12-23T23:01:45+00:00"
         },
         {
             "name": "activecollab/user",
@@ -1564,16 +1564,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.1",
+            "version": "6.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b"
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0274c05370a7bc9bb3a33838858253418bd7d14b",
-                "reference": "0274c05370a7bc9bb3a33838858253418bd7d14b",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
                 "shasum": ""
             },
             "require": {
@@ -1627,7 +1627,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-21T08:51:15+00:00"
+            "time": "2019-12-23T11:57:10+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -2728,16 +2728,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682"
+                "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
-                "reference": "d638ebbb58daba25a6a0dc7969e1358a0e3c6682",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
+                "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
                 "shasum": ""
             },
             "require": {
@@ -2787,7 +2787,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2019-12-17T16:54:23+00:00"
+            "time": "2019-12-22T21:05:45+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
