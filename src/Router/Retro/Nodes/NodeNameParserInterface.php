@@ -10,10 +10,8 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 
-interface FileInterface extends NodeInterface
+interface NodeNameParserInterface
 {
-    public function isIndex(): bool;
-    public function containsMiddlewares(): bool;
-    public function getExtension(): string;
-    public function isExecutable(): bool;
+    public function getFileProperties(): array;
+    public function getDirectoryProperties(): array;
 }

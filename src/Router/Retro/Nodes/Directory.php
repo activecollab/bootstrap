@@ -12,8 +12,24 @@ namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 
 class Directory extends Node implements DirectoryInterface
 {
+    private $node_name = '';
+    private $is_hidden = false;
+    private $is_system = false;
+    private $is_variable = false;
     private $subdirectories = [];
     private $files = [];
+
+    public function __construct(string $routing_root, string $node_path)
+    {
+        parent::__construct($routing_root, $node_path);
+
+        [
+            $this->node_name,
+            $this->is_hidden,
+            $this->is_system,
+            $this->is_variable,
+        ] = (new NodeNameParser($this->getBasename()))->getDirectoryProperties();
+    }
 
     public function isEmpty(): bool
     {
@@ -57,5 +73,25 @@ class Directory extends Node implements DirectoryInterface
     public function getFiles(): array
     {
         return $this->files;
+    }
+
+    public function getNodeName(): string
+    {
+        return $this->node_name;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->is_hidden;
+    }
+
+    public function isSystem(): bool
+    {
+        return $this->is_system;
+    }
+
+    public function isVariable(): bool
+    {
+        return $this->is_variable;
     }
 }
