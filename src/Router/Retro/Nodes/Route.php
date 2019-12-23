@@ -21,6 +21,6 @@ class Route implements RouteInterface
 
     public function getFullPath(): string
     {
-        return $this->node->getPath();
+        return $this->node->getNodePath();
     }
 }

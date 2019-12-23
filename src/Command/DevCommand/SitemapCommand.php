@@ -44,7 +44,7 @@ class SitemapCommand extends DevCommand
             [
                 $this->getNodePath($directory, $indent),
                 $directory->isSystem() ? '<info>system dir</info>' : 'dir',
-                $directory->getRoute() ? $directory->getRoute()->getFullPath() : '--',
+                $this->getNodeRoute($directory),
             ]
         );
 
@@ -57,7 +57,7 @@ class SitemapCommand extends DevCommand
                 [
                     $this->getNodePath($file, $this->increaseIndent($indent)),
                     $file->isSystem() ? '<info>system file</info>' : 'file',
-                    $file->getRoute() ? $file->getRoute()->getFullPath() : '--',
+                    $this->getNodeRoute($file),
                 ]
             );
         }
@@ -68,13 +68,18 @@ class SitemapCommand extends DevCommand
         return $indent . '/' . $node->getBasename();
     }
 
-    protected function getSitemapPath(): string
+    private function getNodeRoute(NodeInterface $node): string
     {
-        return $this->getContainer()->get(SitemapPathResolverInterface::class)->getSitemapPath();
+        return $node->getRoute() ? '/' . $node->getRoute()->getFullPath() : '--';
     }
 
     private function increaseIndent(string $indent): string
     {
         return $indent . '    ';
+    }
+
+    protected function getSitemapPath(): string
+    {
+        return $this->getContainer()->get(SitemapPathResolverInterface::class)->getSitemapPath();
     }
 }
