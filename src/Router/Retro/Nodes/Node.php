@@ -49,8 +49,12 @@ abstract class Node implements NodeInterface
         return $this->path;
     }
 
-    protected function getElementsFromBasename(string $basename): array
+    public function getRoute(): ?RouteInterface
     {
+        if ($this->isSystem() || $this->isHidden()) {
+            return null;
+        }
 
+        return new Route($this);
     }
 }

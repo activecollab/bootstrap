@@ -21,4 +21,6 @@ interface NodeInterface
     public function isHidden(): bool;
     public function isSystem(): bool;
     public function isVariable(): bool;
+
+    public function getRoute(): ?RouteInterface;
 }

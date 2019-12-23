@@ -27,7 +27,7 @@ class SitemapCommand extends DevCommand
         $table = new Table($output);
         $table->setHeaders(
             [
-                'Path',
+                'Structure',
                 'Type',
             ]
         );
