@@ -29,6 +29,7 @@ class SitemapCommand extends DevCommand
             [
                 'Structure',
                 'Type',
+                'Route',
             ]
         );
 
@@ -43,6 +44,7 @@ class SitemapCommand extends DevCommand
             [
                 $this->getNodePath($directory, $indent),
                 $directory->isSystem() ? '<info>system dir</info>' : 'dir',
+                $directory->getRoute() ? $directory->getRoute()->getFullPath() : '--',
             ]
         );
 
@@ -55,6 +57,7 @@ class SitemapCommand extends DevCommand
                 [
                     $this->getNodePath($file, $this->increaseIndent($indent)),
                     $file->isSystem() ? '<info>system file</info>' : 'file',
+                    $file->getRoute() ? $file->getRoute()->getFullPath() : '--',
                 ]
             );
         }
