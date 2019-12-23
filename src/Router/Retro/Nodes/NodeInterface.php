@@ -13,7 +13,14 @@ namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 interface NodeInterface
 {
     public function getRoutingRoot(): string;
+    public function getNodeName(): string;
     public function getNodePath(): string;
-    public function getName(): string;
+    public function getBasename(): string;
     public function getPath(): string;
+
+    public function getExtension(): string;
+    public function isHidden(): bool;
+    public function isExecutable(): bool;
+    public function isSystem(): bool;
+    public function isVariable(): bool;
 }

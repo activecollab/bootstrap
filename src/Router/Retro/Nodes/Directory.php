@@ -33,7 +33,7 @@ class Directory extends Node implements DirectoryInterface
     public function addSubdirectory(DirectoryInterface ...$directories): void
     {
         foreach ($directories as $directory) {
-            $this->subdirectories[$directory->getName()] = $directory;
+            $this->subdirectories[$directory->getBasename()] = $directory;
         }
     }
 
@@ -50,7 +50,7 @@ class Directory extends Node implements DirectoryInterface
     public function addFiles(FileInterface ...$files): void
     {
         foreach ($files as $file) {
-            $this->files[$file->getName()] = $file;
+            $this->files[$file->getBasename()] = $file;
         }
     }
 

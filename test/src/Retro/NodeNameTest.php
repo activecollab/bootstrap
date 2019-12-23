@@ -1,0 +1,82 @@
+<?php
+
+/*
+ * This file is part of the Active Collab Bootstrap project.
+ *
+ * (c) A51 doo <info@activecollab.com>. All rights reserved.
+ */
+
+declare(strict_types=1);
+
+namespace ActiveCollab\Bootstrap\Test\Retro;
+
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File;
+use ActiveCollab\Bootstrap\Test\Base\TestCase;
+
+class NodeNameTest extends TestCase
+{
+    /**
+     * @dataProvider provideFileNamesForTypeTest
+     * @param string $filename
+     * @param string $expected_entity_name
+     * @param string $expected_extension
+     * @param bool   $expected_is_hidden
+     * @param bool   $expected_is_executable
+     * @param bool   $expected_is_system
+     * @param bool   $expected_is_variable
+     */
+    public function testWillDetectTypeBasedOnFilename(
+        string $filename,
+        string $expected_entity_name,
+        string $expected_extension,
+        bool $expected_is_hidden,
+        bool $expected_is_executable,
+        bool $expected_is_system,
+        bool $expected_is_variable
+    )
+    {
+        $routable_file = new File('/', $filename);
+
+        $this->assertSame(
+            $expected_entity_name,
+            $routable_file->getNodeName()
+        );
+
+        $this->assertSame(
+            $expected_is_hidden,
+            $routable_file->isHidden()
+        );
+
+        $this->assertSame(
+            $expected_extension,
+            $routable_file->getExtension()
+        );
+
+        $this->assertSame(
+            $expected_is_executable,
+            $routable_file->isExecutable()
+        );
+
+        $this->assertSame(
+            $expected_is_system,
+            $routable_file->isSystem()
+        );
+
+        $this->assertSame(
+            $expected_is_variable,
+            $routable_file->isVariable()
+        );
+    }
+
+    public function provideFileNamesForTypeTest(): array
+    {
+        return [
+            ['.gitignore', 'gitignore', '', true, false, false, false],
+            ['.phpunit.xml', 'phpunit', 'xml', true, false, false, false],
+            ['authors.html', 'authors', 'html', false, false, false, false],
+            ['index.php', 'index', 'php', false, true, false, false],
+            ['__middleware.php', 'middleware', 'php', false, true, true, false],
+            ['__post_id__.php', 'post_id', 'php', false, true, false, true],
+        ];
+    }
+}
