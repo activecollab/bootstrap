@@ -53,7 +53,7 @@ class SitemapCommand extends DevCommand
         foreach ($directory->getFiles() as $file) {
             $table->addRow(
                 [
-                    $this->getNodePath($file, $indent),
+                    $this->getNodePath($file, $indent . '  '),
                     $file->isSystem() ? '<info>system file</info>' : 'file',
                 ]
             );
@@ -62,7 +62,7 @@ class SitemapCommand extends DevCommand
 
     private function getNodePath(NodeInterface $node, string $indent): string
     {
-        return $indent . '/' . $node->getNodeName();
+        return $indent . '/' . $node->getBasename();
     }
 
     protected function getSitemapPath(): string
