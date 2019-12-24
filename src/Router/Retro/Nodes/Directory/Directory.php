@@ -22,6 +22,8 @@ class Directory extends Node implements DirectoryInterface
     private $is_variable = false;
     private $subdirectories = [];
     private $files = [];
+    private $index_node_name;
+    private $middleware_node_name;
 
     public function __construct(string $routing_root, string $node_path)
     {
@@ -42,12 +44,12 @@ class Directory extends Node implements DirectoryInterface
 
     public function hasIndex(): bool
     {
-        return !empty($this->files['index.php']);
+        return !empty($this->index_node_name);
     }
 
     public function hasMiddleware(): bool
     {
-        return !empty($this->files['__middleware.php']);
+        return !empty($this->middleware_node_name);
     }
 
     public function addSubdirectory(DirectoryInterface ...$directories): void
@@ -71,6 +73,12 @@ class Directory extends Node implements DirectoryInterface
     {
         foreach ($files as $file) {
             $this->files[$file->getBasename()] = $file;
+
+            if ($file->isIndex()) {
+                $this->index_node_name = $file->getBasename();
+            } elseif ($file->isMiddleware()) {
+                $this->middleware_node_name = $file->getBasename();
+            }
         }
     }
 
