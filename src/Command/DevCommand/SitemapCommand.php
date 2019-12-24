@@ -68,7 +68,7 @@ class SitemapCommand extends DevCommand
         $result = $this->getNodePath($directory, $indent);
 
         if ($directory->hasIndex()) {
-            $result .= sprintf(' ~ %s', $directory->getIndex()->getNodeName());
+            $result .= sprintf(' <comment>~ %s</comment>', $directory->getIndex()->getBasename());
         }
 
         return $result;
