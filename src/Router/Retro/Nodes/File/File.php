@@ -41,7 +41,7 @@ class File extends Node implements FileInterface
 
     public function isIndex(): bool
     {
-        return false;
+        return $this->getNodeName() === 'index';
     }
 
     public function containsMiddlewares(): bool

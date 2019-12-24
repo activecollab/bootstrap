@@ -132,4 +132,31 @@ class NodeNameTest extends TestCase
             ['__post_id__', 'post_id', false, false, true],
         ];
     }
+
+    /**
+     * @dataProvider provideDataForIndexTest
+     * @param string $file_name
+     * @param bool   $expected_is_index
+     */
+    public function testWillDetectIndexFile(
+        string $file_name,
+        bool $expected_is_index
+    )
+    {
+        $this->assertSame(
+            $expected_is_index,
+            (new File('/', $file_name))->isIndex()
+        );
+    }
+    
+    public function provideDataForIndexTest(): array
+    {
+        return [
+            ['index', true],
+            ['index.php', true],
+            ['index.html', true],
+            ['index.twig', true],
+            ['index.not.html', false],
+        ];
+    }
 }
