@@ -59,7 +59,7 @@ class SitemapCommand extends DevCommand
         InputInterface $input
     ): void
     {
-        if ($directory->isSystem() && $input->getOption('include-system')) {
+        if ($directory->isSystem() && empty($input->getOption('include-system'))) {
             return;
         }
 
@@ -76,7 +76,7 @@ class SitemapCommand extends DevCommand
         }
 
         foreach ($directory->getFiles() as $file) {
-            if ($file->isSystem() && $input->getOption('include-system')) {
+            if ($file->isSystem() && empty($input->getOption('include-system'))) {
                 continue;
             }
 
