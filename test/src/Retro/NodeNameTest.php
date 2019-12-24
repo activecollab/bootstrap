@@ -83,57 +83,6 @@ class NodeNameTest extends TestCase
     }
 
     /**
-     * @dataProvider provideDirNamesForTypeTest
-     * @param string $dirname
-     * @param string $expected_entity_name
-     * @param bool   $expected_is_hidden
-     * @param bool   $expected_is_system
-     * @param bool   $expected_is_variable
-     */
-    public function testWillDetectTypeBasedOnDirname(
-        string $dirname,
-        string $expected_entity_name,
-        bool $expected_is_hidden,
-        bool $expected_is_system,
-        bool $expected_is_variable
-    ): void
-    {
-        $dir = new Directory('/', $dirname);
-
-        $this->assertSame(
-            $expected_entity_name,
-            $dir->getNodeName()
-        );
-
-        $this->assertSame(
-            $expected_is_hidden,
-            $dir->isHidden()
-        );
-
-        $this->assertSame(
-            $expected_is_system,
-            $dir->isSystem()
-        );
-
-        $this->assertSame(
-            $expected_is_variable,
-            $dir->isVariable()
-        );
-    }
-
-    public function provideDirNamesForTypeTest(): array
-    {
-        return [
-            ['.ssh', 'ssh',  true, false, false],
-            ['.ssh.important', 'ssh.important', true, false, false],
-            ['posts', 'posts', false, false, false],
-            ['vip.authors', 'vip.authors', false, false, false],
-            ['__templates', 'templates', false, true, false],
-            ['__post_id__', 'post_id', false, false, true],
-        ];
-    }
-
-    /**
      * @dataProvider provideDataForIndexTest
      * @param string $file_name
      * @param bool   $expected_is_index
@@ -184,6 +133,57 @@ class NodeNameTest extends TestCase
             ['middleware.php', false],
             ['__middleware.php', true],
             ['__middleware-not.php', false],
+        ];
+    }
+
+    /**
+     * @dataProvider provideDirNamesForTypeTest
+     * @param string $dirname
+     * @param string $expected_entity_name
+     * @param bool   $expected_is_hidden
+     * @param bool   $expected_is_system
+     * @param bool   $expected_is_variable
+     */
+    public function testWillDetectTypeBasedOnDirname(
+        string $dirname,
+        string $expected_entity_name,
+        bool $expected_is_hidden,
+        bool $expected_is_system,
+        bool $expected_is_variable
+    ): void
+    {
+        $dir = new Directory('/', $dirname);
+
+        $this->assertSame(
+            $expected_entity_name,
+            $dir->getNodeName()
+        );
+
+        $this->assertSame(
+            $expected_is_hidden,
+            $dir->isHidden()
+        );
+
+        $this->assertSame(
+            $expected_is_system,
+            $dir->isSystem()
+        );
+
+        $this->assertSame(
+            $expected_is_variable,
+            $dir->isVariable()
+        );
+    }
+
+    public function provideDirNamesForTypeTest(): array
+    {
+        return [
+            ['.ssh', 'ssh',  true, false, false],
+            ['.ssh.important', 'ssh.important', true, false, false],
+            ['posts', 'posts', false, false, false],
+            ['vip.authors', 'vip.authors', false, false, false],
+            ['__templates', 'templates', false, true, false],
+            ['__post_id__', 'post_id', false, false, true],
         ];
     }
 }
