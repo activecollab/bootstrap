@@ -13,6 +13,7 @@ namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Node;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeNameParser\NodeNameParser;
+use LogicException;
 
 class Directory extends Node implements DirectoryInterface
 {
@@ -22,8 +23,8 @@ class Directory extends Node implements DirectoryInterface
     private $is_variable = false;
     private $subdirectories = [];
     private $files = [];
-    private $index_node_name;
-    private $middleware_node_name;
+    private $index_file_basename;
+    private $middleware_file_basename;
 
     public function __construct(string $routing_root, string $node_path)
     {
@@ -44,12 +45,12 @@ class Directory extends Node implements DirectoryInterface
 
     public function hasIndex(): bool
     {
-        return !empty($this->index_node_name);
+        return !empty($this->index_file_basename);
     }
 
     public function hasMiddleware(): bool
     {
-        return !empty($this->middleware_node_name);
+        return !empty($this->middleware_file_basename);
     }
 
     public function addSubdirectory(DirectoryInterface ...$directories): void
@@ -75,9 +76,17 @@ class Directory extends Node implements DirectoryInterface
             $this->files[$file->getBasename()] = $file;
 
             if ($file->isIndex()) {
-                $this->index_node_name = $file->getBasename();
+                if (!empty($this->index_file_basename)) {
+                    throw new LogicException('Only onde index file per directory is supported.');
+                }
+
+                $this->index_file_basename = $file->getBasename();
             } elseif ($file->isMiddleware()) {
-                $this->middleware_node_name = $file->getBasename();
+                if (!empty($this->middleware_file_basename)) {
+                    throw new LogicException('Only onde middleware file per directory is supported.');
+                }
+
+                $this->middleware_file_basename = $file->getBasename();
             }
         }
     }

@@ -13,6 +13,7 @@ namespace ActiveCollab\Bootstrap\Test\Retro;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use LogicException;
 use RuntimeException;
 
 class RetroRouterTest extends TestCase
@@ -109,5 +110,29 @@ class RetroRouterTest extends TestCase
             ['with-middleware', false, false, true],
             ['with-middleware-and-index', false, true, true],
         ];
+    }
+
+    public function testWillThrowExceptionOnMultipleIndexes(): void
+    {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Only onde index file per directory is supported.');
+
+        $directory_example_path = $this->fixtures_dir . '/with_multi_index_example';
+
+        $this->assertDirectoryExists($directory_example_path);
+
+        (new Router())->scan($directory_example_path);
+    }
+
+    public function testWillThrowExceptionOnMultipleMiddlewares(): void
+    {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Only onde middleware file per directory is supported.');
+
+        $directory_example_path = $this->fixtures_dir . '/with_multi_middleware_example';
+
+        $this->assertDirectoryExists($directory_example_path);
+
+        (new Router())->scan($directory_example_path);
     }
 }
