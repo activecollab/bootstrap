@@ -8,13 +8,14 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Handlers;
+namespace ActiveCollab\Bootstrap\Router\Retro\Handlers\TemplateHandler;
 
+use ActiveCollab\Bootstrap\Router\Retro\Handlers\Handler;
 use ActiveCollab\TemplateEngine\TemplateEngineInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class TemplateHandler extends Handler
+class TemplateHandler extends Handler implements TemplateHandlerInterface
 {
     private $templateEngine;
     private $templateName;
