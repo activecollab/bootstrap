@@ -31,6 +31,12 @@ class SitemapCommand extends DevCommand
                 '',
                 InputOption::VALUE_NONE,
                 'Include system directories in the structure'
+            )
+            ->addOption(
+                'include-indexes',
+                '',
+                InputOption::VALUE_NONE,
+                'Include index files in the structure, as lines'
             );
     }
 
@@ -77,6 +83,10 @@ class SitemapCommand extends DevCommand
 
         foreach ($directory->getFiles() as $file) {
             if ($file->isSystem() && empty($input->getOption('include-system'))) {
+                continue;
+            }
+
+            if ($file->isIndex() && empty($input->getOption('include-indexes'))) {
                 continue;
             }
 
