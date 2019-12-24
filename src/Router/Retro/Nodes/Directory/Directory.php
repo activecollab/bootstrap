@@ -48,9 +48,23 @@ class Directory extends Node implements DirectoryInterface
         return !empty($this->index_file_basename);
     }
 
+    public function getIndex(): ?FileInterface
+    {
+        return !empty($this->index_file_basename)
+            ? $this->files[$this->index_file_basename]
+            : null;
+    }
+
     public function hasMiddleware(): bool
     {
         return !empty($this->middleware_file_basename);
+    }
+
+    public function getMiddleware(): ?FileInterface
+    {
+        return !empty($this->middleware_file_basename)
+            ? $this->files[$this->middleware_file_basename]
+            : null;
     }
 
     public function addSubdirectory(DirectoryInterface ...$directories): void

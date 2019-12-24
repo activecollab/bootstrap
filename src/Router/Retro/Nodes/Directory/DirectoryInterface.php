@@ -16,8 +16,12 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 interface DirectoryInterface extends NodeInterface
 {
     public function isEmpty(): bool;
+
     public function hasIndex(): bool;
+    public function getIndex(): ?FileInterface;
+
     public function hasMiddleware(): bool;
+    public function getMiddleware(): ?FileInterface;
 
     public function addSubdirectory(DirectoryInterface ...$directories): void;
 

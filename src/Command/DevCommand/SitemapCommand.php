@@ -42,7 +42,7 @@ class SitemapCommand extends DevCommand
     {
         $table->addRow(
             [
-                $this->getNodePath($directory, $indent),
+                $this->getDirectoryStructureContent($directory, $indent),
                 $directory->isSystem() ? '<info>system dir</info>' : 'dir',
                 $this->getNodeRoute($directory),
             ]
@@ -61,6 +61,17 @@ class SitemapCommand extends DevCommand
                 ]
             );
         }
+    }
+
+    private function getDirectoryStructureContent(DirectoryInterface $directory, string $indent): string
+    {
+        $result = $this->getNodePath($directory, $indent);
+
+        if ($directory->hasIndex()) {
+            $result .= sprintf(' ~ %s', $directory->getIndex()->getNodeName());
+        }
+
+        return $result;
     }
 
     private function getNodePath(NodeInterface $node, string $indent): string

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\Test\Retro;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
 use LogicException;
@@ -110,6 +111,32 @@ class RetroRouterTest extends TestCase
             ['with-middleware', false, false, true],
             ['with-middleware-and-index', false, true, true],
         ];
+    }
+
+    public function testWillReturnIndexFile()
+    {
+        $directory_example_path = $this->fixtures_dir . '/directory_example/with-index';
+
+        $this->assertDirectoryExists($directory_example_path);
+
+        $routing_root = (new Router())->scan($directory_example_path);
+
+        $this->assertTrue($routing_root->hasIndex());
+        $this->assertInstanceOf(FileInterface::class, $routing_root->getIndex());
+        $this->assertSame('index', $routing_root->getIndex()->getNodeName());
+    }
+
+    public function testWillReturnMiddlewareFile()
+    {
+        $directory_example_path = $this->fixtures_dir . '/directory_example/with-middleware';
+
+        $this->assertDirectoryExists($directory_example_path);
+
+        $routing_root = (new Router())->scan($directory_example_path);
+
+        $this->assertTrue($routing_root->hasMiddleware());
+        $this->assertInstanceOf(FileInterface::class, $routing_root->getMiddleware());
+        $this->assertSame('middleware', $routing_root->getMiddleware()->getNodeName());
     }
 
     public function testWillThrowExceptionOnMultipleIndexes(): void
