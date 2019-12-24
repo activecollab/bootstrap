@@ -16,10 +16,24 @@ use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SitemapCommand extends DevCommand
 {
+    protected function configure()
+    {
+        parent::configure();
+
+        $this
+            ->addOption(
+                'include-system',
+                '',
+                InputOption::VALUE_NONE,
+                'Include system directories in the structure'
+            );
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $root  = (new Router())->scan($this->getSitemapPath());
@@ -33,13 +47,22 @@ class SitemapCommand extends DevCommand
             ]
         );
 
-        $this->recursivelyPopulateRows($root, '', $table);
+        $this->recursivelyPopulateRows($root, '', $table, $input);
 
         $table->render();
     }
 
-    private function recursivelyPopulateRows(DirectoryInterface $directory, string $indent, Table $table): void
+    private function recursivelyPopulateRows(
+        DirectoryInterface $directory,
+        string $indent,
+        Table $table,
+        InputInterface $input
+    ): void
     {
+        if ($directory->isSystem() && $input->getOption('include-system')) {
+            return;
+        }
+
         $table->addRow(
             [
                 $this->getDirectoryStructureContent($directory, $indent),
@@ -49,10 +72,14 @@ class SitemapCommand extends DevCommand
         );
 
         foreach ($directory->getSubdirectories() as $subdirectory) {
-            $this->recursivelyPopulateRows($subdirectory, $this->increaseIndent($indent), $table);
+            $this->recursivelyPopulateRows($subdirectory, $this->increaseIndent($indent), $table, $input);
         }
 
         foreach ($directory->getFiles() as $file) {
+            if ($file->isSystem() && $input->getOption('include-system')) {
+                continue;
+            }
+
             $table->addRow(
                 [
                     $this->getNodePath($file, $this->increaseIndent($indent)),
