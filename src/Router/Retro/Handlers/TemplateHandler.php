@@ -23,7 +23,7 @@ class TemplateHandler extends Handler
     public function __construct(
         TemplateEngineInterface $templateEngine,
         string $templateName,
-        array $templateAttributes
+        array $templateAttributes = []
     )
     {
         $this->templateEngine = $templateEngine;
