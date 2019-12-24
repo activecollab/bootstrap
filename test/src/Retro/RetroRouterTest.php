@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Test\Retro;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
 use RuntimeException;

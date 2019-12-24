@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Test\Retro;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory;
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\File;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\Directory;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\File;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
 
 class NodeNameTest extends TestCase

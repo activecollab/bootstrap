@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
+namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeNameParser;
 
 class NodeNameParser implements NodeNameParserInterface
 {

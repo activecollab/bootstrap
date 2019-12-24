@@ -8,7 +8,11 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
+namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory;
+
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Node;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeNameParser\NodeNameParser;
 
 class Directory extends Node implements DirectoryInterface
 {

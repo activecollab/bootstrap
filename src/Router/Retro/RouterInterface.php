@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 
 interface RouterInterface
 {

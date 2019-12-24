@@ -8,7 +8,10 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
+namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\File;
+
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Node;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeNameParser\NodeNameParser;
 
 class File extends Node implements FileInterface
 {

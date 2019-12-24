@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory;
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\File;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\Directory;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\File;
 use DirectoryIterator;
 use RuntimeException;
 

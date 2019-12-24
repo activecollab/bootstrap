@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;

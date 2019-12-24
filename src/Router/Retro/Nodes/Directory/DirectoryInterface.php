@@ -8,7 +8,10 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
+namespace ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory;
+
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 
 interface DirectoryInterface extends NodeInterface
 {
