@@ -46,7 +46,8 @@ class File extends Node implements FileInterface
 
     public function isMiddleware(): bool
     {
-        return false;
+        return $this->isSystem()
+            && $this->getNodeName() === 'middleware';
     }
 
     public function getExtension(): string

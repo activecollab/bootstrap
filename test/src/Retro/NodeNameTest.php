@@ -141,7 +141,7 @@ class NodeNameTest extends TestCase
     public function testWillDetectIndexFile(
         string $file_name,
         bool $expected_is_index
-    )
+    ): void
     {
         $this->assertSame(
             $expected_is_index,
@@ -157,6 +157,33 @@ class NodeNameTest extends TestCase
             ['index.html', true],
             ['index.twig', true],
             ['index.not.html', false],
+        ];
+    }
+
+    /**
+     * @dataProvider provideDataForMiddlewareTest
+     * @param string $file_name
+     * @param bool   $expected_is_middleware
+     */
+    public function testWillDetectIsMiddleware(
+        string $file_name,
+        bool $expected_is_middleware
+    ): void
+    {
+        $this->assertSame(
+            $expected_is_middleware,
+            (new File('/', $file_name))->isMiddleware()
+        );
+    }
+
+    public function provideDataForMiddlewareTest(): array
+    {
+        return [
+            ['middleware', false],
+            ['__middleware', true],
+            ['middleware.php', false],
+            ['__middleware.php', true],
+            ['__middleware-not.php', false],
         ];
     }
 }
