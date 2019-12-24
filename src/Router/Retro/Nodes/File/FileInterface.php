@@ -15,7 +15,7 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 interface FileInterface extends NodeInterface
 {
     public function isIndex(): bool;
-    public function containsMiddlewares(): bool;
+    public function isMiddleware(): bool;
     public function getExtension(): string;
     public function isExecutable(): bool;
 }
