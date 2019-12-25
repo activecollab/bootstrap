@@ -52,9 +52,14 @@ abstract class Node implements NodeInterface
         return $this->path;
     }
 
+    public function isRoute(): bool
+    {
+        return !$this->isSystem() && !$this->isHidden();
+    }
+
     public function getRoute(): ?RouteInterface
     {
-        if ($this->isSystem() || $this->isHidden()) {
+        if (!$this->isRoute()) {
             return null;
         }
 

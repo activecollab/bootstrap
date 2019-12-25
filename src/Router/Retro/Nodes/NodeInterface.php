@@ -24,5 +24,6 @@ interface NodeInterface
     public function isSystem(): bool;
     public function isVariable(): bool;
 
+    public function isRoute(): bool;
     public function getRoute(): ?RouteInterface;
 }
