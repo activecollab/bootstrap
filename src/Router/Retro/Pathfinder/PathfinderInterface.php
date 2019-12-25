@@ -16,6 +16,6 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
 interface PathfinderInterface
 {
     public function hasRoute(NodeInterface $node): bool;
-    public function getRoutingPath(NodeInterface $node): string;
-    public function getRouteHandler(NodeInterface $node): HandlerInterface;
+    public function getRoutingPath(NodeInterface ...$nodes): ?string;
+    public function getRouteHandler(NodeInterface $node): ?HandlerInterface;
 }
