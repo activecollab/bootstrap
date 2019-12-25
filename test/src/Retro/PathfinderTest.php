@@ -14,14 +14,14 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\File;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\Pathfinder;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
 
-class RouteFactoryTest extends TestCase
+class PathfinderTest extends TestCase
 {
     /**
      * @dataProvider provideFileNamesForRouteDetectionTest
      * @param string $filename
      * @param bool   $expected_is_route
      */
-    public function testWillDetectIfNodeHasHandler(
+    public function testWillDetectIfNodeHasRoute(
         string $filename,
         bool $expected_is_route
     ): void
