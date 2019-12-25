@@ -12,6 +12,7 @@ namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
 use Symfony\Component\Console\Helper\Table;
@@ -118,7 +119,11 @@ class SitemapCommand extends DevCommand
 
     private function getNodeRoute(NodeInterface $node): string
     {
-        return $node->getRoute() ? '/' . $node->getRoute()->getFullPath() : '--';
+        $pathfinder = $this->getContainer()->get(PathfinderInterface::class);
+
+        return $pathfinder->hasRoute($node)
+            ? '/' . $pathfinder->getRoutingPath($node)
+            : '--';
     }
 
     private function increaseIndent(string $indent): string

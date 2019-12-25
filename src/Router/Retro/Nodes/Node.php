@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro\Nodes;
 
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing\Route;
-use ActiveCollab\Bootstrap\Router\Retro\Nodes\Routing\RouteInterface;
-
 abstract class Node implements NodeInterface
 {
     private $routing_root;
@@ -50,19 +47,5 @@ abstract class Node implements NodeInterface
     public function getPath(): string
     {
         return $this->path;
-    }
-
-    public function isRoute(): bool
-    {
-        return !$this->isSystem() && !$this->isHidden();
-    }
-
-    public function getRoute(): ?RouteInterface
-    {
-        if (!$this->isRoute()) {
-            return null;
-        }
-
-        return new Route($this);
     }
 }
