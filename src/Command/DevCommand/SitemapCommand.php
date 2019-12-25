@@ -119,11 +119,9 @@ class SitemapCommand extends DevCommand
 
     private function getNodeRoute(NodeInterface $node): string
     {
-        $pathfinder = $this->getContainer()->get(PathfinderInterface::class);
-
-        return $pathfinder->hasRoute($node)
-            ? '/' . $pathfinder->getRoutingPath($node)
-            : '--';
+        return (string) $this->getContainer()
+            ->get(PathfinderInterface::class)
+                ->getRoutingPath($node);
     }
 
     private function increaseIndent(string $indent): string
