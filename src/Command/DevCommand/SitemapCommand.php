@@ -54,14 +54,13 @@ class SitemapCommand extends DevCommand
             ]
         );
 
-        $this->recursivelyPopulateRows($root, [], '', $table, $input);
+        $this->recursivelyPopulateRows($root, '', $table, $input);
 
         $table->render();
     }
 
     private function recursivelyPopulateRows(
         DirectoryInterface $directory,
-        array $nodes_chain,
         string $indent,
         Table $table,
         InputInterface $input
@@ -75,32 +74,12 @@ class SitemapCommand extends DevCommand
             [
                 $this->getDirectoryStructureContent($directory, $indent),
                 $directory->isSystem() ? '<info>system dir</info>' : 'dir',
-                $this->getNodeRoute(
-                    array_merge(
-                        $nodes_chain,
-                        [
-                            $directory,
-                        ]
-                    )
-                ),
+                $this->getNodeRoute($directory),
             ]
         );
 
-        $nodes_chain[] = $directory;
-
         foreach ($directory->getSubdirectories() as $subdirectory) {
-            $this->recursivelyPopulateRows(
-                $subdirectory,
-                array_merge(
-                    $nodes_chain,
-                    [
-                        $subdirectory,
-                    ]
-                ),
-                $this->increaseIndent($indent),
-                $table,
-                $input
-            );
+            $this->recursivelyPopulateRows($subdirectory, $this->increaseIndent($indent), $table, $input);
         }
 
         foreach ($directory->getFiles() as $file) {
@@ -116,14 +95,7 @@ class SitemapCommand extends DevCommand
                 [
                     $this->getNodePath($file, $this->increaseIndent($indent)),
                     $file->isSystem() ? '<info>system file</info>' : 'file',
-                    $this->getNodeRoute(
-                        array_merge(
-                            $nodes_chain,
-                            [
-                                $file,
-                            ]
-                        )
-                    ),
+                    $this->getNodeRoute($file),
                 ]
             );
         }
@@ -145,11 +117,11 @@ class SitemapCommand extends DevCommand
         return $indent . '/' . $node->getBasename();
     }
 
-    private function getNodeRoute(NodeInterface ...$nodes): string
+    private function getNodeRoute(NodeInterface $node): string
     {
         return (string) $this->getContainer()
             ->get(PathfinderInterface::class)
-                ->getRoutingPath(...$nodes);
+                ->getRoutingPath($node);
     }
 
     private function increaseIndent(string $indent): string
