@@ -37,7 +37,9 @@ class SitemapLoader implements SitemapLoaderInterface
 
         $routes = [];
 
-        return $this->loadDirRoutes($app, $routingRoot, $routes, '');
+        $this->loadDirRoutes($app, $routingRoot, $routes, '');
+
+        return $routes;
     }
 
     private function loadDirRoutes(
@@ -45,7 +47,7 @@ class SitemapLoader implements SitemapLoaderInterface
         DirectoryInterface $directory,
         array &$routes,
         string $route_prefix
-    ): iterable
+    ): void
     {
         foreach ($directory->getSubdirectories() as $subdirectory) {
             if ($this->pathfinder->hasRoute($subdirectory)) {
