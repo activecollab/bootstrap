@@ -8,9 +8,10 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Pathfinder;
+namespace ActiveCollab\Bootstrap\Router\Retro\SitemapLoader;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
 use ActiveCollab\TemplateEngine\TemplateEngineInterface;

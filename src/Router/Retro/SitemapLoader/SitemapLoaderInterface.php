@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\Pathfinder;
+namespace ActiveCollab\Bootstrap\Router\Retro\SitemapLoader;
 
 use Slim\Interfaces\RouteCollectorProxyInterface;
 
