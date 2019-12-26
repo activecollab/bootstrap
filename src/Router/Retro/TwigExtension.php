@@ -12,22 +12,14 @@ namespace ActiveCollab\Bootstrap\Router\Retro;
 
 use ActiveCollab\Bootstrap\App\Metadata\UrlInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class TwigExtension extends AbstractExtension
+class TwigExtension extends AbstractExtension implements ContainerAccessInterface
 {
-    private $url;
-    private $sitemap;
-
-    public function __construct(
-        UrlInterface $url,
-        SitemapInterface $sitemap
-    )
-    {
-        $this->url = $url;
-        $this->sitemap = $sitemap;
-    }
+    use ContainerAccessImplementation;
 
     public function getFunctions()
     {
@@ -35,12 +27,16 @@ class TwigExtension extends AbstractExtension
             new TwigFunction(
                 'link',
                 function (string $routeName, array $arguments = []) {
-                    return $this->url->getUrl() . $this->sitemap->urlFor($routeName, $arguments);
+                    return sprintf(
+                        '%s%s',
+                        $this->container->get(UrlInterface::class)->getUrl(),
+                        $this->container->get(SitemapInterface::class)->urlFor($routeName, $arguments)
+                    );
                 },
                 [
                     'is_variadic' => true,
                 ]
-            )
+            ),
         ];
     }
 }
