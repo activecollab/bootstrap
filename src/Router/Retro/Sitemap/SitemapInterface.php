@@ -20,6 +20,6 @@ interface SitemapInterface
         array $queryParams = []
     ): string;
     public function isLoaded(): bool;
-    public function getLoadedRoutes(): iterable;
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable;
+    public function getLoadedRoutes(): iterable;
 }
