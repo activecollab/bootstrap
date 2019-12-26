@@ -13,9 +13,17 @@ namespace ActiveCollab\Bootstrap\Router\Retro\Pathfinder;
 use ActiveCollab\Bootstrap\Router\Retro\Handlers\HandlerInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\NodeInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\NodeHandlerDetector\NodeHandlerDetectorInterface;
 
 class Pathfinder implements PathfinderInterface
 {
+    private $nodeHandlerDetectors;
+
+    public function __construct(NodeHandlerDetectorInterface ...$nodeHandlerDetectors)
+    {
+        $this->nodeHandlerDetectors = $nodeHandlerDetectors;
+    }
+
     public function hasRoute(NodeInterface $node): bool
     {
         return !$node->isSystem() && !$node->isHidden();
@@ -59,6 +67,14 @@ class Pathfinder implements PathfinderInterface
     {
         if (!$this->hasRoute($node)) {
             return null;
+        }
+
+        foreach ($this->nodeHandlerDetectors as $nodeHandlerDetector) {
+            $handler = $nodeHandlerDetector->probe($node);
+
+            if ($handler) {
+                return $handler;
+            }
         }
 
         return null;
