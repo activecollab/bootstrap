@@ -21,6 +21,7 @@ class SitemapLoader implements SitemapLoaderInterface
 {
     private $sitemapPathResolver;
     private $pathfinder;
+    private $loadedRoutes;
 
     public function __construct(
         SitemapPathResolverInterface $sitemapPathResolver,
@@ -31,21 +32,23 @@ class SitemapLoader implements SitemapLoaderInterface
         $this->pathfinder = $pathfinder;
     }
 
+    public function getLoadedRoutes(): iterable
+    {
+        return $this->loadedRoutes;
+    }
+
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable
     {
         $routingRoot = (new Router())->scan($this->sitemapPathResolver->getSitemapPath());
 
-        $routes = [];
+        $this->loadDirRoutes($app, $routingRoot, '');
 
-        $this->loadDirRoutes($app, $routingRoot, $routes, '');
-
-        return $routes;
+        return $this->loadedRoutes;
     }
 
     private function loadDirRoutes(
         RouteCollectorProxyInterface $routeCollector,
         DirectoryInterface $directory,
-        array &$routes,
         string $route_prefix
     ): void
     {
@@ -53,11 +56,10 @@ class SitemapLoader implements SitemapLoaderInterface
             if ($this->pathfinder->hasRoute($subdirectory)) {
                 $routeCollector->group(
                     $this->pathfinder->getRoutingPath($subdirectory),
-                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$routes, $route_prefix) {
+                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $route_prefix) {
                         $this->loadDirRoutes(
                             $proxy,
                             $subdirectory,
-                            $routes,
                             ($route_prefix ? $route_prefix . '_' : '') . $subdirectory->getNodeName()
                         );
                     }
@@ -83,7 +85,7 @@ class SitemapLoader implements SitemapLoaderInterface
             $handler = $this->pathfinder->getRouteHandler($directory->getIndex());
 
             if ($handler) {
-                $routes[] = $routeCollector->any(
+                $this->loadedRoutes[] = $routeCollector->any(
                     $this->pathfinder->getRoutingPath($directory->getIndex()),
                     $handler
                 )->setName($route_prefix ? $route_prefix . '_index' : 'index');
@@ -98,7 +100,7 @@ class SitemapLoader implements SitemapLoaderInterface
             $handler = $this->pathfinder->getRouteHandler($file);
 
             if ($handler) {
-                $routes[] = $routeCollector->any(
+                $this->loadedRoutes[] = $routeCollector->any(
                     $this->pathfinder->getRoutingPath($file),
                     $handler
                 )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName());
