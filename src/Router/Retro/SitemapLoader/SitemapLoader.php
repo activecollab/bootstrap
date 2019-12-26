@@ -101,7 +101,7 @@ class SitemapLoader implements SitemapLoaderInterface
                 $routes[] = $routeCollector->any(
                     $this->pathfinder->getRoutingPath($file),
                     $handler
-                )->setName($route_prefix . '_' . $file->getNodeName());
+                )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName());
             }
         }
     }
