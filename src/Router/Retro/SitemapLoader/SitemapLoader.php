@@ -58,7 +58,7 @@ class SitemapLoader implements SitemapLoaderInterface
                             $proxy,
                             $subdirectory,
                             $routes,
-                            ($route_prefix ? $route_prefix . '_' : '') . $subdirectory->getNodeName() . '_'
+                            ($route_prefix ? $route_prefix . '_' : '') . $subdirectory->getNodeName()
                         );
                     }
                 );
@@ -101,7 +101,7 @@ class SitemapLoader implements SitemapLoaderInterface
                 $routes[] = $routeCollector->any(
                     $this->pathfinder->getRoutingPath($file),
                     $handler
-                )->setName($route_prefix . $file->getNodeName());
+                )->setName($route_prefix . '_' . $file->getNodeName());
             }
         }
     }
