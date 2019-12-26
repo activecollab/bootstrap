@@ -45,8 +45,7 @@ class Sitemap implements SitemapInterface
 
     public function urlFor(
         string $routeName,
-        array $data = [],
-        array $queryParams = []
+        array $data = []
     ): string
     {
 
@@ -102,9 +101,9 @@ class Sitemap implements SitemapInterface
         }
 
         $url = implode('', $segments);
-        if ($queryParams) {
-            $url .= '?' . http_build_query($queryParams);
-        }
+//        if ($queryParams) {
+//            $url .= '?' . http_build_query($queryParams);
+//        }
 
         return $url;
     }

@@ -16,8 +16,7 @@ interface SitemapInterface
 {
     public function urlFor(
         string $routeName,
-        array $data = [],
-        array $queryParams = []
+        array $data = []
     ): string;
     public function isLoaded(): bool;
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable;
