@@ -34,9 +34,7 @@ class SitemapCommand extends DevCommand
         );
 
         /** @var SitemapLoaderInterface $sitemapLoader */
-        $sitemapLoader = $this->getContainer()
-            ->get(SitemapLoaderInterface::class)
-                ->getLoadedRoutes();
+        $sitemapLoader = $this->getContainer()->get(SitemapLoaderInterface::class);
 
         if (!$sitemapLoader->isLoaded()) {
             $this->getContainer()
@@ -45,7 +43,7 @@ class SitemapCommand extends DevCommand
         }
 
         /** @var RouteInterface $route */
-        foreach ($this->getContainer()->get(SitemapLoaderInterface::class)->getLoadedRoutes() as $route) {
+        foreach ($sitemapLoader as $route) {
             $table->addRow(
                 [
                     $route->getPattern(),
