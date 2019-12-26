@@ -210,7 +210,7 @@ class Sitemap implements SitemapInterface
 
     private function registerLoadedRoute(RouteInterface $route): void
     {
-        $this->loadedRoutes[] = $route;
+        $this->loadedRoutes[$route->getName()] = $route;
     }
 
     public function isLoaded(): bool
