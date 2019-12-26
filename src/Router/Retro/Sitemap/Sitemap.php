@@ -14,9 +14,13 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
+use FastRoute\RouteParser\Std;
+use InvalidArgumentException;
 use LogicException;
 use Psr\Http\Server\MiddlewareInterface;
+use RuntimeException;
 use Slim\Interfaces\RouteCollectorProxyInterface;
+use Slim\Interfaces\RouteInterface;
 
 class Sitemap implements SitemapInterface
 {
@@ -37,6 +41,72 @@ class Sitemap implements SitemapInterface
     public function getLoadedRoutes(): iterable
     {
         return $this->loadedRoutes;
+    }
+
+    public function urlFor(
+        string $routeName,
+        array $data = [],
+        array $queryParams = []
+    ): string
+    {
+
+        $route = $this->mustGetLoadedRoute($routeName);
+        $routeParser = new Std();
+        $pattern = $route->getPattern();
+
+        $segments = [];
+        $segmentName = '';
+
+        /*
+         * $routes is an associative array of expressions representing a route as multiple segments
+         * There is an expression for each optional parameter plus one without the optional parameters
+         * The most specific is last, hence why we reverse the array before iterating over it
+         */
+        $expressions = array_reverse($routeParser->parse($pattern));
+        foreach ($expressions as $expression) {
+            foreach ($expression as $segment) {
+                /*
+                 * Each $segment is either a string or an array of strings
+                 * containing optional parameters of an expression
+                 */
+                if (is_string($segment)) {
+                    $segments[] = $segment;
+                    continue;
+                }
+
+                /*
+                 * If we don't have a data element for this segment in the provided $data
+                 * we cancel testing to move onto the next expression with a less specific item
+                 */
+                if (!array_key_exists($segment[0], $data)) {
+                    $segments = [];
+                    $segmentName = $segment[0];
+                    break;
+                }
+
+                $segments[] = $data[$segment[0]];
+            }
+
+            /*
+             * If we get to this logic block we have found all the parameters
+             * for the provided $data which means we don't need to continue testing
+             * less specific expressions
+             */
+            if (!empty($segments)) {
+                break;
+            }
+        }
+
+        if (empty($segments)) {
+            throw new InvalidArgumentException('Missing data for URL segment: ' . $segmentName);
+        }
+
+        $url = implode('', $segments);
+        if ($queryParams) {
+            $url .= '?' . http_build_query($queryParams);
+        }
+
+        return $url;
     }
 
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable
@@ -95,10 +165,12 @@ class Sitemap implements SitemapInterface
             $handler = $this->pathfinder->getRouteHandler($directory->getIndex());
 
             if ($handler) {
-                $this->loadedRoutes[] = $routeCollector->any(
-                    $this->pathfinder->getRoutingPath($directory->getIndex()),
-                    $handler
-                )->setName($route_prefix ? $route_prefix . '_index' : 'index');
+                $this->registerLoadedRoute(
+                    $routeCollector->any(
+                        $this->pathfinder->getRoutingPath($directory->getIndex()),
+                        $handler
+                    )->setName($route_prefix ? $route_prefix . '_index' : 'index')
+                );
             }
         }
 
@@ -110,12 +182,35 @@ class Sitemap implements SitemapInterface
             $handler = $this->pathfinder->getRouteHandler($file);
 
             if ($handler) {
-                $this->loadedRoutes[] = $routeCollector->any(
-                    $this->pathfinder->getRoutingPath($file),
-                    $handler
-                )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName());
+                $this->registerLoadedRoute(
+                    $routeCollector->any(
+                        $this->pathfinder->getRoutingPath($file),
+                        $handler
+                    )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName())
+                );
             }
         }
+    }
+
+    private function getLoadedRoute(string $routeName): ?RouteInterface
+    {
+        return $this->loadedRoutes[$routeName] ?? null;
+    }
+
+    private function mustGetLoadedRoute(string $routeName): RouteInterface
+    {
+        $route = $this->getLoadedRoute($routeName);
+
+        if (empty($route)) {
+            throw new RuntimeException(sprintf('Route "%s" not found.', $routeName));
+        }
+
+        return $route;
+    }
+
+    private function registerLoadedRoute(RouteInterface $route): void
+    {
+        $this->loadedRoutes[] = $route;
     }
 
     public function isLoaded(): bool
