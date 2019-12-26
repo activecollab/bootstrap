@@ -12,20 +12,20 @@ namespace ActiveCollab\Bootstrap\AppBootstrapper\Web;
 
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapper;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Linker\LinkerInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Linker\SlimAppLinker;
 use DI\Bridge\Slim\Bridge;
 use LogicException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App as SlimApp;
 
-class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperInterface, SlimAppBootstrapperInterface
+class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperInterface
 {
     /**
      * @var SlimApp
      */
     private $app;
-
-    private $response;
 
     public function getApp(): SlimApp
     {
@@ -34,6 +34,15 @@ class SlimAppBootstrapper extends AppBootstrapper implements WebAppBootstrapperI
         }
 
         return $this->app;
+    }
+
+    public function getLinker(): LinkerInterface
+    {
+        if (!$this->isBootstrapped()) {
+            throw new LogicException("Linker can't be prepared if app is not bootstrapped.");
+        }
+
+        return new SlimAppLinker($this->getApp()->getRouteCollector()->getRouteParser());
     }
 
     public function bootstrap(): AppBootstrapperInterface

@@ -11,11 +11,13 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\AppBootstrapper\Web;
 
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Linker\LinkerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App as SlimApp;
 
 interface WebAppBootstrapperInterface extends AppBootstrapperInterface
 {
+    public function getLinker(): LinkerInterface;
     public function handle(ServerRequestInterface $request): ResponseInterface;
 }
