@@ -13,6 +13,7 @@ namespace ActiveCollab\Bootstrap\AppBootstrapper\Web;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\App as SlimApp;
 
 interface WebAppBootstrapperInterface extends AppBootstrapperInterface
 {
