@@ -14,6 +14,7 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
+use LogicException;
 use Psr\Http\Server\MiddlewareInterface;
 use Slim\Interfaces\RouteCollectorProxyInterface;
 
@@ -21,7 +22,8 @@ class SitemapLoader implements SitemapLoaderInterface
 {
     private $sitemapPathResolver;
     private $pathfinder;
-    private $loadedRoutes;
+    private $loadedRoutes = [];
+    private $isLoaded = false;
 
     public function __construct(
         SitemapPathResolverInterface $sitemapPathResolver,
@@ -39,9 +41,17 @@ class SitemapLoader implements SitemapLoaderInterface
 
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable
     {
-        $routingRoot = (new Router())->scan($this->sitemapPathResolver->getSitemapPath());
+        if ($this->isLoaded) {
+            throw new LogicException('Sitemap already loaded.');
+        }
 
-        $this->loadDirRoutes($app, $routingRoot, '');
+        $this->loadDirRoutes(
+            $app,
+            (new Router())->scan($this->sitemapPathResolver->getSitemapPath()),
+            ''
+        );
+
+        $this->isLoaded = true;
 
         return $this->loadedRoutes;
     }
@@ -106,5 +116,10 @@ class SitemapLoader implements SitemapLoaderInterface
                 )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName());
             }
         }
+    }
+
+    public function isLoaded(): bool
+    {
+        return $this->isLoaded();
     }
 }
