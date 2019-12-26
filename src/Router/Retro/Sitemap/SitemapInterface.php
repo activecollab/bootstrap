@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\SitemapLoader;
+namespace ActiveCollab\Bootstrap\Router\Retro\Sitemap;
 
 use Slim\Interfaces\RouteCollectorProxyInterface;
 
-interface SitemapLoaderInterface
+interface SitemapInterface
 {
     public function getLoadedRoutes(): iterable;
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable;

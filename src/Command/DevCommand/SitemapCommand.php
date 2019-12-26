@@ -12,7 +12,7 @@ namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
 use ActiveCollab\Bootstrap\AppBootstrapper\Web\WebAppBootstrapperInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
-use ActiveCollab\Bootstrap\Router\Retro\SitemapLoader\SitemapLoaderInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
 use Slim\Interfaces\RouteInterface;
 use Symfony\Component\Console\Helper\Table;
@@ -33,8 +33,8 @@ class SitemapCommand extends DevCommand
             ]
         );
 
-        /** @var SitemapLoaderInterface $sitemapLoader */
-        $sitemapLoader = $this->getContainer()->get(SitemapLoaderInterface::class);
+        /** @var SitemapInterface $sitemapLoader */
+        $sitemapLoader = $this->getContainer()->get(SitemapInterface::class);
 
         if (!$sitemapLoader->isLoaded()) {
             $this->getContainer()

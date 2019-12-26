@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\SitemapLoader;
+namespace ActiveCollab\Bootstrap\Router\Retro\Sitemap;
 
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
@@ -18,7 +18,7 @@ use LogicException;
 use Psr\Http\Server\MiddlewareInterface;
 use Slim\Interfaces\RouteCollectorProxyInterface;
 
-class SitemapLoader implements SitemapLoaderInterface
+class Sitemap implements SitemapInterface
 {
     private $sitemapPathResolver;
     private $pathfinder;
