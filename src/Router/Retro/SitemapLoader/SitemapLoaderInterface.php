@@ -14,5 +14,5 @@ use Slim\Interfaces\RouteCollectorProxyInterface;
 
 interface SitemapLoaderInterface
 {
-    public function loadRoutes(RouteCollectorProxyInterface $app): void;
+    public function loadRoutes(RouteCollectorProxyInterface $app): iterable;
 }
