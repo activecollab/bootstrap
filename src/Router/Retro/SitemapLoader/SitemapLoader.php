@@ -80,7 +80,7 @@ class SitemapLoader implements SitemapLoaderInterface
                 yield $routeCollector->any(
                     $this->pathfinder->getRoutingPath($directory->getIndex()),
                     $handler
-                )->setName($route_prefix ?? 'homepage');
+                )->setName($route_prefix ? $route_prefix . '_index' : 'index');
             }
         }
 
