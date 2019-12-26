@@ -120,6 +120,6 @@ class SitemapLoader implements SitemapLoaderInterface
 
     public function isLoaded(): bool
     {
-        return $this->isLoaded();
+        return $this->isLoaded;
     }
 }
