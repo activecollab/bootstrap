@@ -43,11 +43,11 @@ class SitemapCommand extends DevCommand
         }
 
         /** @var RouteInterface $route */
-        foreach ($sitemapLoader as $route) {
+        foreach ($sitemapLoader->getLoadedRoutes() as $route) {
             $table->addRow(
                 [
                     $route->getPattern(),
-                    $route->getPattern(),
+                    $route->getName(),
                 ]
             );
         }
