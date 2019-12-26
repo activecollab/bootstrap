@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Command\DevCommand;
 
+use ActiveCollab\Bootstrap\AppBootstrapper\Web\WebAppBootstrapperInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\Router\Retro\SitemapLoader\SitemapLoaderInterface;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
@@ -31,6 +32,17 @@ class SitemapCommand extends DevCommand
                 'Route',
             ]
         );
+
+        /** @var SitemapLoaderInterface $sitemapLoader */
+        $sitemapLoader = $this->getContainer()
+            ->get(SitemapLoaderInterface::class)
+                ->getLoadedRoutes();
+
+        if (!$sitemapLoader->isLoaded()) {
+            $this->getContainer()
+                ->get(WebAppBootstrapperInterface::class)
+                    ->bootstrap();
+        }
 
         /** @var RouteInterface $route */
         foreach ($this->getContainer()->get(SitemapLoaderInterface::class)->getLoadedRoutes() as $route) {

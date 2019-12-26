@@ -16,4 +16,5 @@ interface SitemapLoaderInterface
 {
     public function getLoadedRoutes(): iterable;
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable;
+    public function isLoaded(): bool;
 }
