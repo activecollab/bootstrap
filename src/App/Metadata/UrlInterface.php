@@ -10,10 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\App\Metadata;
 
-interface MetadataInterface
+interface UrlInterface
 {
-    public function getName(): string;
-    public function getVersion(): string;
-    public function getPath(): string;
     public function getUrl(): string;
 }

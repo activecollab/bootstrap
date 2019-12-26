@@ -25,17 +25,19 @@
         "activecollab/eventsdispatcher": "^1.0",
         "activecollab/templateengine": "^2.0",
         "activecollab/utils": "^1.0",
+        "php-di/slim-bridge": "^3.0",
         "slim/http-cache": "~0.3.0",
         "slim/php-view": "^2.0",
         "slim/slim": "^3.0||^4.0",
-        "zendframework/zend-diactoros": "^2.2",
         "symfony/console": "^4.0||^5.0",
+        "twig/twig": "^3.0",
         "vlucas/phpdotenv": "^2.2.0",
-        "php-di/slim-bridge": "^3.0"
+        "zendframework/zend-diactoros": "^2.2"
     },
     "suggest": {
         "activecollab/jobsqueue": "Queue for background, delayed, parallel or remote jobs",
-        "graylog2/gelf-php": "Log to Graylog2 using GELF"
+        "graylog2/gelf-php": "Log to Graylog2 using GELF",
+        "twig/twig": "Twig templating engine"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",

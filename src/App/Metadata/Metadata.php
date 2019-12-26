@@ -13,16 +13,21 @@ namespace ActiveCollab\Bootstrap\App\Metadata;
 class Metadata implements MetadataInterface
 {
     private $name = '';
-
     private $version = '';
-
     private $path = '';
+    private $url = '';
 
-    public function __construct(string $name, string $version, string $path)
+    public function __construct(
+        string $name,
+        string $version,
+        string $path,
+        string $url
+    )
     {
         $this->name = $name;
         $this->version = $version;
         $this->path = $path;
+        $this->url = $url;
     }
 
     public function getName(): string
@@ -38,5 +43,10 @@ class Metadata implements MetadataInterface
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }
