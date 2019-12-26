@@ -37,7 +37,10 @@ class TemplateHandler extends Handler implements TemplateHandlerInterface
         $response->getBody()->write(
             $this->templateEngine->fetch(
                 $this->templateName,
-                $this->templateAttributes
+                array_merge(
+                    $this->templateAttributes,
+                    $request->getAttributes()
+                )
             )
         );
 
