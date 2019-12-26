@@ -53,7 +53,7 @@ class SitemapLoader implements SitemapLoaderInterface
             if ($this->pathfinder->hasRoute($subdirectory)) {
                 $routeCollector->group(
                     $this->pathfinder->getRoutingPath($subdirectory),
-                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $routes, $route_prefix) {
+                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$routes, $route_prefix) {
                         $this->loadDirRoutes(
                             $proxy,
                             $subdirectory,
