@@ -37,6 +37,27 @@ class TwigExtension extends AbstractExtension implements ContainerAccessInterfac
                     'is_variadic' => true,
                 ]
             ),
+
+            new TwigFunction(
+                'asset',
+                function (string $assetPath) {
+                    return sprintf(
+                        '%s/assets/%s',
+                        $this->container->get(UrlInterface::class)->getUrl(),
+                        $assetPath
+                    );
+                }
+            ),
+
+            new TwigFunction(
+                'application_script',
+                function () {
+                    return sprintf(
+                        '%s/assets/application.js',
+                        $this->container->get(UrlInterface::class)->getUrl(),
+                    );
+                }
+            ),
         ];
     }
 }
