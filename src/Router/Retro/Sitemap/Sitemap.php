@@ -84,6 +84,8 @@ class Sitemap implements SitemapInterface
                 }
 
                 $segments[] = $data[$segment[0]];
+
+                unset($data[$segment[0]]);
             }
 
             /*
@@ -101,9 +103,9 @@ class Sitemap implements SitemapInterface
         }
 
         $url = implode('', $segments);
-//        if ($queryParams) {
-//            $url .= '?' . http_build_query($queryParams);
-//        }
+        if (!empty($data)) {
+            $url .= '?' . http_build_query($data);
+        }
 
         return $url;
     }
