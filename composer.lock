@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5c77e34a0010504e05f483d6529c087",
+    "content-hash": "387a43ab0e9bf8aab86cfe61614d7fa5",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -404,17 +404,11 @@
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "2.0.0",
+            "version": "dev-next",
             "source": {
                 "type": "git",
-                "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/6ff1510ee1a8d382255a74a232f718dda6c4986a",
-                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a",
-                "shasum": ""
+                "url": "/Users/ilija/Dropbox/Projects/Components/DatabaseStructure",
+                "reference": "336a7f038cd3563bfd6547b5871b6d5d7a3bdb59"
             },
             "require": {
                 "activecollab/databaseobject": "^5.0",
@@ -435,7 +429,6 @@
                     "ActiveCollab\\DatabaseStructure\\Test\\": "test/src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -453,7 +446,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-12-21T14:28:18+00:00"
+            "time": "2019-12-27T08:19:23+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -5686,7 +5679,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "activecollab/controller": 20
+        "activecollab/controller": 20,
+        "activecollab/databasestructure": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

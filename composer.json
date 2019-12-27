@@ -12,6 +12,10 @@
         {
             "type": "vcs",
             "url": "/Users/ilija/Dropbox/Projects/Components/Controller"
+        },
+        {
+            "type": "vcs",
+            "url": "/Users/ilija/Dropbox/Projects/Components/DatabaseStructure"
         }
     ],
     "require": {
@@ -21,7 +25,7 @@
         "activecollab/baseline": "^1.0",
         "activecollab/controller": "dev-next",
         "activecollab/databasemigrations": "^3.0",
-        "activecollab/databasestructure": "^2.0",
+        "activecollab/databasestructure": "dev-next",
         "activecollab/eventsdispatcher": "^1.0",
         "activecollab/templateengine": "^2.0",
         "activecollab/utils": "^1.0",
