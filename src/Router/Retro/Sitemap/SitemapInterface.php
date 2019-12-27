@@ -14,10 +14,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface;
 
 interface SitemapInterface
 {
-    public function urlFor(
-        string $routeName,
-        array $data = []
-    ): string;
+    public function urlFor(string $routeName, array $data = []): string;
     public function isLoaded(): bool;
     public function loadRoutes(RouteCollectorProxyInterface $app): iterable;
     public function getLoadedRoutes(): iterable;
