@@ -14,9 +14,11 @@ use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use FastRoute\RouteParser\Std;
 use InvalidArgumentException;
 use LogicException;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use RuntimeException;
 use Slim\Interfaces\RouteCollectorProxyInterface;
@@ -93,7 +95,7 @@ class Sitemap implements SitemapInterface
         return $url;
     }
 
-    public function loadRoutes(RouteCollectorProxyInterface $app): iterable
+    public function loadRoutes(RouteCollectorProxyInterface $app, ContainerInterface $container): iterable
     {
         if ($this->isLoaded) {
             throw new LogicException('Sitemap already loaded.');
@@ -101,6 +103,7 @@ class Sitemap implements SitemapInterface
 
         $this->loadDirRoutes(
             $app,
+            $container,
             (new Router())->scan($this->sitemapPathResolver->getSitemapPath()),
             ''
         );
@@ -112,6 +115,7 @@ class Sitemap implements SitemapInterface
 
     private function loadDirRoutes(
         RouteCollectorProxyInterface $routeCollector,
+        ContainerInterface $container,
         DirectoryInterface $directory,
         string $route_prefix
     ): void
@@ -120,9 +124,10 @@ class Sitemap implements SitemapInterface
             if ($this->pathfinder->hasRoute($subdirectory)) {
                 $group = $routeCollector->group(
                     $this->pathfinder->getRoutingPath($subdirectory),
-                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $route_prefix) {
+                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$container, $route_prefix) {
                         $this->loadDirRoutes(
                             $proxy,
+                            $container,
                             $subdirectory,
                             ($route_prefix ? $route_prefix . '_' : '') . $subdirectory->getNodeName()
                         );
@@ -137,6 +142,10 @@ class Sitemap implements SitemapInterface
                     if (is_array($middlewares)) {
                         foreach ($middlewares as $middleware) {
                             if ($middleware instanceof MiddlewareInterface) {
+                                if ($middleware instanceof ContainerAccessInterface) {
+                                    $middleware->setContainer($container);
+                                }
+
                                 $group->add($middleware);
                             }
                         }
@@ -154,6 +163,10 @@ class Sitemap implements SitemapInterface
                 if (is_array($middlewares)) {
                     foreach ($middlewares as $middleware) {
                         if ($middleware instanceof MiddlewareInterface) {
+                            if ($middleware instanceof ContainerAccessInterface) {
+                                $middleware->setContainer($container);
+                            }
+
                             $routeCollector->add($middleware);
                         }
                     }
