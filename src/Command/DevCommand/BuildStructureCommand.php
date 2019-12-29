@@ -37,7 +37,7 @@ class BuildStructureCommand extends DevCommand
         $modelPath = $this->getSystemPath()->getPath() . '/app/current/src/Model';
 
         $structure->build(
-            $modelPath,
+            $modelPath,\
             $connection,
                 [
                 'on_dir_created' => function ($base_dir_path) use ($output) {

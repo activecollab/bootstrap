@@ -118,7 +118,7 @@ class Sitemap implements SitemapInterface
     {
         foreach ($directory->getSubdirectories() as $subdirectory) {
             if ($this->pathfinder->hasRoute($subdirectory)) {
-                $routeCollector->group(
+                $group = $routeCollector->group(
                     $this->pathfinder->getRoutingPath($subdirectory),
                     function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $route_prefix) {
                         $this->loadDirRoutes(
@@ -128,18 +128,34 @@ class Sitemap implements SitemapInterface
                         );
                     }
                 );
+
+                $middlewareNode = $subdirectory->getMiddleware();
+
+                if ($middlewareNode) {
+                    $middlewares = require $middlewareNode->getPath();
+
+                    if (is_array($middlewares)) {
+                        foreach ($middlewares as $middleware) {
+                            if ($middleware instanceof MiddlewareInterface) {
+                                $group->add($middleware);
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        $middlewareNode = $directory->getMiddleware();
+        if (empty($route_prefix)) {
+            $middlewareNode = $directory->getMiddleware();
 
-        if ($middlewareNode) {
-            $middlewares = require $middlewareNode->getPath();
+            if ($middlewareNode) {
+                $middlewares = require $middlewareNode->getPath();
 
-            if (is_array($middlewares)) {
-                foreach ($middlewares as $middleware) {
-                    if ($middleware instanceof MiddlewareInterface) {
-                        $routeCollector->add($middleware);
+                if (is_array($middlewares)) {
+                    foreach ($middlewares as $middleware) {
+                        if ($middleware instanceof MiddlewareInterface) {
+                            $routeCollector->add($middleware);
+                        }
                     }
                 }
             }
