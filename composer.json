@@ -21,7 +21,7 @@
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
-        "activecollab/authentication": "^3.0",
+        "activecollab/authentication": "^4.0",
         "activecollab/baseline": "^1.0",
         "activecollab/controller": "dev-next",
         "activecollab/databasemigrations": "^3.0",

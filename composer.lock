@@ -4,36 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "387a43ab0e9bf8aab86cfe61614d7fa5",
+    "content-hash": "8725c836b2e81420e4ec80781ffa087f",
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "3.0.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "f9a033e381d2122504f05cd1a6d6d0db07ed86c2"
+                "reference": "f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/f9a033e381d2122504f05cd1a6d6d0db07ed86c2",
-                "reference": "f9a033e381d2122504f05cd1a6d6d0db07ed86c2",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f",
+                "reference": "f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f",
                 "shasum": ""
             },
             "require": {
-                "activecollab/cookies": "^1.0",
+                "activecollab/cookies": "^2.0",
                 "activecollab/user": "^4.0",
+                "ext-json": "*",
                 "ext-mbstring": "*",
                 "google/apiclient": "^2.1",
-                "guzzlehttp/psr7": "^1.2",
-                "php": ">=7.1"
+                "php": ">=7.3",
+                "psr/http-server-middleware": "^1.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.0",
                 "lightsaml/lightsaml": "^1.1",
-                "phpunit/phpunit": "^5.0",
+                "phpunit/phpunit": "^7.0",
+                "pimple/pimple": "^3.2",
                 "satooshi/php-coveralls": "^1.0",
-                "slim/slim": "~3.2"
+                "zendframework/zend-diactoros": "^2.2"
             },
             "suggest": {
                 "lightsaml/lightsaml": "If you want to use SAML authentication you should manually install this package."
@@ -60,7 +62,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2019-06-24T10:09:39+00:00"
+            "time": "2019-12-31T17:22:52+00:00"
         },
         {
             "name": "activecollab/baseline",
@@ -194,26 +196,28 @@
         },
         {
             "name": "activecollab/cookies",
-            "version": "1.1.2",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/cookies.git",
-                "reference": "4b7f794b47b67d9289ccd46af29877c6d5f65457"
+                "reference": "1e6b294dc0894ccba332ca38166dd539bf1995d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/cookies/zipball/4b7f794b47b67d9289ccd46af29877c6d5f65457",
-                "reference": "4b7f794b47b67d9289ccd46af29877c6d5f65457",
+                "url": "https://api.github.com/repos/activecollab/cookies/zipball/1e6b294dc0894ccba332ca38166dd539bf1995d0",
+                "reference": "1e6b294dc0894ccba332ca38166dd539bf1995d0",
                 "shasum": ""
             },
             "require": {
                 "activecollab/utils": "^1.0",
-                "dflydev/fig-cookies": "~1.0",
+                "dflydev/fig-cookies": "^1.0",
                 "ext-openssl": "*",
-                "php": ">=5.6.0"
+                "php": ">=7.3",
+                "psr/http-server-middleware": "^1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5.3",
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": "^7.0",
                 "slim/slim": "3.3.0"
             },
             "type": "library",
@@ -238,7 +242,7 @@
                 "activecollab",
                 "cookies"
             ],
-            "time": "2016-12-15T00:33:03+00:00"
+            "time": "2019-12-31T15:46:15+00:00"
         },
         {
             "name": "activecollab/databaseconnection",
@@ -408,7 +412,7 @@
             "source": {
                 "type": "git",
                 "url": "/Users/ilija/Dropbox/Projects/Components/DatabaseStructure",
-                "reference": "336a7f038cd3563bfd6547b5871b6d5d7a3bdb59"
+                "reference": "bbd89e79c54f9a9e8946b58595d0f829d58f5fda"
             },
             "require": {
                 "activecollab/databaseobject": "^5.0",
@@ -446,7 +450,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-12-27T08:19:23+00:00"
+            "time": "2019-12-30T07:54:38+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -2531,16 +2535,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.3",
+            "version": "4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62"
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da3fd972d6bafd628114f7e7e036f45944b62e9c",
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c",
                 "shasum": ""
             },
             "require": {
@@ -2552,6 +2556,7 @@
             "require-dev": {
                 "doctrine/instantiator": "^1.0.5",
                 "mockery/mockery": "^1.0",
+                "phpdocumentor/type-resolver": "0.4.*",
                 "phpunit/phpunit": "^6.4"
             },
             "type": "library",
@@ -2578,7 +2583,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-12-20T13:40:23+00:00"
+            "time": "2019-12-28T18:55:12+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5446,27 +5451,26 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9b58bb8ac7a41d72fbb5a7dc643e07923e5ccc26"
+                "reference": "28f856a4c57eeb24485916e8a68403f41a133616"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b58bb8ac7a41d72fbb5a7dc643e07923e5ccc26",
-                "reference": "9b58bb8ac7a41d72fbb5a7dc643e07923e5ccc26",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/28f856a4c57eeb24485916e8a68403f41a133616",
+                "reference": "28f856a4c57eeb24485916e8a68403f41a133616",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.9",
+                "php": "^7.2.5",
                 "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "^1.3"
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/debug": "^3.4|^4.2|^5.0",
-                "symfony/phpunit-bridge": "^4.4@dev|^5.0"
+                "symfony/phpunit-bridge": "^4.4|^5.0"
             },
             "type": "library",
             "extra": {
@@ -5492,7 +5496,6 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://twig.symfony.com/contributors",
                     "role": "Contributors"
                 },
                 {
@@ -5506,7 +5509,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-11-15T20:38:32+00:00"
+            "time": "2019-12-28T07:17:28+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
