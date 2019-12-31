@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8725c836b2e81420e4ec80781ffa087f",
+    "content-hash": "599b750033101fa1f9f15dad7bd020a6",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -5689,7 +5689,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.3",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-mbstring": "*"
     },
     "platform-dev": []
 }
