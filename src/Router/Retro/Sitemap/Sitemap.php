@@ -117,19 +117,19 @@ class Sitemap implements SitemapInterface
         RouteCollectorProxyInterface $routeCollector,
         ContainerInterface $container,
         DirectoryInterface $directory,
-        string $route_prefix
+        string $routePrefix
     ): void
     {
         foreach ($directory->getSubdirectories() as $subdirectory) {
             if ($this->pathfinder->hasRoute($subdirectory)) {
                 $group = $routeCollector->group(
                     $this->pathfinder->getRoutingPath($subdirectory),
-                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$container, $route_prefix) {
+                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$container, $routePrefix) {
                         $this->loadDirRoutes(
                             $proxy,
                             $container,
                             $subdirectory,
-                            ($route_prefix ? $route_prefix . '_' : '') . $subdirectory->getNodeName()
+                            ($routePrefix ? $routePrefix . '_' : '') . $subdirectory->getNodeName()
                         );
                     }
                 );
@@ -154,7 +154,7 @@ class Sitemap implements SitemapInterface
             }
         }
 
-        if (empty($route_prefix)) {
+        if (empty($routePrefix)) {
             $middlewareNode = $directory->getMiddleware();
 
             if ($middlewareNode) {
@@ -182,7 +182,7 @@ class Sitemap implements SitemapInterface
                     $routeCollector->any(
                         $this->pathfinder->getRoutingPath($directory->getIndex()),
                         $handler
-                    )->setName($route_prefix ? $route_prefix . '_index' : 'index')
+                    )->setName($routePrefix ? $routePrefix . '_index' : 'index')
                 );
             }
         }
@@ -199,7 +199,7 @@ class Sitemap implements SitemapInterface
                     $routeCollector->any(
                         $this->pathfinder->getRoutingPath($file),
                         $handler
-                    )->setName(($route_prefix ? $route_prefix . '_' : '') . $file->getNodeName())
+                    )->setName(($routePrefix ? $routePrefix . '_' : '') . $file->getNodeName())
                 );
             }
         }
