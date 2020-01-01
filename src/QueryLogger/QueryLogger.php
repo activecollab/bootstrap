@@ -10,24 +10,44 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\QueryLogger;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+
 class QueryLogger implements QueryLoggerInterface
 {
-    private $number_of_queries = 0;
-    private $execution_time = 0.0;
+    private $logger;
+    private $logLevel;
+    private $queries = [];
+    private $executionTime = 0.0;
 
-    public function __invoke(string $query_sql, float $query_execution_time)
+    public function __construct(LoggerInterface $logger, string $logLevel = LogLevel::DEBUG)
     {
-        $this->number_of_queries++;
-        $this->execution_time += $query_execution_time;
+        $this->logger = $logger;
+        $this->logLevel = $logLevel;
+    }
+
+    public function __invoke(string $querySql, float $queryExecutionTime)
+    {
+        $this->logger->log(
+            $this->logLevel,
+            'Query {query} ran in {time}s.',
+            [
+                'query' => $querySql,
+                'time' => round($queryExecutionTime, 5)
+            ]
+        );
+
+        $this->queries[] = $querySql;
+        $this->executionTime += $queryExecutionTime;
     }
 
     public function getNumberOfQueries(): int
     {
-        return $this->number_of_queries;
+        return count($this->queries);
     }
 
     public function getExecutionTime(): float
     {
-        return round($this->execution_time, 5);
+        return round($this->executionTime, 5);
     }
 }
