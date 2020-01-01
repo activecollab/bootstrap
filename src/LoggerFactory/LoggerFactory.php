@@ -39,9 +39,9 @@ class LoggerFactory implements LoggerFactoryInterface
         $handler = new RotatingFileHandler(
             $this->path->getPath() . '/logs/log.txt',
             7,
-            $this->environment->isTest()
-                ? Logger::DEBUG
-                : Logger::INFO
+            $this->environment->isProduction()
+                ? Logger::INFO
+                : Logger::DEBUG
         );
 
         $handler->setFormatter(
