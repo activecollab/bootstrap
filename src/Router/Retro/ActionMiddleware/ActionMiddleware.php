@@ -8,25 +8,18 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\RequestHandler;
+namespace ActiveCollab\Bootstrap\Router\Retro\ActionMiddleware;
 
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
+use Zend\Diactoros\ResponseFactory;
 
-abstract class RequestHandler implements MiddlewareInterface, RequestHandlerInterface
+abstract class ActionMiddleware implements ActionMiddlewareInterface
 {
-    private $responseFactory;
+    use ContainerAccessImplementation;
     private $sitemap;
-
-    public function __construct(ResponseFactoryInterface $responseFactory, SitemapInterface $sitemap)
-    {
-        $this->responseFactory = $responseFactory;
-        $this->sitemap = $sitemap;
-
-        $this->configure();
-    }
 
     protected function configure(): void
     {
@@ -69,7 +62,7 @@ abstract class RequestHandler implements MiddlewareInterface, RequestHandlerInte
     ): ResponseInterface
     {
         if (empty($response)) {
-            $response = $this->responseFactory->createResponse();
+            $response = $this->getResponseFactory()->createResponse();
         }
 
         return $response->withStatus($code, $reasonPhrase);
@@ -83,7 +76,7 @@ abstract class RequestHandler implements MiddlewareInterface, RequestHandlerInte
     ): ResponseInterface
     {
         return $this->moved(
-            $this->sitemap->urlFor($routeName, $data),
+            $this->getSitemap()->urlFor($routeName, $data),
             $isMovedPermanently,
             $response
         );
@@ -96,11 +89,27 @@ abstract class RequestHandler implements MiddlewareInterface, RequestHandlerInte
     ): ResponseInterface
     {
         if (empty($response)) {
-            $response = $this->responseFactory->createResponse();
+            $response = $this->getResponseFactory()->createResponse();
         }
 
         return $response
             ->withStatus($isMovedPermanently ? 301 : 302)
             ->withHeader('Location', $url);
+    }
+
+    private $responseFactory;
+
+    protected function getResponseFactory(): ResponseFactoryInterface
+    {
+        if (empty($this->responseFactory)) {
+            $this->responseFactory = new ResponseFactory();
+        }
+
+        return $this->responseFactory;
+    }
+
+    protected function getSitemap(): SitemapInterface
+    {
+        return $this->getContainer()->get(SitemapInterface::class);
     }
 }

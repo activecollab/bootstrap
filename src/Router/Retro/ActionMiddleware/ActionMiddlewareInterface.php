@@ -8,11 +8,13 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\RequestHandler;
+namespace ActiveCollab\Bootstrap\Router\Retro\ActionMiddleware;
 
+use ActiveCollab\ContainerAccess\ContainerAccessInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\MiddlewareInterface;
 
-interface RequestHandlerInterface
+interface ActionMiddlewareInterface extends ContainerAccessInterface, MiddlewareInterface
 {
     public function ok(string $reasonPhrase = ''): ResponseInterface;
     public function badRequest(string $reasonPhrase = ''): ResponseInterface;
