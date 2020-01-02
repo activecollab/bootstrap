@@ -182,7 +182,9 @@ class Sitemap implements SitemapInterface
                     $routeCollector->any(
                         $this->pathfinder->getRoutingPath($directory->getIndex()),
                         $handler
-                    )->setName($routePrefix ? $routePrefix . '_index' : 'index')
+                    )
+                        ->setName($routePrefix ? $routePrefix . '_index' : 'index')
+                        ->setArgument('nodeName', $directory->getIndex()->getNodeName())
                 );
             }
         }
@@ -199,7 +201,9 @@ class Sitemap implements SitemapInterface
                     $routeCollector->any(
                         $this->pathfinder->getRoutingPath($file),
                         $handler
-                    )->setName(($routePrefix ? $routePrefix . '_' : '') . $file->getNodeName())
+                    )
+                        ->setName(($routePrefix ? $routePrefix . '_' : '') . $file->getNodeName())
+                        ->setArgument('nodeName', $file->getIndex()->getNodeName())
                 );
             }
         }

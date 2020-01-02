@@ -14,6 +14,9 @@ use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
+use Slim\Interfaces\RouteInterface;
 use Zend\Diactoros\ResponseFactory;
 
 abstract class NodeMiddleware implements NodeMiddlewareInterface
@@ -95,6 +98,36 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
         return $response
             ->withStatus($isMovedPermanently ? 301 : 302)
             ->withHeader('Location', $url);
+    }
+
+    protected function getRoute(ServerRequestInterface $request): RouteInterface
+    {
+        $route = $request->getAttribute('route');
+
+        if (!$route instanceof RouteInterface) {
+            throw new RuntimeException('Failed to find route in request.');
+        }
+
+        return $route;
+    }
+
+    protected function isRoute(
+        ServerRequestInterface $request,
+        string $nodeName,
+        string $requestMethod = null
+    ): bool
+    {
+        $route = $this->getRoute($request);
+
+        if ($requestMethod !== null && $request->getMethod() !== $requestMethod) {
+            return false;
+        }
+
+        if ($route->getArgument('nodeName') !== $nodeName) {
+            return false;
+        }
+
+        return true;
     }
 
     private $responseFactory;
