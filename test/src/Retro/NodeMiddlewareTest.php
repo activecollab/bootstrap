@@ -23,7 +23,25 @@ use Psr\Http\Server\RequestHandlerInterface;
 class NodeMiddlewareTest extends TestCase
 {
     /**
-     * @dataProvider provideDataForMovedToRouteTest
+     * @dataProvider provideDataForMovedTests
+     * @param bool $isMovedPermanently
+     * @param int  $expectedStatusCode
+     */
+    public function testWillRedirectWhenMovedToUrl(
+        bool $isMovedPermanently,
+        int $expectedStatusCode
+    )
+    {
+        $movedToUrl = 'https://example.com/login';
+
+        $response = $this->getNodeMiddleware()->moved($movedToUrl, $isMovedPermanently);
+
+        $this->assertSame($expectedStatusCode, $response->getStatusCode());
+        $this->assertContains($movedToUrl, $response->getHeaderLine('Location'));
+    }
+
+    /**
+     * @dataProvider provideDataForMovedTests
      * @param bool $isMovedPermanently
      * @param int  $expectedStatusCode
      */
@@ -52,7 +70,7 @@ class NodeMiddlewareTest extends TestCase
         $this->assertContains($movedToUrl, $response->getHeaderLine('Location'));
     }
 
-    public function provideDataForMovedToRouteTest()
+    public function provideDataForMovedTests()
     {
         return [
             [true, 301],
