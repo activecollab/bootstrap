@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\Test\Retro;
 
 use ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware\NodeMiddleware;
+use ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware\NodeMiddlewareInterface;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,16 +29,8 @@ class NodeMiddlewareTest extends TestCase
         int $expectedCode
     )
     {
-        $middleware = new class extends NodeMiddleware
-        {
-            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-            {
-                return $handler->handle($request);
-            }
-        };
-
         /** @var ResponseInterface $result */
-        $result = $middleware->$methodName();
+        $result = $this->getNodeMiddleware()->$methodName();
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
         $this->assertSame($expectedCode, $result->getStatusCode());
@@ -53,5 +46,16 @@ class NodeMiddlewareTest extends TestCase
             ['conflict', 409],
             ['internalError', 500],
         ];
+    }
+
+    private function getNodeMiddleware(): NodeMiddlewareInterface
+    {
+        return new class extends NodeMiddleware
+        {
+            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+            {
+                return $handler->handle($request);
+            }
+        };
     }
 }
