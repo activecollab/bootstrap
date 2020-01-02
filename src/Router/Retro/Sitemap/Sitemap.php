@@ -184,7 +184,7 @@ class Sitemap implements SitemapInterface
                         $handler
                     )
                         ->setName($routePrefix ? $routePrefix . '_index' : 'index')
-                        ->setArgument('nodeName', $directory->getIndex()->getNodeName())
+                        ->setArgument(self::NODE_NAME_ROUTE_ARGUMENT, $directory->getIndex()->getNodeName())
                 );
             }
         }
@@ -203,7 +203,7 @@ class Sitemap implements SitemapInterface
                         $handler
                     )
                         ->setName(($routePrefix ? $routePrefix . '_' : '') . $file->getNodeName())
-                        ->setArgument('nodeName', $file->getIndex()->getNodeName())
+                        ->setArgument(self::NODE_NAME_ROUTE_ARGUMENT, $file->getNodeName())
                 );
             }
         }

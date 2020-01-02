@@ -123,7 +123,7 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
             return false;
         }
 
-        if ($route->getArgument('nodeName') !== $nodeName) {
+        if ($route->getArgument(SitemapInterface::NODE_NAME_ROUTE_ARGUMENT) !== $nodeName) {
             return false;
         }
 
