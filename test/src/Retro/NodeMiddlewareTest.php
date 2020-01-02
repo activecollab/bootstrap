@@ -14,6 +14,7 @@ use ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware\NodeMiddleware;
 use ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware\NodeMiddlewareInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -22,6 +23,14 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class NodeMiddlewareTest extends TestCase
 {
+    public function testWillThroeExceptionOnInvalidUrl()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('URL "invalid url" is not valid.');
+
+        $this->getNodeMiddleware()->moved('invalid url');
+    }
+
     /**
      * @dataProvider provideDataForMovedTests
      * @param bool $isMovedPermanently

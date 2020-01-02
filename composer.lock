@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "activecollab/authentication",
-            "version": "4.0.0",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/authentication.git",
-                "reference": "f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f"
+                "reference": "13e7877efe588e77fe0727349c3b81f94c762499"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/authentication/zipball/f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f",
-                "reference": "f2e454fb2e6f01d85c54a5aabd8dfcacf08db87f",
+                "url": "https://api.github.com/repos/activecollab/authentication/zipball/13e7877efe588e77fe0727349c3b81f94c762499",
+                "reference": "13e7877efe588e77fe0727349c3b81f94c762499",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "Authentication",
                 "activecollab"
             ],
-            "time": "2019-12-31T17:22:52+00:00"
+            "time": "2020-01-01T15:42:27+00:00"
         },
         {
             "name": "activecollab/baseline",

@@ -12,6 +12,7 @@ namespace ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware;
 
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -91,6 +92,10 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
         ResponseInterface $response = null
     ): ResponseInterface
     {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException(sprintf('URL "%s" is not valid.', $url));
+        }
+
         if (empty($response)) {
             $response = $this->getResponseFactory()->createResponse();
         }
