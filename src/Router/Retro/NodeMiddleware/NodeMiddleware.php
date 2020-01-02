@@ -8,15 +8,15 @@
 
 declare(strict_types=1);
 
-namespace ActiveCollab\Bootstrap\Router\Retro\ActionMiddleware;
+namespace ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware;
 
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
+use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
 use Zend\Diactoros\ResponseFactory;
 
-abstract class ActionMiddleware implements ActionMiddlewareInterface
+abstract class NodeMiddleware implements NodeMiddlewareInterface
 {
     use ContainerAccessImplementation;
     private $sitemap;
