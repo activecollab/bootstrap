@@ -10,49 +10,38 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\LoggerFactory;
 
-use ActiveCollab\Bootstrap\App\Metadata\EnvironmentInterface;
-use ActiveCollab\Bootstrap\App\Metadata\PathInterface;
+use ActiveCollab\Bootstrap\App\Metadata\NameInterface;
 use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\LoggerInterface;
 
 class LoggerFactory implements LoggerFactoryInterface
 {
-    private $environment;
-    private $path;
+    private $appName;
 
-    public function __construct(
-        EnvironmentInterface $environment,
-        PathInterface $path
-    )
+    public function __construct(NameInterface $appName)
     {
-        $this->environment = $environment;
-        $this->path = $path;
+        $this->appName = $appName;;
     }
 
-    public function createLogger(): LoggerInterface
+    public function createLogger(HandlerInterface ...$handlers): LoggerInterface
     {
-        $logger = new Logger('name');
+        $logger = new Logger($this->appName->getName());
 
-        $handler = new RotatingFileHandler(
-            $this->path->getPath() . '/logs/log.txt',
-            7,
-            $this->environment->isProduction()
-                ? Logger::INFO
-                : Logger::DEBUG
+        $formatter = new LineFormatter(
+            "[%datetime%] %level_name%: %message% %context% %extra%\n",
+            'Y-m-d H:i:s'
         );
+        $processor = new PsrLogMessageProcessor();
 
-        $handler->setFormatter(
-            new LineFormatter(
-                "[%datetime%] %level_name%: %message% %context% %extra%\n",
-                'Y-m-d H:i:s'
-            )
-        );
-        $handler->pushProcessor(new PsrLogMessageProcessor());
+        foreach ($handlers as $handler) {
+            $handler->setFormatter($formatter);
+            $handler->pushProcessor($processor);
 
-        $logger->pushHandler($handler);
+            $logger->pushHandler($handler);
+        }
 
         return $logger;
     }
