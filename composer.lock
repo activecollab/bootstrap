@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "599b750033101fa1f9f15dad7bd020a6",
+    "content-hash": "c02146e7cd65b5622172a39a6f1cc1e8",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -146,11 +146,17 @@
         },
         {
             "name": "activecollab/controller",
-            "version": "dev-next",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "/Users/ilija/Dropbox/Projects/Components/Controller",
-                "reference": "7056ee7dc14aad4c40316f3d40eca770eab2f152"
+                "url": "https://github.com/activecollab/controller.git",
+                "reference": "f8f38b2c8b09ca82abd8f1821805c9ec56809544"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/activecollab/controller/zipball/f8f38b2c8b09ca82abd8f1821805c9ec56809544",
+                "reference": "f8f38b2c8b09ca82abd8f1821805c9ec56809544",
+                "shasum": ""
             },
             "require": {
                 "activecollab/containeraccess": "^2.0",
@@ -180,11 +186,7 @@
                     "ActiveCollab\\Controller\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "ActiveCollab\\Controller\\Test\\": "test/src"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -192,7 +194,7 @@
             "keywords": [
                 "controller"
             ],
-            "time": "2019-12-23T23:11:30+00:00"
+            "time": "2020-01-02T13:53:43+00:00"
         },
         {
             "name": "activecollab/cookies",
@@ -411,8 +413,14 @@
             "version": "dev-next",
             "source": {
                 "type": "git",
-                "url": "/Users/ilija/Dropbox/Projects/Components/DatabaseStructure",
+                "url": "https://github.com/activecollab/databasestructure.git",
                 "reference": "bbd89e79c54f9a9e8946b58595d0f829d58f5fda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/bbd89e79c54f9a9e8946b58595d0f829d58f5fda",
+                "reference": "bbd89e79c54f9a9e8946b58595d0f829d58f5fda",
+                "shasum": ""
             },
             "require": {
                 "activecollab/databaseobject": "^5.0",
@@ -433,6 +441,7 @@
                     "ActiveCollab\\DatabaseStructure\\Test\\": "test/src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -5683,7 +5692,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "activecollab/controller": 20,
         "activecollab/databasestructure": 20
     },
     "prefer-stable": true,

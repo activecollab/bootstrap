@@ -8,23 +8,13 @@
     "type": "library",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "/Users/ilija/Dropbox/Projects/Components/Controller"
-        },
-        {
-            "type": "vcs",
-            "url": "/Users/ilija/Dropbox/Projects/Components/DatabaseStructure"
-        }
-    ],
     "require": {
         "php": ">=7.3",
         "ext-json": "*",
         "ext-mbstring": "*",
         "activecollab/authentication": "^4.0",
         "activecollab/baseline": "^1.0",
-        "activecollab/controller": "dev-next",
+        "activecollab/controller": "^1.0",
         "activecollab/databasemigrations": "^3.0",
         "activecollab/databasestructure": "dev-next",
         "activecollab/eventsdispatcher": "^1.0",
