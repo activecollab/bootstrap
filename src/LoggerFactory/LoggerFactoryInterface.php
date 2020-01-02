@@ -10,9 +10,10 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\LoggerFactory;
 
+use Monolog\Handler\HandlerInterface;
 use Psr\Log\LoggerInterface;
 
 interface LoggerFactoryInterface
 {
-    public function createLogger(): LoggerInterface;
+    public function createLogger(HandlerInterface ...$handlers): LoggerInterface;
 }
