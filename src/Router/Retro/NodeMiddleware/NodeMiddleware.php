@@ -59,6 +59,11 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
         return $this->status(500, $reasonPhrase);
     }
 
+    public function serviceUnavailable(string $reasonPhrase = ''): ResponseInterface
+    {
+        return $this->status(503, $reasonPhrase);
+    }
+
     public function status(
         int $code,
         string $reasonPhrase = '',

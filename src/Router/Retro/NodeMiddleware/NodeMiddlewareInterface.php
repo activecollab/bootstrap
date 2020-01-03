@@ -22,6 +22,7 @@ interface NodeMiddlewareInterface extends ContainerAccessInterface, MiddlewareIn
     public function notFound(string $reasonPhrase = ''): ResponseInterface;
     public function conflict(string $reasonPhrase = ''): ResponseInterface;
     public function internalError(string $reasonPhrase = ''): ResponseInterface;
+    public function serviceUnavailable(string $reasonPhrase = ''): ResponseInterface;
 
     public function status(
         int $code,

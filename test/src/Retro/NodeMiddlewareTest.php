@@ -113,6 +113,7 @@ class NodeMiddlewareTest extends TestCase
             ['notFound', 404],
             ['conflict', 409],
             ['internalError', 500],
+            ['serviceUnavailable', 503],
         ];
     }
 
