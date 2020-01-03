@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Router\Retro\Sitemap;
 
+use ActiveCollab\Bootstrap\App\Metadata\UrlInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
@@ -28,16 +29,20 @@ class Sitemap implements SitemapInterface
 {
     private $sitemapPathResolver;
     private $pathfinder;
+    private $rootUrl;
+
     private $loadedRoutes = [];
     private $isLoaded = false;
 
     public function __construct(
         SitemapPathResolverInterface $sitemapPathResolver,
-        PathfinderInterface $pathfinder
+        PathfinderInterface $pathfinder,
+        UrlInterface $rootUrl
     )
     {
         $this->sitemapPathResolver = $sitemapPathResolver;
         $this->pathfinder = $pathfinder;
+        $this->rootUrl = $rootUrl;
     }
 
     public function getLoadedRoutes(): iterable
@@ -92,7 +97,7 @@ class Sitemap implements SitemapInterface
             $url .= '?' . http_build_query($data);
         }
 
-        return $url;
+        return $this->rootUrl->getUrl() . '/' . ltrim($url, '/');
     }
 
     public function loadRoutes(RouteCollectorProxyInterface $app, ContainerInterface $container): iterable
