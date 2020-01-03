@@ -85,7 +85,7 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
     ): ResponseInterface
     {
         return $this->moved(
-            $this->getSitemap()->urlFor($routeName, $data),
+            $this->getSitemap()->absoluteUrlFor($routeName, $data),
             $isMovedPermanently,
             $response
         );
