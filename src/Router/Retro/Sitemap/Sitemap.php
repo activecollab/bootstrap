@@ -97,7 +97,15 @@ class Sitemap implements SitemapInterface
             $url .= '?' . http_build_query($data);
         }
 
-        return $this->rootUrl->getUrl() . '/' . ltrim($url, '/');
+        return $url;
+    }
+
+    public function absoluteUrlFor(string $routeName, array $data = []): string
+    {
+        return sprintf('%s/%s',
+            $this->rootUrl->getUrl(),
+            ltrim($this->urlFor($routeName, $data), '/')
+        );
     }
 
     public function loadRoutes(RouteCollectorProxyInterface $app, ContainerInterface $container): iterable
