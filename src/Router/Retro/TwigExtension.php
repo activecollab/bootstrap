@@ -58,6 +58,16 @@ class TwigExtension extends AbstractExtension implements ContainerAccessInterfac
                     );
                 }
             ),
+
+            new TwigFunction(
+                'application_style',
+                function () {
+                    return sprintf(
+                        '%s/assets/main.css',
+                        $this->container->get(UrlInterface::class)->getUrl(),
+                    );
+                }
+            ),
         ];
     }
 }
