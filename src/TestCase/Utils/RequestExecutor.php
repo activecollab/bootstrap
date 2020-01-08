@@ -17,11 +17,11 @@ use ActiveCollab\Authentication\Token\RepositoryInterface as TokenRepositoryInte
 use ActiveCollab\Authentication\Token\TokenInterface;
 use ActiveCollab\Bootstrap\AppBootstrapper\AppBootstrapperInterface;
 use ActiveCollab\Cookies\CookiesInterface;
+use Laminas\Diactoros\RequestFactory;
+use Laminas\Diactoros\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
-use Zend\Diactoros\RequestFactory;
-use Zend\Diactoros\ResponseFactory;
 
 class RequestExecutor implements RequestExecutorInterface
 {

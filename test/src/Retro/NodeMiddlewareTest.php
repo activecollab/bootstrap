@@ -65,7 +65,7 @@ class NodeMiddlewareTest extends TestCase
         $sitemapMock = $this->createMock(SitemapInterface::class);
         $sitemapMock
             ->expects($this->once())
-            ->method('urlFor')
+            ->method('absoluteUrlFor')
             ->with('login')
             ->willReturn($movedToUrl);
 

@@ -13,12 +13,12 @@ namespace ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware;
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
 use InvalidArgumentException;
+use Laminas\Diactoros\ResponseFactory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
 use Slim\Interfaces\RouteInterface;
-use Zend\Diactoros\ResponseFactory;
 
 abstract class NodeMiddleware implements NodeMiddlewareInterface
 {
@@ -31,7 +31,7 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
     {
         $this->routeKey = $routeKey;
 
-        $this->configure();;
+        $this->configure();
     }
 
     protected function configure(): void

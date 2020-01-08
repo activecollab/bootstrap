@@ -27,7 +27,7 @@
         "symfony/console": "^4.0||^5.0",
         "twig/twig": "^3.0",
         "vlucas/phpdotenv": "^2.2.0",
-        "zendframework/zend-diactoros": "^2.2"
+        "laminas/laminas-diactoros": "^2.2"
     },
     "suggest": {
         "activecollab/jobsqueue": "Queue for background, delayed, parallel or remote jobs",
