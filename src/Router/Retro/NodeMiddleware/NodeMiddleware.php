@@ -23,7 +23,16 @@ use Zend\Diactoros\ResponseFactory;
 abstract class NodeMiddleware implements NodeMiddlewareInterface
 {
     use ContainerAccessImplementation;
+
+    private $routeKey;
     private $sitemap;
+
+    public function __construct(string $routeKey = '__route__')
+    {
+        $this->routeKey = $routeKey;
+
+        $this->configure();;
+    }
 
     protected function configure(): void
     {
@@ -112,7 +121,7 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
 
     protected function getRoute(ServerRequestInterface $request): RouteInterface
     {
-        $route = $request->getAttribute('route');
+        $route = $request->getAttribute($this->routeKey);
 
         if (!$route instanceof RouteInterface) {
             throw new RuntimeException('Failed to find route in request.');
