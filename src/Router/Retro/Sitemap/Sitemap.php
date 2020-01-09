@@ -114,110 +114,165 @@ class Sitemap implements SitemapInterface
             throw new LogicException('Sitemap already loaded.');
         }
 
-        $this->loadDirRoutes(
-            $app,
-            $container,
-            (new Router())->scan($this->sitemapPathResolver->getSitemapPath()),
-            ''
+        $rootDir = (new Router())->scan($this->sitemapPathResolver->getSitemapPath());
+
+        $group = $app->group(
+            '/',
+            function (RouteCollectorProxyInterface $proxy) use ($rootDir, $container) {
+                if ($rootDir->hasIndex()) {
+                    $handler = $this->pathfinder->getRouteHandler($rootDir->getIndex());
+
+                    if ($handler) {
+                        $this->registerLoadedRoute(
+                            $proxy->any(
+                                ltrim($this->pathfinder->getRoutingPath($rootDir->getIndex()), '/'),
+                                $handler
+                            )
+                                ->setName('index')
+                                ->setArgument(
+                                    self::NODE_NAME_ROUTE_ARGUMENT,
+                                    $rootDir->getIndex()->getNodeName()
+                                )
+                        );
+                    }
+                }
+
+                foreach ($rootDir->getFiles() as $file) {
+                    if ($file->isIndex()) {
+                        continue;
+                    }
+
+                    $handler = $this->pathfinder->getRouteHandler($file);
+
+                    if ($handler) {
+                        $this->registerLoadedRoute(
+                            $proxy->any(
+                                ltrim($this->pathfinder->getRoutingPath($file), '/'),
+                                $handler
+                            )
+                                ->setName($file->getNodeName())
+                                ->setArgument(
+                                    self::NODE_NAME_ROUTE_ARGUMENT,
+                                    $file->getNodeName()
+                                )
+                        );
+                    }
+                }
+
+                foreach ($rootDir->getSubdirectories() as $subSubdirectory) {
+                    if ($subSubdirectory->isSystem()) {
+                        continue;
+                    }
+
+                    $this->loadSubdirectoryRoutes(
+                        $proxy,
+                        $subSubdirectory,
+                        $container,
+                        $subSubdirectory->getNodeName()
+                    );
+                }
+            }
         );
+
+        foreach ($this->loadMiddlewares($rootDir, $container) as $middleware) {
+            $group->add($middleware);
+        }
 
         $this->isLoaded = true;
 
         return $this->loadedRoutes;
     }
 
-    private function loadDirRoutes(
-        RouteCollectorProxyInterface $routeCollector,
+    protected function loadSubdirectoryRoutes(
+        RouteCollectorProxyInterface $app,
+        DirectoryInterface $subdirectory,
         ContainerInterface $container,
-        DirectoryInterface $directory,
         string $routePrefix
     ): void
     {
-        foreach ($directory->getSubdirectories() as $subdirectory) {
-            if ($this->pathfinder->hasRoute($subdirectory)) {
-                $group = $routeCollector->group(
-                    $this->pathfinder->getRoutingPath($subdirectory),
-                    function (RouteCollectorProxyInterface $proxy) use ($subdirectory, &$container, $routePrefix) {
-                        $this->loadDirRoutes(
-                            $proxy,
-                            $container,
-                            $subdirectory,
-                            ($routePrefix ? $routePrefix . '_' : '') . $subdirectory->getNodeName()
+        $group = $app->group(
+            $subdirectory->getNodeName(),
+            function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $routePrefix, $container) {
+                if ($subdirectory->hasIndex()) {
+                    $handler = $this->pathfinder->getRouteHandler($subdirectory->getIndex());
+
+                    if ($handler) {
+                        $this->registerLoadedRoute(
+                            $proxy->any(
+                                ltrim($this->pathfinder->getRoutingPath($subdirectory->getIndex()), '/'),
+                                $handler
+                            )
+                                ->setName($routePrefix . '_index')
+                                ->setArgument(
+                                    self::NODE_NAME_ROUTE_ARGUMENT,
+                                    $subdirectory->getIndex()->getNodeName()
+                                )
                         );
                     }
-                );
+                }
 
-                $middlewareNode = $subdirectory->getMiddleware();
+                foreach ($subdirectory->getFiles() as $file) {
+                    if ($file->isIndex()) {
+                        continue;
+                    }
 
-                if ($middlewareNode) {
-                    $middlewares = require $middlewareNode->getPath();
+                    $handler = $this->pathfinder->getRouteHandler($file);
 
-                    if (is_array($middlewares)) {
-                        foreach ($middlewares as $middleware) {
-                            if ($middleware instanceof MiddlewareInterface) {
-                                if ($middleware instanceof ContainerAccessInterface) {
-                                    $middleware->setContainer($container);
-                                }
-
-                                $group->add($middleware);
-                            }
-                        }
+                    if ($handler) {
+                        $this->registerLoadedRoute(
+                            $proxy->any(
+                                $this->pathfinder->getRoutingPath($file),
+                                $handler
+                            )
+                                ->setName($routePrefix . '_' . $file->getNodeName())
+                                ->setArgument(
+                                    self::NODE_NAME_ROUTE_ARGUMENT,
+                                    $file->getNodeName()
+                                )
+                        );
                     }
                 }
-            }
-        }
 
-        if (empty($routePrefix)) {
-            $middlewareNode = $directory->getMiddleware();
-
-            if ($middlewareNode) {
-                $middlewares = require $middlewareNode->getPath();
-
-                if (is_array($middlewares)) {
-                    foreach ($middlewares as $middleware) {
-                        if ($middleware instanceof MiddlewareInterface) {
-                            if ($middleware instanceof ContainerAccessInterface) {
-                                $middleware->setContainer($container);
-                            }
-
-                            $routeCollector->add($middleware);
-                        }
+                foreach ($subdirectory->getSubdirectories() as $subSubdirectory) {
+                    if ($subSubdirectory->isSystem()) {
+                        continue;
                     }
+
+                    $this->loadSubdirectoryRoutes(
+                        $proxy,
+                        $subSubdirectory,
+                        $container,
+                        $routePrefix . '_' . $subSubdirectory->getNodeName()
+                    );
                 }
             }
+        );
+
+        foreach ($this->loadMiddlewares($subdirectory, $container) as $middleware) {
+            $group->add($middleware);
         }
+    }
 
-        if ($directory->hasIndex()) {
-            $handler = $this->pathfinder->getRouteHandler($directory->getIndex());
+    protected function loadMiddlewares(
+        DirectoryInterface $directory,
+        ContainerInterface $container
+    ): iterable
+    {
+        $middlewareNode = $directory->getMiddleware();
 
-            if ($handler) {
-                $this->registerLoadedRoute(
-                    $routeCollector->any(
-                        $this->pathfinder->getRoutingPath($directory->getIndex()),
-                        $handler
-                    )
-                        ->setName($routePrefix ? $routePrefix . '_index' : 'index')
-                        ->setArgument(self::NODE_NAME_ROUTE_ARGUMENT, $directory->getIndex()->getNodeName())
-                );
-            }
-        }
+        if ($middlewareNode) {
+            $middlewares = require $middlewareNode->getPath();
 
-        foreach ($directory->getFiles() as $file) {
-            if ($file->isIndex()) {
-                continue;
-            }
+            if (is_array($middlewares)) {
+                foreach ($middlewares as $middleware) {
+                    if ($middleware instanceof MiddlewareInterface) {
+                        if ($middleware instanceof ContainerAccessInterface) {
+                            $middleware->setContainer($container);
+                        }
 
-            $handler = $this->pathfinder->getRouteHandler($file);
-
-            if ($handler) {
-                $this->registerLoadedRoute(
-                    $routeCollector->any(
-                        $this->pathfinder->getRoutingPath($file),
-                        $handler
-                    )
-                        ->setName(($routePrefix ? $routePrefix . '_' : '') . $file->getNodeName())
-                        ->setArgument(self::NODE_NAME_ROUTE_ARGUMENT, $file->getNodeName())
-                );
+                        yield $middleware;
+                    }
+                }
             }
         }
     }
