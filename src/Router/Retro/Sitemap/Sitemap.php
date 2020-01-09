@@ -150,7 +150,7 @@ class Sitemap implements SitemapInterface
                                 ltrim($this->pathfinder->getRoutingPath($file), '/'),
                                 $handler
                             )
-                                ->setName($file->getNodeName())
+                                ->setName(str_replace('-', '_', $file->getNodeName()))
                                 ->setArgument(
                                     self::NODE_NAME_ROUTE_ARGUMENT,
                                     $file->getNodeName()
@@ -224,7 +224,7 @@ class Sitemap implements SitemapInterface
                                 $this->pathfinder->getRoutingPath($file),
                                 $handler
                             )
-                                ->setName($routePrefix . '_' . $file->getNodeName())
+                                ->setName($routePrefix . '_' . str_replace('-', '_', $file->getNodeName()))
                                 ->setArgument(
                                     self::NODE_NAME_ROUTE_ARGUMENT,
                                     $file->getNodeName()
