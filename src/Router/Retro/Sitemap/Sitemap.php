@@ -12,6 +12,7 @@ namespace ActiveCollab\Bootstrap\Router\Retro\Sitemap;
 
 use ActiveCollab\Bootstrap\App\Metadata\UrlInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Nodes\Directory\DirectoryInterface;
+use ActiveCollab\Bootstrap\Router\Retro\Nodes\File\FileInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Pathfinder\PathfinderInterface;
 use ActiveCollab\Bootstrap\Router\Retro\Router;
 use ActiveCollab\Bootstrap\SitemapPathResolver\SitemapPathResolverInterface;
@@ -168,8 +169,9 @@ class Sitemap implements SitemapInterface
                         $proxy,
                         $subSubdirectory,
                         $container,
-                        $subSubdirectory->getNodeName()
-                    );
+                        $subSubdirectory->getNodeName(),
+                        false,
+                        );
                 }
             }
         );
@@ -184,24 +186,36 @@ class Sitemap implements SitemapInterface
     }
 
     protected function loadSubdirectoryRoutes(
-        RouteCollectorProxyInterface $app,
+        RouteCollectorProxyInterface $collector,
         DirectoryInterface $subdirectory,
         ContainerInterface $container,
-        string $routePrefix
+        string $routePrefix,
+        bool $prefixGroupPath
     ): void
     {
-        $group = $app->group(
-            $subdirectory->getNodeName(),
-            function (RouteCollectorProxyInterface $proxy) use ($subdirectory, $routePrefix, $container) {
+        $group = $collector->group(
+            $this->getGroupPattern($subdirectory, $prefixGroupPath),
+            function (RouteCollectorProxyInterface $groupCollectorProxy) use ($subdirectory, $routePrefix, $container) {
+                foreach ($subdirectory->getSubdirectories() as $subSubdirectory) {
+                    if ($subSubdirectory->isSystem()) {
+                        continue;
+                    }
+
+                    $this->loadSubdirectoryRoutes(
+                        $groupCollectorProxy,
+                        $subSubdirectory,
+                        $container,
+                        $routePrefix . '_' . $subSubdirectory->getNodeName(),
+                        true,
+                        );
+                }
+
                 if ($subdirectory->hasIndex()) {
                     $handler = $this->pathfinder->getRouteHandler($subdirectory->getIndex());
 
                     if ($handler) {
                         $this->registerLoadedRoute(
-                            $proxy->any(
-                                ltrim($this->pathfinder->getRoutingPath($subdirectory->getIndex()), '/'),
-                                $handler
-                            )
+                            $groupCollectorProxy->any('[/]', $handler)
                                 ->setName($routePrefix . '_index')
                                 ->setArgument(
                                     self::NODE_NAME_ROUTE_ARGUMENT,
@@ -220,11 +234,11 @@ class Sitemap implements SitemapInterface
 
                     if ($handler) {
                         $this->registerLoadedRoute(
-                            $proxy->any(
+                            $groupCollectorProxy->any(
                                 $this->pathfinder->getRoutingPath($file),
                                 $handler
                             )
-                                ->setName($routePrefix . '_' . str_replace('-', '_', $file->getNodeName()))
+                                ->setName($this->getRouteName($file, $routePrefix))
                                 ->setArgument(
                                     self::NODE_NAME_ROUTE_ARGUMENT,
                                     $file->getNodeName()
@@ -232,25 +246,31 @@ class Sitemap implements SitemapInterface
                         );
                     }
                 }
-
-                foreach ($subdirectory->getSubdirectories() as $subSubdirectory) {
-                    if ($subSubdirectory->isSystem()) {
-                        continue;
-                    }
-
-                    $this->loadSubdirectoryRoutes(
-                        $proxy,
-                        $subSubdirectory,
-                        $container,
-                        $routePrefix . '_' . $subSubdirectory->getNodeName()
-                    );
-                }
             }
         );
 
         foreach ($this->loadMiddlewares($subdirectory, $container) as $middleware) {
             $group->add($middleware);
         }
+    }
+
+    private function getGroupPattern(DirectoryInterface $directory, bool $prefixGroupPath): string
+    {
+        $result = $prefixGroupPath ? '/' : '';
+
+        $result .= $directory->isVariable()
+            ? sprintf('{%s}', $directory->getNodeName())
+            : $directory->getNodeName();
+
+        return $result;
+    }
+
+    private function getRouteName(FileInterface $file, string $routePrefix): string
+    {
+        return sprintf('%s_%s',
+            $routePrefix,
+            str_replace('-', '_', $file->getNodeName())
+        );
     }
 
     protected function loadMiddlewares(
