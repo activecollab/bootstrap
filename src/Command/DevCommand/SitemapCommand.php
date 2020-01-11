@@ -50,12 +50,20 @@ class SitemapCommand extends DevCommand
                     ->bootstrap();
         }
 
+        $routes = [];
+
         /** @var RouteInterface $route */
         foreach ($sitemapLoader->getLoadedRoutes() as $route) {
+            $routes[$route->getPattern()] = $route->getName();
+        }
+
+        ksort($routes);
+
+        foreach ($routes as $routePattern => $routeName) {
             $table->addRow(
                 [
-                    $this->renderPattern($route->getPattern()),
-                    $this->renderName($route->getName()),
+                    $this->renderPattern($routePattern),
+                    $this->renderName($routeName),
                 ]
             );
         }
@@ -70,11 +78,33 @@ class SitemapCommand extends DevCommand
 
     private function renderPattern(string $routePattern): string
     {
-        return $routePattern;
+        $optionalSlashAtTheEnd = $this->stringEndsWith($routePattern, '[/]');
+
+        if ($optionalSlashAtTheEnd) {
+            $routePattern = mb_substr($routePattern, 0, mb_strlen($routePattern) - 3);
+        }
+
+        $result = $routePattern;
+
+        if ($optionalSlashAtTheEnd) {
+            $routePattern .= '<comment>/</comment>';
+        }
+
+        return $result;
     }
 
     public function renderName(string $routeName): string
     {
         return $routeName;
+    }
+
+    private function stringStartsWith(string $string, string $prefix): bool
+    {
+        return mb_substr($string, 0, mb_strlen($prefix)) === $prefix;
+    }
+
+    private function stringEndsWith(string $string, string $suffix): bool
+    {
+        return mb_substr($string, 0 - mb_strlen($suffix)) === $suffix;
     }
 }
