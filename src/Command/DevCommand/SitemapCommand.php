@@ -84,10 +84,18 @@ class SitemapCommand extends DevCommand
             $routePattern = mb_substr($routePattern, 0, mb_strlen($routePattern) - 3);
         }
 
-        $result = $routePattern;
+        $bits = explode('/', $routePattern);
+
+        foreach ($bits as $k => $bit) {
+            if ($this->stringStartsWith($bit, '{') && $this->stringEndsWith($bit, '}')) {
+                $bits[$k] = sprintf('<info>%s</info>', $bit);
+            }
+        }
+
+        $result = implode('/', $bits);
 
         if ($optionalSlashAtTheEnd) {
-            $routePattern .= '<comment>/</comment>';
+            $result .= '<comment>/</comment>';
         }
 
         return $result;
