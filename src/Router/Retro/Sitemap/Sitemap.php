@@ -207,7 +207,7 @@ class Sitemap implements SitemapInterface
                         $container,
                         $routePrefix . '_' . $subSubdirectory->getNodeName(),
                         true,
-                        );
+                    );
                 }
 
                 if ($subdirectory->hasIndex()) {
