@@ -258,11 +258,47 @@ class Sitemap implements SitemapInterface
     {
         $result = $prefixGroupPath ? '/' : '';
 
-        $result .= $directory->isVariable()
-            ? sprintf('{%s}', $directory->getNodeName())
-            : $directory->getNodeName();
+        if ($directory->isVariable()) {
+            $nodeNameForPattern = $directory->getNodeName();
+            $modifier = $this->getVariableGroupFormat($directory);
+
+            if ($modifier) {
+                $nodeNameForPattern .= ':' . $modifier;
+            }
+
+            $result .= sprintf('{%s}', $nodeNameForPattern);
+        } else {
+            $result .= $directory->getNodeName();
+        }
 
         return $result;
+    }
+
+    private function getVariableGroupFormat(DirectoryInterface $directory): string
+    {
+        $nodeNameBits = explode('_', $directory->getNodeName());
+        $lastNodeNameBit = $nodeNameBits[count($nodeNameBits) - 1];
+
+        $modifier = $this->getModifierFromLastNodeNameBit($lastNodeNameBit);
+
+        $patternBits = [
+            $directory->getNodeName(),
+        ];
+
+        if ($modifier) {
+            $patternBits[] = $modifier;
+        }
+
+        return sprintf('{%s}', implode(':', $patternBits));
+    }
+
+    private function getModifierFromLastNodeNameBit(string $lastNodeNameBit): string
+    {
+        if ($lastNodeNameBit === 'id') {
+            return '[0-9]+';
+        }
+
+        return '';
     }
 
     private function getRouteName(FileInterface $file, string $routePrefix): string
