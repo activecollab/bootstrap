@@ -21,6 +21,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SitemapCommand extends DevCommand
 {
+    protected function configure()
+    {
+        parent::configure();
+
+        $this->setDescription('Output how sitemap is built and routed.');
+    }
+
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $root  = (new Router())->scan($this->getSitemapPath());
@@ -46,8 +54,8 @@ class SitemapCommand extends DevCommand
         foreach ($sitemapLoader->getLoadedRoutes() as $route) {
             $table->addRow(
                 [
-                    $route->getPattern(),
-                    $route->getName(),
+                    $this->renderPattern($route->getPattern()),
+                    $this->renderName($route->getName()),
                 ]
             );
         }
@@ -58,5 +66,15 @@ class SitemapCommand extends DevCommand
     protected function getSitemapPath(): string
     {
         return $this->getContainer()->get(SitemapPathResolverInterface::class)->getSitemapPath();
+    }
+
+    private function renderPattern(string $routePattern): string
+    {
+        return $routePattern;
+    }
+
+    public function renderName(string $routeName): string
+    {
+        return $routeName;
     }
 }

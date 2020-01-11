@@ -259,14 +259,7 @@ class Sitemap implements SitemapInterface
         $result = $prefixGroupPath ? '/' : '';
 
         if ($directory->isVariable()) {
-            $nodeNameForPattern = $directory->getNodeName();
-            $modifier = $this->getVariableGroupFormat($directory);
-
-            if ($modifier) {
-                $nodeNameForPattern .= ':' . $modifier;
-            }
-
-            $result .= sprintf('{%s}', $nodeNameForPattern);
+            $result .= $this->getVariableGroupPattern($directory);
         } else {
             $result .= $directory->getNodeName();
         }
@@ -274,7 +267,7 @@ class Sitemap implements SitemapInterface
         return $result;
     }
 
-    private function getVariableGroupFormat(DirectoryInterface $directory): string
+    private function getVariableGroupPattern(DirectoryInterface $directory): string
     {
         $nodeNameBits = explode('_', $directory->getNodeName());
         $lastNodeNameBit = $nodeNameBits[count($nodeNameBits) - 1];
