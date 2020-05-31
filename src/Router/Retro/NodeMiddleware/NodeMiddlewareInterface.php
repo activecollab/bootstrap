@@ -16,6 +16,10 @@ use Psr\Http\Server\MiddlewareInterface;
 
 interface NodeMiddlewareInterface extends ContainerAccessInterface, MiddlewareInterface
 {
+    const DEFAULT_ROUTE_KEY = '__route__';
+
+    public function getRouteKey(): string;
+
     public function ok(string $reasonPhrase = ''): ResponseInterface;
     public function badRequest(string $reasonPhrase = ''): ResponseInterface;
     public function forbidden(string $reasonPhrase = ''): ResponseInterface;

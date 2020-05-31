@@ -24,18 +24,28 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
 {
     use ContainerAccessImplementation;
 
-    private $routeKey;
+    private $routeKey = self::DEFAULT_ROUTE_KEY;
     private $sitemap;
 
-    public function __construct(string $routeKey = '__route__')
+    public function __construct()
     {
-        $this->routeKey = $routeKey;
-
         $this->configure();
     }
 
     protected function configure(): void
     {
+    }
+
+    public function getRouteKey(): string
+    {
+        return $this->routeKey;
+    }
+
+    protected function setRouteKey(string $routeKey): NodeMiddlewareInterface
+    {
+        $this->routeKey = $routeKey;
+
+        return $this;
     }
 
     public function ok(string $reasonPhrase = ''): ResponseInterface
