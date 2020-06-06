@@ -12,6 +12,9 @@ namespace ActiveCollab\Bootstrap\Router\Retro\NodeMiddleware;
 
 use ActiveCollab\Bootstrap\Router\Retro\Sitemap\SitemapInterface;
 use ActiveCollab\ContainerAccess\ContainerAccessInterface\Implementation as ContainerAccessImplementation;
+use ActiveCollab\DatabaseObject\Entity\EntityInterface;
+use ActiveCollab\DatabaseObject\PoolInterface;
+use Doctrine\Common\Inflector\Inflector;
 use InvalidArgumentException;
 use Laminas\Diactoros\ResponseFactory;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -173,5 +176,36 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
     protected function getSitemap(): SitemapInterface
     {
         return $this->getContainer()->get(SitemapInterface::class);
+    }
+
+    protected function getEntityFromRequest(
+        ServerRequestInterface $request,
+        string $entityType,
+        string $routeArgumentName = null
+    ): ?EntityInterface
+    {
+        $entityId = (int) $this
+            ->getRoute($request)
+                ->getArgument(
+                    $routeArgumentName ?? $this->getIdArgumentNameFromEntityType($entityType)
+                );
+
+        if ($entityId) {
+            $entity = $this->getContainer()
+                ->get(PoolInterface::class)
+                ->getById($entityType, $entityId);
+
+            if ($entity instanceof $entityType) {
+                return $entity;
+            }
+        }
+
+        return null;
+    }
+
+    private function getIdArgumentNameFromEntityType(string $entityType): string
+    {
+        $bits = explode('\\', $entityType);
+        return Inflector::tableize($bits[count($bits) - 1]) . '_id';
     }
 }
