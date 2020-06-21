@@ -12,7 +12,7 @@ namespace ActiveCollab\Bootstrap\Router\Retro\RoutingContext;
 
 interface RoutingContextInterface
 {
-    public function getUrl(string $subpageName = null): string;
+    public function getUrl(string $subpageName = null, array $data = []): string;
     public function getRoutePrefix(): string;
     public function getRouteData(): array;
 }
