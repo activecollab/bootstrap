@@ -162,6 +162,41 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
         return true;
     }
 
+    protected function isMethod(ServerRequestInterface $request, string $requestMethod): bool
+    {
+        return $request->getMethod() === $requestMethod;
+    }
+
+    protected function isHead(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'HEAD');
+    }
+
+    protected function isGet(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'GET');
+    }
+
+    protected function isPost(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'POST');
+    }
+
+    protected function isPut(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'PUT');
+    }
+
+    protected function isPatch(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'PATCH');
+    }
+
+    protected function isDelete(ServerRequestInterface $request): bool
+    {
+        return $this->isMethod($request, 'DELETE');
+    }
+
     private $responseFactory;
 
     protected function getResponseFactory(): ResponseFactoryInterface
