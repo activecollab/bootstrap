@@ -139,7 +139,9 @@ class PostMethodOverrideTest extends TestCase
             {
                 parent::__construct();
 
-                $this->setPostMethodOverride($postMethodOverride);
+                if ($postMethodOverride !== NodeMiddlewareInterface::DEFAULT_POST_OVERRIDE_FIELD_NAME) {
+                    $this->setPostMethodOverride($postMethodOverride);
+                }
             }
 
             public function process(
