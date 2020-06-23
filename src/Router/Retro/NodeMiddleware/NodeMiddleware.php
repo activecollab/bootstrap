@@ -164,6 +164,12 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
 
     protected function isMethod(ServerRequestInterface $request, string $requestMethod): bool
     {
+        if ($request->getMethod() === 'POST' && $this->getPostMethodOverride()) {
+            $overridenMethod = $request->getParsedBody()[$this->getPostMethodOverride()] ?? null;
+
+            return $overridenMethod && $overridenMethod === $requestMethod;
+        }
+
         return $request->getMethod() === $requestMethod;
     }
 
@@ -195,6 +201,20 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
     protected function isDelete(ServerRequestInterface $request): bool
     {
         return $this->isMethod($request, 'DELETE');
+    }
+
+    private $posMethodOverride = null;
+
+    protected function getPostMethodOverride(): ?string
+    {
+        return $this->posMethodOverride;
+    }
+
+    protected function setPostMethodOverride(?string $postMethodOverride): NodeMiddlewareInterface
+    {
+        $this->posMethodOverride = $postMethodOverride;
+
+        return $this;
     }
 
     private $responseFactory;

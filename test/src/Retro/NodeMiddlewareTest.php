@@ -46,7 +46,7 @@ class NodeMiddlewareTest extends TestCase
         $response = $this->getNodeMiddleware()->moved($movedToUrl, $isMovedPermanently);
 
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
-        $this->assertContains($movedToUrl, $response->getHeaderLine('Location'));
+        $this->assertStringContainsString($movedToUrl, $response->getHeaderLine('Location'));
     }
 
     /**
@@ -76,7 +76,7 @@ class NodeMiddlewareTest extends TestCase
         )->movedToRoute('login', [], $isMovedPermanently);
 
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
-        $this->assertContains($movedToUrl, $response->getHeaderLine('Location'));
+        $this->assertStringContainsString($movedToUrl, $response->getHeaderLine('Location'));
     }
 
     public function provideDataForMovedTests()
