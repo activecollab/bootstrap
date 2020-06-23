@@ -16,15 +16,24 @@ use Psr\Http\Server\RequestHandlerInterface;
 class PostMethodOverrideTest extends TestCase
 {
     /**
-     * @dataProvider provideDataForDefaultOverridCheck
+     * @dataProvider provideDataForDisabledOverrideCheck
      * @param string $checkMethodName
      * @param bool   $expectedCheckResult
      */
-    public function testWillNotOverridePostByDefault(string $checkMethodName, bool $expectedCheckResult): void
+    public function testAllowsPostMethodOverrideToBeDisabled(
+        string $checkMethodName,
+        bool $expectedCheckResult
+    ): void
     {
-        $middleware = $this->getNodeMiddleware();
+        $middleware = $this->getNodeMiddleware(null);
 
-        $request = (new ServerRequestFactory())->createServerRequest('POST', 'https://example.org');
+        $request = (new ServerRequestFactory())
+            ->createServerRequest('POST', 'https://example.org')
+                ->withParsedBody(
+                    [
+                        NodeMiddlewareInterface::DEFAULT_POST_OVERRIDE_FIELD_NAME => 'DELETE',
+                    ]
+                );
 
         /** @var MockObject|RequestHandlerInterface $requestHandler */
         $requestHandler = $this->createMock(RequestHandlerInterface::class);
@@ -34,7 +43,7 @@ class PostMethodOverrideTest extends TestCase
         $this->assertSame($expectedCheckResult, $middleware->isMethodCallResults[$checkMethodName]);
     }
 
-    public function provideDataForDefaultOverridCheck(): array
+    public function provideDataForDisabledOverrideCheck(): array
     {
         return [
             ['isPost', true],
@@ -97,9 +106,11 @@ class PostMethodOverrideTest extends TestCase
         ];
     }
     
-    private function getNodeMiddleware(string $postMethodOverride = null): NodeMiddlewareInterface
+    private function getNodeMiddleware(
+        ?string $postMethodOverride = NodeMiddlewareInterface::DEFAULT_POST_OVERRIDE_FIELD_NAME
+    ): NodeMiddlewareInterface
     {
-        $middleware = new class ($postMethodOverride) extends NodeMiddleware
+        return new class ($postMethodOverride) extends NodeMiddleware
         {
             public $isMethodCallResults = [];
 
@@ -129,7 +140,5 @@ class PostMethodOverrideTest extends TestCase
                 return $handler->handle($request);
             }
         };
-
-        return $middleware;
     }
 }

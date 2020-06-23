@@ -17,6 +17,7 @@ use Psr\Http\Server\MiddlewareInterface;
 interface NodeMiddlewareInterface extends ContainerAccessInterface, MiddlewareInterface
 {
     const DEFAULT_ROUTE_KEY = '__route__';
+    const DEFAULT_POST_OVERRIDE_FIELD_NAME = '__post_method_override';
 
     public function getRouteKey(): string;
 

@@ -203,7 +203,7 @@ abstract class NodeMiddleware implements NodeMiddlewareInterface
         return $this->isMethod($request, 'DELETE');
     }
 
-    private $posMethodOverride = null;
+    private $posMethodOverride = self::DEFAULT_POST_OVERRIDE_FIELD_NAME;
 
     protected function getPostMethodOverride(): ?string
     {
