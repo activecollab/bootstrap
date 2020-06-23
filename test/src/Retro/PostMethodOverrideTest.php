@@ -15,6 +15,27 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class PostMethodOverrideTest extends TestCase
 {
+    public function testWillAllowPostOverrideByDefault()
+    {
+        $middleware = $this->getNodeMiddleware();
+
+        $request = (new ServerRequestFactory())
+            ->createServerRequest('POST', 'https://example.org')
+            ->withParsedBody(
+                [
+                    NodeMiddlewareInterface::DEFAULT_POST_OVERRIDE_FIELD_NAME => 'DELETE',
+                ]
+            );
+
+        /** @var MockObject|RequestHandlerInterface $requestHandler */
+        $requestHandler = $this->createMock(RequestHandlerInterface::class);
+
+        $middleware->process($request, $requestHandler);
+
+        $this->assertFalse($middleware->isMethodCallResults['isPost']);
+        $this->assertTrue($middleware->isMethodCallResults['isDelete']);
+    }
+
     /**
      * @dataProvider provideDataForDisabledOverrideCheck
      * @param string $checkMethodName
