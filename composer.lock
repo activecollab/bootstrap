@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3e2e360b85ff78c969b6f58f2ece550",
+    "content-hash": "e0c48d66f4808a40079078c5544f7681",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -372,16 +372,16 @@
         },
         {
             "name": "activecollab/databasestructure",
-            "version": "2.0.0",
+            "version": "dev-next",
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a"
+                "reference": "e669b3190f76bbb7b717ebb516f1d71216b5820d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/6ff1510ee1a8d382255a74a232f718dda6c4986a",
-                "reference": "6ff1510ee1a8d382255a74a232f718dda6c4986a",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/e669b3190f76bbb7b717ebb516f1d71216b5820d",
+                "reference": "e669b3190f76bbb7b717ebb516f1d71216b5820d",
                 "shasum": ""
             },
             "require": {
@@ -389,11 +389,12 @@
                 "activecollab/filesystem": "^0.10",
                 "activecollab/user": "^4.0",
                 "doctrine/inflector": "^1.0",
+                "ext-mysqli": "*",
                 "php": ">=7.3"
             },
             "require-dev": {
-                "ext-mysqli": "*",
                 "friendsofphp/php-cs-fixer": "^2.0",
+                "monolog/monolog": "^2.0",
                 "phpunit/phpunit": "^7.0"
             },
             "type": "library",
@@ -421,7 +422,7 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2019-12-21T14:28:18+00:00"
+            "time": "2020-06-28T09:16:40+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -6144,11 +6145,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "activecollab/databasestructure": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

@@ -14,7 +14,7 @@
         "activecollab/authentication": "^3.0",
         "activecollab/controller": "^1.0",
         "activecollab/databasemigrations": "^2.0",
-        "activecollab/databasestructure": "^2.0",
+        "activecollab/databasestructure": "dev-next",
         "activecollab/logger": "^1.0",
         "activecollab/utils": "^1.0",
         "slim/http-cache": "~0.3.0",
