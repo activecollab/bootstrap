@@ -20,20 +20,14 @@ abstract class TestCase extends BaseTestCase
 {
     use NowTrait;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setNow(new DateTimeValue());
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->setNow(null);
 

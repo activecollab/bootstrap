@@ -29,7 +29,7 @@ class AuthenticationTransportEncoderTest extends TestCase
      */
     private $adapter;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -55,12 +55,12 @@ class AuthenticationTransportEncoderTest extends TestCase
 
         $response = (new AuthenticationTransportEncoder())->encode($response, $encoder, $authentication_transport);
         $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertContains('yes', $response->getHeaderLine('X-Test'));
-        $this->assertContains('application/json', $response->getHeaderLine('Content-Type'));
+        $this->assertStringContainsString('yes', $response->getHeaderLine('X-Test'));
+        $this->assertStringContainsString('application/json', $response->getHeaderLine('Content-Type'));
 
         $response_body = json_decode((string) $response->getBody(), true);
 
-        $this->assertInternalType('array', $response_body);
+        $this->assertIsArray($response_body);
         $this->assertSame([1, 2, 3], $response_body);
     }
 }

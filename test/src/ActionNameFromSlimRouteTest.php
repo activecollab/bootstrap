@@ -12,28 +12,24 @@ namespace ActiveCollab\Bootstrap\Test;
 
 use ActiveCollab\Bootstrap\Controller\ActionNameResolver\ActionNameFromSlimRoute;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use RuntimeException;
 use Slim\Route;
 
-/**
- * @package ActiveCollab\Bootstrap\Test
- */
 class ActionNameFromSlimRouteTest extends TestCase
 {
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Request attribute 'route' not found in the request.
-     */
     public function testRouteNotFound()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Request attribute 'route' not found in the request.");
+
         (new ActionNameFromSlimRoute())->getActionName($this->createRequest());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Action name not found for GET method.
-     */
     public function testActionForMethodNotFound()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Action name not found for GET method.");
+
         $route = new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
         });
         $request = $this->createRequest()
@@ -61,12 +57,11 @@ class ActionNameFromSlimRouteTest extends TestCase
         $this->assertSame('set_value', $action_name_from_route->getActionName($put_request));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Request attribute 'different_name' not found in the request.
-     */
     public function testRouteAttributeNameCanBeChanged()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Request attribute 'different_name' not found in the request.");
+
         $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
         }))
             ->setArgument('GET_action', 'get_value');
