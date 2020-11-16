@@ -17,17 +17,17 @@ use Psr\Log\LoggerInterface;
 
 abstract class AppBootstrapper implements AppBootstrapperInterface
 {
-    private $logger;
-
     private $app_metadata;
-
     private $container;
-
+    private $logger;
     private $is_bootstrapped = false;
-
     private $is_ran = false;
 
-    public function __construct(AppMetadataInterface $app_metadata, ContainerInterface $container, LoggerInterface $logger = null)
+    public function __construct(
+        AppMetadataInterface $app_metadata,
+        ContainerInterface $container,
+        LoggerInterface $logger
+    )
     {
         $this->setAppMetadata($app_metadata);
         $this->setContainer($container);
@@ -118,7 +118,7 @@ abstract class AppBootstrapper implements AppBootstrapperInterface
         return $this;
     }
 
-    protected function getLogger(): ? LoggerInterface
+    protected function getLogger(): LoggerInterface
     {
         return $this->logger;
     }
