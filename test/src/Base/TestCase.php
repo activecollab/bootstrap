@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace ActiveCollab\Bootstrap\Test\Base;
 
-use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ResponseFactory;
 use Laminas\Diactoros\ServerRequestFactory;
 use PHPUnit\Framework\TestCase as BaseTestCase;
