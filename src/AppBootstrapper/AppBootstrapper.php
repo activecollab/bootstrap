@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace ActiveCollab\Bootstrap\AppBootstrapper;
 
 use ActiveCollab\Bootstrap\AppMetadata\AppMetadataInterface;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use LogicException;
 use Psr\Log\LoggerInterface;
 
