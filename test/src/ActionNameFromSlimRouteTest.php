@@ -12,8 +12,10 @@ namespace ActiveCollab\Bootstrap\Test;
 
 use ActiveCollab\Bootstrap\Controller\ActionNameResolver\ActionNameFromSlimRoute;
 use ActiveCollab\Bootstrap\Test\Base\TestCase;
+use Psr\Http\Message\ResponseFactoryInterface;
 use RuntimeException;
-use Slim\Route;
+use Slim\Interfaces\CallableResolverInterface;
+use Slim\Routing\Route;
 
 class ActionNameFromSlimRouteTest extends TestCase
 {
@@ -30,8 +32,17 @@ class ActionNameFromSlimRouteTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Action name not found for GET method.");
 
-        $route = new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
-        });
+        $response_factory_mock = $this->createMock(ResponseFactoryInterface::class);
+        $callable_resolver_mock = $this->createMock(CallableResolverInterface::class);
+
+        $route = new Route(
+            ['GET'],
+            '/hello/{name}',
+            function ($req, $resp, $next) {
+            },
+            $response_factory_mock,
+            $callable_resolver_mock
+        );
         $request = $this->createRequest()
             ->withAttribute('route', $route);
 
@@ -40,8 +51,17 @@ class ActionNameFromSlimRouteTest extends TestCase
 
     public function testActionForMethod()
     {
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
-        }))
+        $response_factory_mock = $this->createMock(ResponseFactoryInterface::class);
+        $callable_resolver_mock = $this->createMock(CallableResolverInterface::class);
+
+        $route = (new Route(
+            ['GET'],
+            '/hello/{name}',
+            function ($req, $resp, $next) {
+            },
+            $response_factory_mock,
+            $callable_resolver_mock
+        ))
             ->setArgument('GET_action', 'get_value')
             ->setArgument('PUT_action', 'set_value');
 
@@ -62,8 +82,17 @@ class ActionNameFromSlimRouteTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Request attribute 'different_name' not found in the request.");
 
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
-        }))
+        $response_factory_mock = $this->createMock(ResponseFactoryInterface::class);
+        $callable_resolver_mock = $this->createMock(CallableResolverInterface::class);
+
+        $route = (new Route(
+            ['GET'],
+            '/hello/{name}',
+            function ($req, $resp, $next) {
+            },
+            $response_factory_mock,
+            $callable_resolver_mock
+        ))
             ->setArgument('GET_action', 'get_value');
 
         $request = $this->createRequest()
@@ -74,14 +103,26 @@ class ActionNameFromSlimRouteTest extends TestCase
 
     public function testActionArgumentNameFormatChange()
     {
-        $route = (new Route('GET', '/hello/{name}', function ($req, $resp, $next) {
-        }))
+        $response_factory_mock = $this->createMock(ResponseFactoryInterface::class);
+        $callable_resolver_mock = $this->createMock(CallableResolverInterface::class);
+
+        $route = (new Route(
+            ['GET'],
+            '/hello/{name}',
+            function ($req, $resp, $next) {
+            },
+            $response_factory_mock,
+            $callable_resolver_mock
+        ))
             ->setArgument('always_look_here', 'get_value');
 
         $request = $this->createRequest()
             ->withAttribute('route', $route);
 
-        $action_name_from_route = new ActionNameFromSlimRoute('route', 'always_look_here');
+        $action_name_from_route = new ActionNameFromSlimRoute(
+            'route',
+            'always_look_here'
+        );
 
         $this->assertSame('get_value', $action_name_from_route->getActionName($request));
     }
