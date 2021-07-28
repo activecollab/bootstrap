@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "699746f94987bd244652e57104cfb17f",
+    "content-hash": "3d2d3efcb347b36ecd4af550e3512fa9",
     "packages": [
         {
             "name": "activecollab/authentication",
@@ -376,12 +376,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/activecollab/databasestructure.git",
-                "reference": "e669b3190f76bbb7b717ebb516f1d71216b5820d"
+                "reference": "374bba41ee83369d0d1e82e682e46d8cd2dc444f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/e669b3190f76bbb7b717ebb516f1d71216b5820d",
-                "reference": "e669b3190f76bbb7b717ebb516f1d71216b5820d",
+                "url": "https://api.github.com/repos/activecollab/databasestructure/zipball/374bba41ee83369d0d1e82e682e46d8cd2dc444f",
+                "reference": "374bba41ee83369d0d1e82e682e46d8cd2dc444f",
                 "shasum": ""
             },
             "require": {
@@ -422,7 +422,11 @@
                 "mysql",
                 "persistence"
             ],
-            "time": "2020-06-28T09:16:40+00:00"
+            "support": {
+                "issues": "https://github.com/activecollab/databasestructure/issues",
+                "source": "https://github.com/activecollab/databasestructure/tree/next"
+            },
+            "time": "2021-07-28T09:15:20+00:00"
         },
         {
             "name": "activecollab/datevalue",
@@ -6545,5 +6549,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
